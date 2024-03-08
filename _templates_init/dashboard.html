@@ -1,0 +1,197 @@
+<!-- only accessible to admins -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Support</title>
+    <link rel="stylesheet" href="../static_init/styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.0/chart.js"></script>
+    <!-- <script src="https://cdnjs.com/libraries/Chart.js"></script> -->
+
+</head>
+
+<body>
+    <header class="nav">
+        <h1>Tech Support System</h1>
+        <ul>
+            <li><a href="#">Home</a></li> <!-- this will lead to home page with submit ticket, view tickets-->
+            <li><a href="#">Dashboard</a></li> <!-- seen only by admins-->
+            <li><a href="#">Profile</a></li> <!--profile page with employee info about company, department, etc.-->
+            <li><a href="#">Notifications</a></li> <!-- about resolved tickets, messages, etc.-->
+        </ul>
+    </header>
+    <div class="dashboard-main">
+        <div class="dashboard-body">
+            <div class="dashboard-header">
+                <div class="employees header-container">
+                    <a href="#">
+                        <h4>Employees</h4>
+                        <p>645</p>
+                        <div class="employees-image header-image">
+                            <img src="../static_init/images/employee.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="departments header-container">
+                    <a href="#">
+                        <h4>Departments</h4>
+                        <p>15</p>
+                        <div class="departments-image header-image">
+                            <img src="../static_init/images/department.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="utilities header-container">
+                    <h4>Utilities and Scripts</h4>
+                    <p>1000</p>
+                    <div class="automation-image header-image">
+                        <img src="../static_init/images/automation.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="tickets">
+                <div class="all-tickets ticket-container">
+                    <a href="#">
+                        <h1>1000</h1>
+                        <p>All Tickets</p>
+                    </a>
+                </div>
+                <div class="waiting-tickets ticket-container">
+                    <a href="#">
+                        <h1>50</h1>
+                        <p>Waiting</p>
+                    </a>
+                </div>
+                <div class="assigned-tickets ticket-container">
+                    <a href="#">
+                        <h1>150</h1>
+                        <p>Assigned</p>
+                    </a>
+                </div>
+                <div class="resolved-tickets ticket-container">
+                    <a href="#">
+                        <h1>800</h1>
+                        <p>Resolved</p>
+                    </a>
+                </div>
+            </div>
+            <div class="ticket-status ticket-diagram">
+                <h4>Ticket Status</h4>
+                <div class="doughnut-chart" id="doughnutContainer">
+                    <canvas id="statusDiagram"></canvas>
+                </div>
+            </div>
+            <div class="ticket-priority ticket-diagram">
+                <h4>Ticket Priority</h4>
+                <div class="pie-chart" id="pieContainer">
+                    <canvas id="priorityDiagram"></canvas>
+                </div>
+            </div>
+            <div class="ticket-per-product ticket-diagram">
+                <h4>Tickets per product</h4>
+                <div class="product-diagram">
+                    <canvas id="productDiagram"></canvas>
+                </div>
+            </div>
+            <div class="ticket-per-department ticket-diagram">
+                <h4>Tickets per department</h4>
+                <div class="department-diagram">
+                    <canvas id="departmentDiagram"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-last-tickets-pane">
+            <h3>Most recent</h3>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>John Smith</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something with the automation tool testing, it does not
+                        work properly, because it's broken and I cannot use it</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="ticket-side-pane">
+                    <h4>Username</h4>
+                    <p class="ticket-submission-time">09:10 AM</p>
+                    <p class="ticket-submission-date">6th Feb 2020</p>
+                    <p class="ticket-title">Ticket title: Do something</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+<!-- <script src="../static_init//scripts/Chart.js"></script> -->
+
+<script src="../static_init/scripts/pie-charts.js"></script>
+
+</html>
