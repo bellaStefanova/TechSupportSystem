@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Support</title>
+    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+
+</head>
+
+<body>
+    <header class="nav">
+        <h1>Tech Support System</h1>
+        <ul>
+            <li><a href="#">Home</a></li> <!-- this will lead to home page with submit ticket, view tickets-->
+            <li><a href="#">Dashboard</a></li> <!-- seen only by admins-->
+            <li><a href="#">Profile</a></li> <!--profile page with employee info about company, department, etc.-->
+            <li><a href="#">Notifications</a></li> <!-- about resolved tickets, messages, etc.-->
+        </ul>
+    </header>
+    <div class="register-pane form-container">
+        <form action="{% url 'signup'%}" method="post">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form }}
+            </div>
+            <div class="form-buttons">
+                <button class="submit">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+
+
+
+
+</html>

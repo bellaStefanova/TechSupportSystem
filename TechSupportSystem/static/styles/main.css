@@ -1,0 +1,19 @@
+/* formatting main content */
+
+.dashboard-main {
+    padding: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dashboard-body {
+    width: 65%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dashboard-last-tickets-pane {
+    width: 30%;
+}
