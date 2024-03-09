@@ -15,3 +15,4 @@ class RegisterForm(auth_forms.UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['password1'].help_text = ''
         self.fields['password2'].help_text = ''
+        self.fields['department'].required = True
