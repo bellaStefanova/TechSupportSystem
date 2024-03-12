@@ -28,14 +28,14 @@
             </ul>
         {% endif %}
     </header>
-    <div class="register-pane form-container">
-        <form action="{% url 'signup'%}" method="post">
+    <div class="login-pane form-container">
+        <form action="{% url 'signin'%}" method="post">
             {% csrf_token %}
             <div class="form-fields">
                 {{ form }}
             </div>
             <div class="form-buttons">
-                <button class="submit">Sign Up</button>
+                <button class="submit">Sign In</button>
             </div>
         </form>
     </div>

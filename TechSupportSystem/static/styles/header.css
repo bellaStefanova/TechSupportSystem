@@ -4,25 +4,115 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    padding: 1em 2em;
+    align-items:stretch;
+    /* padding: 1em 2em; */
     background-color: #1D3B65;
 }
 
 header h1 {
     color: white;
+    padding: 0.5em 1em;
 }
 
 header h1:hover {
     cursor: default;
 }
 
-header ul li {
-    display: inline-block;
-    padding: 0 1em;
+header .navigation-bar {
+    display: flex;
+    width: 27%;
+    height: 100%;
+    align-items: stretch;
+    justify-content: space-between;
+    /* gap: 4em; */
+    padding: 0 2em;
+    font-size: 14px;
 }
 
-header ul li a {
+header .navigation-bar div {
+    display: flex;
+    align-items: stretch;
+    padding: 1.25em 0;
+
+    /* flex-grow: 1; */
+    /* align-items: center;
+    gap: 1em; */
+}
+
+
+header .navigation-bar div a,
+header .navigation-bar .profile-nav-bar {
     color: white;
     text-decoration: none;
+    cursor: pointer;
+    /* text-align: center; */
 }
+
+/* profile dropdown menu on hover */
+header .navigation-bar .profile-options {
+    display: none;
+    position: absolute;
+    /* bottom: -100%; */
+    /* right: 0; */
+    top: 2.45em;
+    right: 0;
+    width: 26%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    /* opacity: 0.9; */
+}
+
+header .navigation-bar .profile-options .profile-option {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #1D3B65;
+    /* animation: rollDown 2s ease-in-out; */
+    /* -webkit-transition: height 0.3s ease-in-out;
+    -o-transition: height 0.3s ease-in-out;
+    -moz-transition: height 0.3s ease-in-out;
+    transition: height 0.3s ease-in-out; */
+    /* max-height: 0;
+    transition: all 5s; */
+}
+
+header .navigation-bar .profile-options .profile-option {
+    /* background-color: #122642; */
+    max-height: 120px;
+    transition: all 0.4s;
+}
+  
+header .navigation-bar .profile-options .profile-option:hover {
+    background-color: #122642;
+}
+
+header .navigation-bar .profile-options .profile-option:hover + .profile-options {
+    animation: rollUp 2s ease;
+}
+
+
+@keyframes rollDown {
+    from {
+      max-height: 0;
+    }
+    25% {
+      max-height: 80px; /* Adjust the max height based on your content */
+    }
+    50% {
+      max-height: 160px; /* Adjust the max height based on your content */
+    }
+    75% {
+      max-height: 240px; /* Adjust the max height based on your content */
+    }
+    to {
+      max-height: 320px; /* Adjust the max height based on your content */
+    }
+  }
+  
+  @keyframes rollUp {
+    from {
+      max-height: 200px; /* Adjust the max height based on your content */
+    }
+    to {
+      max-height: 0;
+    }
+  }
