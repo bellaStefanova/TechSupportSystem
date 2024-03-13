@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="login-pane form-container">
-        <form action="{% url 'signin'%}" method="post">
+    <div class="create-request-pane form-container">
+        <form action="{% url 'create-request'%}" method="post">
             {% csrf_token %}
             <div class="form-fields">
                 {{ form }}
             </div>
             <div class="form-buttons">
-                <button class="submit">Sign In</button>
+                <button class="submit">Submit</button>
             </div>
         </form>
     </div>

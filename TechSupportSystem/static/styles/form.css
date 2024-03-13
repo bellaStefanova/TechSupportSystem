@@ -1,5 +1,5 @@
 .form-container {
-    display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -7,19 +7,28 @@
 }
 
 .form-container form {
-    width: 70%;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 70%; */
     background-color: white;
-    padding: 3em;
+    padding: 2.5em;
     border-radius: 3px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
-    margin: 5em 0;
+    margin: 2.6em 35em;
+}
+.form-container form .form-fields {
+    flex: 1 1 auto;
+    flex-direction: column;
 }
 
 .form-container form .form-fields label,
 .form-container form .form-fields input,
 .form-container form .form-fields select{
+    /* min-width: 350px; */
     width: 100%;
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 0.5em 0;
 
 }

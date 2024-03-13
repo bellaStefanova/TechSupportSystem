@@ -1,65 +1,11 @@
-<!-- only accessible to admins -->
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Support</title>
-    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
-    <script src="{% static '/scripts/profile-navbar-dynamic-menu.js' %}"></script>
-    <script src="{% static '/scripts/user-homepage-actions.js' %}"></script>
-
-</head>
-
-<body>
-    <header class="nav">
-        <h1>Tech Support System</h1>
-        <div class="navigation-bar">
-            {% if user.is_authenticated %}
-
-            <!-- <ul> -->
-            {% if user.is_superuser %}
-            <li>
-                <a href="#">Admin Dashboard</a>
-            </li>
-            {% endif %}
-            <div class="home-nav-bar">
-                <a href="#">Home</a>
-            </div> <!-- this will lead to home page with submit ticket, view tickets-->
-            <div>
-                <a href="#">Notifications</a>
-            </div> <!-- about resolved tickets, messages, etc.-->
-            <!-- <li><a href="#">Dashboard</a></li> seen only by admins -->
-            <div class="profile-nav-bar">
-                <p>Profile</p> <!--profile page with employee info about company, department, etc.-->
-                <div class="profile-options">
-                    <div class="profile-option">
-                        <a href="#">Profile details</a>
-                    </div>
-                    <div class="profile-option">
-                        <a href="#">Change password</a>
-                    </div>
-                    <div class="profile-option">
-                        <a href="{% url 'signout' %}">Sign out</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- </ul> -->
-            {% else %}
-            <ul>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'signin' %}">Sign In</a></li>
-            </ul>
-            {% endif %}
-        </div>
-    </header>
+{% block content %}
     <div class="user-homepage-main">
         <div class="tickets-table-header">
             <h1>Submitted requests</h1>
-            <a href="#">Create new request</a>
+            <a href="{% url 'create-request' %}">Create new request</a>
         </div>
         <div class="search-filter-header">
             <div class="per-status">
@@ -93,91 +39,35 @@
                         <th class="table-header-status">Status</th>
                         <th class="table-header-created-on">Created on</th>
                         <th class="table-header-updated-on">Updated on</th>
+                        <th class="table-header-hidden"></th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1234</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Waiting</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
+                    {%if requests %}
+                        {% for request in requests %}
+                        <tr class="table-row">
+                            <!-- <a href="#"> -->
+                            <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
+                            <td class="table-data-subject">{{request.title}}</td>
+                            <td class="table-data-status-cell"><div class="table-data-status">{{request.status}}</div></td>
+                            <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
+                            <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
+                            <td class="table-icons">
+                                <a class="delete-request" href="{% url 'delete-request' pk=request.pk %}">
+                                    <img src="{% static '/images/delete.jpg' %}" alt="">
+                                </a>
+                            </td>
+                        <!-- </a> -->
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                    <tr class="table-row-no-requests">
+                        <td class="no-requests-found">No requests</td>
                     </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1235</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Assigned</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1236</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Waiting</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Waiting</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">1</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Assigned</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">2</td>
-                        <td class="table-data-subject">Printer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">3</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">4</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="table-data-request-id">5</td>
-                        <td class="table-data-subject">Computer not working</td>
-                        <td class="table-data-status">Resolved</td>
-                        <td class="table-data-created-on">2021-10-10</td>
-                        <td class="table-data-updated-on">2021-10-10</td>
-                    </tr>
+                    {% endif %}
+
                 </tbody>
             </table>
         </div>
     </div>
-</body>
-
-
-</html>
+{% endblock %}

@@ -15,14 +15,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Department',
+            name='Request',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True)),
+                ('title', models.CharField(max_length=100)),
                 ('description', models.TextField()),
-                ('location', models.CharField(blank=True, max_length=50, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('manager', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='managed_departments', to=settings.AUTH_USER_MODEL)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('status', models.CharField(choices=[('WAITING', 'Waiting'), ('ASSIGNED', 'Assigned'), ('RESOLVED', 'Resolved')], default='WAITING', max_length=10)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

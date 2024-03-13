@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="user-details-container">
+        USername: {{ user.username }}
+        Email: {{ user.email }}
+        First name: {{ user.first_name }}
+        Last name: {{ user.last_name }}
+        Role: {{ user.role }}
+        Date joined: {{ user.date_joined }}
+        Department: {{ user.department }}
+        Level: 
+        {% if user.is_superuser %}
+            Superuser
+        {% elif user.is_staff %}
+            Admin
+        {% else %}
+            Regular user
+        {% endif %}
+        
+    </div>
+{% endblock %}

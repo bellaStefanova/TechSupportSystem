@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'TechSupportSystem.accounts.apps.AccountsConfig',
     'TechSupportSystem.departments.apps.DepartmentsConfig',
+    'TechSupportSystem.requests.apps.RequestsConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +80,15 @@ WSGI_APPLICATION = 'TechSupportSystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'techsupportsystem_db',
+        'USER': 'root',
+        'PASSWORD': 'Test',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation

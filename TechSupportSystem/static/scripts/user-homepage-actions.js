@@ -31,13 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Handle option selection
+    const tableRows = document.querySelectorAll('.table-row');
     optionsContainer.addEventListener("click", function (event) {
         if (event.target.classList.contains("option")) {
             selectedOptionValue.textContent = event.target.textContent;
             optionsContainer.style.display = "none";
             tbody.innerHTML = tbodyOriginal_content;
             // Filter the table per status
-            const tableRows = document.querySelectorAll('.table-row');
+            tableRows = document.querySelectorAll('.table-row');
             tableRows.forEach(row => {
                 const statusCell = row.querySelector('.table-data-status');
                 
@@ -89,6 +90,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Handle table row click to redirect to the specific request details page
+
+    tableRows.forEach(row => {
+        row.addEventListener("click", function (event) {
+            var target = event.target.parentNode;
+            if (target.tagName === "TBODY") {
+                target = target.children[0];
+            };
+            if (target.tagName === "TD" && target.className === "table-data-status-cell") {
+                target = target.parentNode;
+            };
+            if (target.tagName === "TR") {
+                target = target.children[0];
+            };
+
+            if (target.tagName === "TD" && target.className === "table-data-request-id") {
+              var id = target.getAttribute("data-id");
+              // Redirect to the edit page with the specific ID
+              window.location.href = "/view-request/" + id; // Replace "/edit" with your actual edit page URL
+            }
+          });
+    })
+    
+    
+    
+    
     
 });
 

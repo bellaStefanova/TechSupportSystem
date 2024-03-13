@@ -89,6 +89,22 @@ header .navigation-bar .profile-options .profile-option:hover + .profile-options
     animation: rollUp 2s ease;
 }
 
+.signup-nav-bar{
+    margin-left: 8em;
+}
+
+.signin-nav-bar {
+    margin-right: 1em;
+}
+
+.notification-count {
+  background-color: red;
+  color: white;
+  border-radius: 50px;
+  padding: 1px 5px;
+  margin-left: 5px;
+}
+
 
 @keyframes rollDown {
     from {
