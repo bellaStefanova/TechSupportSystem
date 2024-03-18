@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.views import generic as views
-from .models import Request, RequestNotification, UserNotification
+from django.contrib.auth import get_user_model
+
+from TechSupportSystem.notifications.models import RequestNotification
+from .models import Request
 from django.forms import modelform_factory
 from django.urls import reverse_lazy
+from TechSupportSystem.helpers.mixins import GetNotificationsMixin
+from django.http import JsonResponse
+from django.views import View
 
-class CreateRequestView(views.CreateView):
+UserModel = get_user_model()
+
+class CreateRequestView(GetNotificationsMixin, views.CreateView):
     queryset = Request.objects.all()
-    form_class = modelform_factory(Request, exclude=('status', 'user'))
+    form_class = modelform_factory(Request, exclude=('status', 'user', 'worked_on_by'))
     template_name = 'requests/create-request.html'
 
     def get_success_url(self) -> str:
@@ -15,12 +23,16 @@ class CreateRequestView(views.CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.status = 'Waiting'
+       
         return super().form_valid(form)
+    
+    
 
 
-class ListRequestView(views.ListView):
+class DetailsRequestView(GetNotificationsMixin, views.DetailView):
     queryset = Request.objects.all()
     template_name = 'requests/view-request.html'
+
 
 
 
@@ -34,20 +46,17 @@ class ListRequestView(views.ListView):
 #         form.instance.status = 'Waiting'
 #         return super().form_valid(form)
 
-class DeleteRequestView(views.DeleteView):
+class DeleteRequestView(GetNotificationsMixin, views.DeleteView):
     queryset = Request.objects.all()
     template_name = 'requests/delete-request.html'
     success_url = reverse_lazy('user-home')
 
-class ListNotificationView(views.ListView):
-    queryset = RequestNotification.objects.all()
-    template_name = 'requests/view-notifications.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
 
-        read_notifications = UserNotification.objects.filter(user=self.request.user, is_read=True)
-        unread_notifications = UserNotification.objects.filter(user=self.request.user, is_read=False)
-        context['read_notifications'] = read_notifications
-        context['unread_notifications'] = unread_notifications
-        return context
+class TakeRequestView(View):
+    def post(self, request, request_id):
+        support_request = Request.objects.get(id=request_id)
+        support_request.status = 'Assigned'
+        support_request.worked_on_by = request.user
+        support_request.save()
+        return JsonResponse({'message': 'Request taken'}, status=200)

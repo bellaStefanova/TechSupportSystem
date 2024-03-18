@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'TechSupportSystem.accounts.apps.AccountsConfig',
     'TechSupportSystem.departments.apps.DepartmentsConfig',
     'TechSupportSystem.requests.apps.RequestsConfig',
+    'TechSupportSystem.notifications.apps.NotificationsConfig',
 ]
 
 MIDDLEWARE = [

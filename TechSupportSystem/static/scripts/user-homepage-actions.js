@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (target.tagName === "TD" && target.className === "table-data-request-id") {
               var id = target.getAttribute("data-id");
               // Redirect to the edit page with the specific ID
-              window.location.href = "/view-request/" + id; // Replace "/edit" with your actual edit page URL
+              window.location.href = "/view-request/" + id;
             }
           });
     })

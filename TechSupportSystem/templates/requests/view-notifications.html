@@ -1,2 +1,30 @@
-{{ read_notifications }}
-{{ unread_notifications }}
+{% extends 'base.html' %}
+{% block content %}
+<div class="notifications-page">
+<h1 class="notifications-page-heading">Your Notifications</h1>
+{% for notification in unread_notifications %}
+<div class="notification-container">
+    <div class="unread-notification">
+        <p class="notification-id" notification-id="{{ notification.id }}" request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
+        <p class="notification-message">{{ notification.notification.message }}</p>
+        <p class="notification-request">Request title: {{ notification.notification.request }}</p>
+        <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
+        <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+    </div>
+</div>
+{% endfor %}
+{% for notification in read_notifications %}
+<div class="notification-container">
+    <div class="read-notification">
+        <p class="notification-id" notification-id="{{ notification.id }}" request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
+        <p class="notification-message">{{ notification.notification.message }}</p>
+        <p class="notification-request">Request title: {{ notification.notification.request }}</p>
+        <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
+        <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% csrf_token %}
+
+{% endblock %}

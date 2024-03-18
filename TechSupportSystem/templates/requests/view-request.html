@@ -1,1 +1,30 @@
-test
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="request-page">
+    <h1 class="request-page-heading">Request Details</h1>
+    <div class="request-details">
+        <p class="request-id" id="request-id" request-id="{{ request.id }}">Request ID: {{ request.id }}</p>
+        <p class="request-title">Title: {{ request.title }}</p>
+        <p class="request-description">Description: {{ request.description }}</p>
+        <p class="request-status">Status: {{ request.status }}</p>
+        <p class="request-created-on">Created on: {{ request.created_on }}</p>
+        <p class="request-updated-on">Updated on: {{ request.updated_on }}</p>
+        {% if user.is_superuser %}
+        <p class="request-user">Created by: {{ request.user }}</p>
+        {% endif %}
+        <p class="request-worked-by">Working on this request: {{ request.worked_on_by|default:'' }}</p>
+    </div>
+    <div class="request-actions">
+        {% if user.is_superuser %}
+        <div class="take-request" id="take-request">Take Request</div>
+        {% endif %}
+        
+
+        
+
+    </div>
+</div>
+{% csrf_token %}
+
+{% endblock %}

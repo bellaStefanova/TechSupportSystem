@@ -1,0 +1,41 @@
+.notifications-page {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    /* padding: 3em 5em; */
+    width: 100%;
+}
+
+.notifications-page .notifications-page-heading {
+    color: #757575;
+    font-size: 2.5em;
+    font-weight: normal;
+    padding: 1em 4em;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.notification-container {
+    border-radius: 3px;
+    background-color: white;
+    margin: 1em 10em;
+    padding: 0.5em;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 300px;
+}
+
+.notification-container .unread-notification p{
+    font-weight: bold;
+    padding-bottom: 3px;
+}
+
+.notification-container .read-notification p{
+    padding-bottom: 3px;
+}
+
+.notification-container .notification-id {
+    display: none;
+}

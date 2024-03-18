@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    {%if requests %}
+                    {% if not user.is_superuser %}
                         {% for request in requests %}
                         <tr class="table-row">
                             <!-- <a href="#"> -->
@@ -59,13 +59,37 @@
                             </td>
                         <!-- </a> -->
                         </tr>
+                        {% empty %}
+                        <tr class="table-row-no-requests">
+                            <td class="no-requests-found">No requests</td>
+                        </tr>
                         {% endfor %}
-                    {% else %}
-                    <tr class="table-row-no-requests">
-                        <td class="no-requests-found">No requests</td>
-                    </tr>
-                    {% endif %}
 
+                    {% endif %}
+                    
+                    {% if user.is_superuser %}
+                        {% for request in all_requests %}
+                        <tr class="table-row">
+                            <!-- <a href="#"> -->
+                            <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
+                            <td class="table-data-subject">{{request.title}}</td>
+                            <td class="table-data-status-cell"><div class="table-data-status">{{request.status}}</div></td>
+                            <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
+                            <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
+                            <td class="table-icons">
+                                <a class="delete-request" href="{% url 'delete-request' pk=request.pk %}">
+                                    <img src="{% static '/images/delete.jpg' %}" alt="">
+                                </a>
+                            </td>
+                        <!-- </a> -->
+                        </tr>
+                        
+                        {% empty %}
+                        <tr class="table-row-no-requests">
+                            <td class="no-requests-found">No requests</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

@@ -5,7 +5,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model
 from django.forms.models import modelform_factory
 from .forms import RegisterForm
-from TechSupportSystem.requests.models import UserNotification
+from TechSupportSystem.helpers.mixins import GetNotificationsMixin
+from TechSupportSystem.requests.models import Request
 
 UserModel = get_user_model()
 
@@ -28,23 +29,22 @@ class SignInView(auth_views.LoginView):
         # return super().get_success_url()
         return reverse_lazy('user-home')
 
-def test(request):
-    return ('testing only')
-
 class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('signin')
 
-class UserHomeView(views.TemplateView):
+class UserHomeView(GetNotificationsMixin, views.TemplateView):
     template_name = 'accounts/user-homepage.html'
 
     def get_context_data(self, **kwargs):
+        all_requests = Request.objects.order_by('-created_at')
         context = super().get_context_data(**kwargs)
-        notifications = self.request.user.requestnotification_set.all()
-        context['requests'] = UserNotification.objects.filter(user=self.request.user, is_read=False).count()
-        context['notifications'] = len(notifications)
+        # context['requests'] = self.request.user.request_set.all()
+        # context['all_requests'] = Request.objects.all()
+        context['all_requests'] = all_requests
+        context['requests'] = all_requests.filter(user=self.request.user)
         return context
     
-class ProfileDetailsView(views.DetailView):
+class ProfileDetailsView(GetNotificationsMixin, views.DetailView):
     queryset = UserModel.objects.all()
     template_name = 'accounts/profile-details.html'
 
