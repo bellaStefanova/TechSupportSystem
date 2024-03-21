@@ -1,22 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
-    <div class="user-details-container">
-        USername: {{ user.username }}
-        Email: {{ user.email }}
-        First name: {{ user.first_name }}
-        Last name: {{ user.last_name }}
-        Role: {{ user.role }}
-        Date joined: {{ user.date_joined }}
-        Department: {{ user.department }}
-        Level: 
-        {% if user.is_superuser %}
-            Superuser
-        {% elif user.is_staff %}
-            Admin
-        {% else %}
-            Regular user
-        {% endif %}
-        
+<div class="profile-details-page">
+    <h1 class="profile-details-page-heading">Profile</h1>
+    <div class="profile-details">
+        <p class="user-username">Username: <span>{{ user.username }}</span> </p>
+        <p class="user-id" id="user-id" user-id="{{ user.id }}">User ID: <span>{{ user.id }}</span></p>
+        <p class="user-email">Email: <span>{{ user.email }}</span></p>
+        <p class="user-first-name">First Name: <span>{{ user.profile.first_name }}</span></p>
+        <p class="user-last-name">Last Name: <span>{{ user.profile.last_name }}</span></p>
+        <p class="user-role">Position: <span>{{ user.profile.role|default:'Not specified' }}</span></p>
+        <p class="user-department">Department: <span>{{ user.department }}</span></p>
+        <p class="user-level">Level: <span>
+            {% if user.is_superuser %}
+                Superuser
+            {% elif user.is_staff %}
+                Admin
+            {% else %}
+                Regular user
+            {% endif %}
+        </span></p>
+    
     </div>
+    <div class="profile-actions">
+        <h2>Profile actions</h2>
+        <div class="profile-actions-buttons">
+            {% if user.is_superuser %}
+            <div class="delete-profile" id="delete-profile">Delete Profile</div>
+            {% endif %}
+            <a class="edit-profile" id="edit-profile" href="{% url 'edit-profile' %}">
+                Edit Profile
+            </a>
+            <a href="{% url 'change-password' %}" class="change-password" id="change-password">
+                Change Password
+            </a>
+        </div>
+
+
+
+    </div>
+</div>
+
 {% endblock %}

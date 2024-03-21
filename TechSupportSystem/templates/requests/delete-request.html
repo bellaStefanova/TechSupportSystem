@@ -4,14 +4,12 @@
     <div class="delete-request-pane form-container">
         <form action="{% url 'delete-request' pk=request.pk %}" method="post">
             {% csrf_token %}
-            <!-- <div class="form-fields"> -->
                 <div class="delete-confirm">
                     <h1>Confirm delete</h1>
                     <p>Are you sure you want to delete the request? You won't be able to revert this.</p>
                 </div>
-            <!-- </div> -->
             <div class="form-buttons">
-                <a href="{% url 'user-home' %}" class="cancel">Cancel</a>
+                <a href="{% url 'view-request' pk=request.pk %}" class="cancel">Cancel</a>
                 <button class="submit">Delete</button>
                 
             </div>

@@ -1,5 +1,20 @@
 /* formatting main content */
 
+.logo {
+    width: 80px;
+    height: 40px;
+    margin-left: 2em;
+    margin-top: 0.3em;
+}
+
+.initial-logo {
+    width: 120px;
+    height: 60px;
+    /* margin-left: 1em; */
+    margin-top: 2em;
+    position: relative;
+}
+
 .dashboard-main {
     padding: 2em;
     display: flex;
@@ -17,3 +32,163 @@
 .dashboard-last-tickets-pane {
     width: 30%;
 }
+
+.request-page,
+.profile-details-page {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.request-title span{
+    overflow: auto;
+}
+
+.request-page .request-page-heading,
+.profile-details-page .profile-details-page-heading {
+    color: #757575;
+    font-size: 2.5em;
+    font-weight: normal;
+    padding: 1em 4em;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.request-page .request-details,
+.profile-details-page .profile-details {
+    margin-left: 10em;
+    width: 60%;
+    margin-right: 8%;
+    padding: 2em;
+    background-color: white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.request-page .request-details p,
+.profile-details-page .profile-details p {
+    font-size: 1.2em;
+    color: #4e4e4e;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #eaeaea;
+    font-weight: bold;
+    padding-right: 0.5em;
+    width: 100%;
+}
+
+.request-page .request-details p span,
+.profile-details-page .profile-details p span {
+    font-weight: normal;
+    padding: 1em 0 0 1em;
+    width: 70%;
+    text-align: left;
+    border-left: 1px solid #eaeaea;
+    height: auto;
+}
+
+.request-page .request-actions,
+.profile-details-page .profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    flex-wrap: wrap;
+    align-items: start;
+    height: auto;
+}
+
+.request-page .request-actions h2,
+.profile-details-page .profile-actions h2 {
+    width: 100%;
+    height: auto;
+}
+
+.request-page .request-actions .request-actions-buttons,
+.request-page .request-actions .disabled-buttons,
+.profile-details-page .profile-actions .profile-actions-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.request-page .request-actions .request-actions-buttons a,
+.request-page .request-actions .disabled-buttons a,
+.profile-details-page .profile-actions .profile-actions-buttons a{
+    width: 110px;
+}
+
+.request-page .request-actions .request-actions-buttons .delete-request,
+.request-page .request-actions .request-actions-buttons .edit-request,
+.request-page .request-actions .request-actions-buttons .take-request,
+.request-page .request-actions .disabled-buttons .delete-request,
+.request-page .request-actions .disabled-buttons .edit-request,
+.request-page .request-actions .disabled-buttons .take-request,
+.profile-details-page .profile-actions .profile-actions-buttons .edit-profile,
+.profile-details-page .profile-actions .profile-actions-buttons .change-password,
+.profile-details-page .profile-actions .profile-actions-buttons .delete-profile {
+    color: white;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 1.05em;
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request,
+.profile-details-page .profile-actions .profile-actions-buttons .delete-profile {
+    background-color: #BE3A3A;
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .edit-request,
+.profile-details-page .profile-actions .profile-actions-buttons .edit-profile {
+    background-color: #CFAF71;
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .take-request,
+.profile-details-page .profile-actions .profile-actions-buttons .change-password {
+    background-color: #1D3B65;
+    cursor: pointer;
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request:hover,
+.profile-details-page .profile-actions .profile-actions-buttons .delete-profile:hover {
+    background-color: #820202
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .edit-request:hover,
+.profile-details-page .profile-actions .profile-actions-buttons .edit-profile:hover {
+    background-color: #aa905c;
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .take-request:hover,
+.profile-details-page .profile-actions .profile-actions-buttons .change-password:hover {
+    background-color: #142843
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request:active,
+.profile-details-page .profile-actions .profile-actions-buttons .delete-profile:active {
+    background-color: #600000
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .edit-request:hover,
+.profile-details-page .profile-actions .profile-actions-buttons .edit-profile:hover {
+    background-color: #aa905c;
+}
+
+.request-page .request-actions .disabled-buttons .delete-request,
+.request-page .request-actions .disabled-buttons .edit-request,
+.request-page .request-actions .disabled-buttons .take-request {
+    background-color: #848484;
+    cursor: not-allowed;
+}
+
+.request-page .request-actions h2,
+.profile-details-page .profile-actions h2 {
+    color: #4e4e4e;
+}
+

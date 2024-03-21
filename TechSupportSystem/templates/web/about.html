@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Support</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+
+
+</head>
+
+<body>
+    <!-- TODO: Add link to index page on left banner -->
+    <div class="about-page">
+        <div class="about-header initial-header">
+            <a href="{% url 'index' %}">
+                <img class="initial-logo" src="{% static '/images/logo2.jpg' %}" alt="">
+            </a>
+            <ul>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                <li><a href="{% url 'signin' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Register</a></li>
+            </ul>
+        </div>
+        <div class="heading-about-page">
+            <h1>About Us</h1>
+        </div>
+        <div class="about-content">
+            <p>
+                In today's fast-paced world the importance of seamless technical support is getting higher with each
+                day.
+                Our mission is to provide innovative solutions that empower businesses to overcome technical challenges
+                effortlessly.
+            </p>
+            <p>
+                With years of experience in the industry, our team is dedicated to delivering exceptional support
+                services tailored
+                to meet your unique needs. From troubleshooting IT issues to providing top-notch customer support, we're
+                committed
+                to helping you succeed.
+            </p>
+            <br>
+            <p>
+                What sets us apart:
+            </p>
+            <ul>
+                <li>Expertise: Our team consists of skilled professionals with extensive experience in technical
+                    support.</li>
+                <li>Customer-centric approach: We prioritize your satisfaction and strive to exceed your expectations.
+                </li>
+                <li>Cutting-edge technology: We leverage the latest tools and technologies to ensure efficient and
+                    effective
+                    support.</li>
+                <li>Whether you're a small business or a large enterprise, you can count on us to be your
+                    trusted partner in technical support.</li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>

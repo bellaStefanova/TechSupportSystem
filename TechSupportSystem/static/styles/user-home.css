@@ -169,6 +169,7 @@
 .tickets-table table thead tr th.table-header-subject,
 .tickets-table table tbody .table-row td.table-data-subject{
     width: 40%;
+    overflow: hidden;
 }
 
 .tickets-table table tbody .table-row td.table-data-status-cell{

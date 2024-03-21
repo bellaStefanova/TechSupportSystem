@@ -54,7 +54,8 @@
 
 .form-container form .form-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+
 }
 
 .form-container form .submit {
@@ -66,4 +67,55 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 1em;
+    width: 110px;
+}
+
+.cancel-button {
+    background-color: #848484;
+    color: white;
+    padding: 1em 2em;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 1em;
+    text-decoration: none;
+    width: 110px;
+    cursor: pointer;
+}
+
+.form-fields .helptext {
+    color: #848484;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+
+}
+
+.form-fields .helptext ul {
+    list-style: none;
+    padding-bottom: 1em;
+}
+
+textarea {
+    width: 100%;
+    margin-bottom: 1em; 
+    margin-top: 0.5em;
+    border: 1px solid #ccc;
+    resize: none;
+    border-radius: 5px;
+}
+
+textarea::-webkit-scrollbar {
+    width: 12px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #cacaca;
+    border-radius: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+textarea::-webkit-scrollbar-corner {
+    background-color: #f1f1f1;
 }

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'TechSupportSystem.web.apps.WebConfig',
     'TechSupportSystem.accounts.apps.AccountsConfig',
     'TechSupportSystem.departments.apps.DepartmentsConfig',
     'TechSupportSystem.requests.apps.RequestsConfig',

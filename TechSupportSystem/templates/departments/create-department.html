@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="create-department-pane form-container">
+        <form action="{% url 'create-department'%}" method="post">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form }}
+            </div>
+            <div class="form-buttons">
+                <button class="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

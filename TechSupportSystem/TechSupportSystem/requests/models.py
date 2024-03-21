@@ -6,18 +6,26 @@ from TechSupportSystem.notifications.models import RequestNotification
 UserModel = get_user_model()
 
 class StatusOptions(models.TextChoices):
-    WAITING = 'WAITING', 'Waiting'
-    ASSIGNED = 'ASSIGNED', 'Assigned'
-    RESOLVED = 'RESOLVED', 'Resolved'
+    WAITING = 'Waiting', 'Waiting'
+    ASSIGNED = 'Assigned', 'Assigned'
+    RESOLVED = 'Resolved', 'Resolved'
+    
+class UrgencyOptions(models.TextChoices):
+    LOW = 'Low', 'Low'
+    MEDIUM = 'Medium', 'Medium'
+    HIGH = 'High', 'High'
+    CRITICAL = 'Critical', 'Critical'
 
 class Request(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
+    urgency = models.CharField(max_length=10, choices=UrgencyOptions.choices, default=UrgencyOptions.LOW)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=StatusOptions.choices, default=StatusOptions.WAITING)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     worked_on_by = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='worked_on_by', null=True, blank=True)
+    last_updated_by = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='last_updated_by', null=True, blank=True)
 
     def __str__(self):
         return self.title

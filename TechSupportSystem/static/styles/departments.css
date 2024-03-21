@@ -1,0 +1,295 @@
+
+.departments-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 3em;
+}
+
+.departments-main .departments-table-header {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.departments-main .departments-table-header h1 {
+    color: #757575;
+    font-size: 2.5em;
+    font-weight: normal;
+}
+
+.departments-main .departments-table-header a {
+    background-color: #1D3B65;
+    color: white;
+    text-decoration: none;
+    padding: 1em 1.2em;
+    border-radius: 5px;
+}
+
+/* .user-homepage-main .search-filter-header {
+    background-color: white;
+    width: 70%;
+    display: flex;
+    padding: 1em;
+    margin-bottom: 2em;
+    border-radius: 3px;
+    box-shadow: 0 0 10px 2px rgba(162, 162, 162, 0.2);
+}
+
+.search-filter-header .per-status {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 1px solid #ccc;
+    padding: 8px 0;
+    width: 9%;
+}
+
+.search-filter-header .per-status .initial-option-container {
+    width: 70%;
+    text-align: center;
+    padding-left: 10px;
+    color: #a4a4a4;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.search-filter-header .per-status .initial-option-container img {
+    margin-right: 15px;
+    margin-bottom: 2px;
+    display: inline-block;
+    width: 10px;
+    height: 6px;
+}
+
+.search-filter-header .per-status .filter-per-status-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.search-filter-header .per-status .filter-per-status-options .option {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+}
+  
+.search-filter-header .per-status .filter-per-status-options .option:hover {
+    background-color: #f0f0f0;
+}
+
+.search-filter-header .per-details {
+    display: flex;
+    align-items: center;
+    width: 56%;
+}
+
+.search-filter-header .per-details img {
+    margin: 0 12px 2px 24px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.search-filter-header .per-details input {
+    width: 90%;
+    font-size: 1em;
+    color: #a4a4a4;
+    border: none;
+}
+
+.search-filter-header .per-details input::placeholder {
+    color: #a4a4a4;
+}
+
+.search-filter-header .per-details input:focus {
+    outline: none;
+    border: none;
+}
+
+.search-filter-header .per-period {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 2em;
+    flex-grow: 1;
+}
+
+.search-filter-header .per-period a{
+    text-decoration: none;
+    color: #7b7b7b;
+    background-color: #dbdbdb;
+    padding: 0.5em 2em;
+} */
+
+/* requests table */
+.departments-table,
+.departments-table table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.departments-table table thead tr {
+    display: flex;
+    padding-bottom: 1em;
+    width: 100%;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+    padding: 1em 15%;
+}
+
+.departments-table table thead tr th {
+    color: #a4a4a4;
+    text-transform: uppercase;
+    margin-left: 2em;
+    text-align: left;
+}
+
+.departments-table table thead tr th.table-header-department-name,
+.departments-table table tbody .table-row td.table-data-department-name,
+.departments-table table thead tr th.table-header-department-manager,
+.departments-table table tbody .table-row td.table-data-department-manager,
+.departments-table table thead tr th.table-header-department-location,
+.departments-table table tbody .table-row td.table-data-department-location{
+    width: 14%;
+}
+
+.departments-table table thead tr th.table-header-department-description,
+.departments-table table tbody .table-row td.table-data-department-description{
+    width: 49%;
+}
+
+
+.departments-table table tbody tr td {
+    padding: 1em 0 1em 2em;
+    text-align: left;
+    box-sizing: content-box;
+}
+
+
+.departments-table table thead tr th.table-header-hidden,
+.departments-table table tbody .table-row td.table-icons{
+    width: 8%;
+    margin-left: 0.5%;
+    padding-left: 0;
+}
+
+.departments-table table tbody .table-row td.table-icons .delete-department,
+.departments-table table tbody .table-row td.table-icons .edit-department{
+    margin-right: 0.5em;
+    text-decoration: none;
+}
+
+.departments-table table tbody .table-row td.table-icons .delete-department img {
+    width: 12px;
+    height: 15px;
+}
+
+.departments-table table tbody .table-row td.table-icons .edit-department img {
+    width: 15px;
+    height: 15px;
+}
+
+/* .departments-table table tbody .table-row td.table-icons .delete-department img:hover  {
+    cursor: pointer;
+} */
+/* TODO: add tooltip on hovering the delete icon */
+/* .tickets-table table tbody .table-row td.table-icons a img:hover::after {
+    content: "Delete request";
+    position: absolute;
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    opacity: 0.7;
+    
+} */
+
+
+
+.departments-table table tbody{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: scroll;
+    max-height: 60vh;
+}
+
+.departments-table table tbody::-webkit-scrollbar {
+    display: none;
+}
+
+.departments-table table tbody .table-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.5em 15%;
+    background-color: #ffffff;
+    opacity: 0.7;
+    box-shadow: 0 0 10px 2px rgba(162, 162, 162, 0.2);
+}
+
+.departments-table table tbody .table-row:hover {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    /* cursor: pointer; */
+}
+
+.table-row-no-departments {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5em 15%;
+    padding: 1.5em 0;
+}
+.no-departments-found {
+    font-size: 2em;
+    color: #757575;
+}
+
+.delete-confirm h1 {
+    color: #757575;
+    font-weight: normal;
+    text-align: left;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    line-height: 1.5em;
+    border-bottom: 1px solid #b5b5b5;
+}
+
+.delete-confirm p {
+    color: #757575;
+    font-size: 1.2em;
+    text-align: left;
+    padding-bottom: 1.5em;
+    line-height: 1.5em;
+}
+
+.cancel {
+    background-color: #757575;
+    color: white;
+    font-size: 1em;
+    text-decoration: none;
+    padding: 1em 3em;
+    border-radius: 5px;
+    margin-right: 2em;
+    margin-top: 1em;
+}

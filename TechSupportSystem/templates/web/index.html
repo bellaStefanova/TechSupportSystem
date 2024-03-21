@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Support</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+
+
+</head>
+
+<body>
+    <!-- TODO: Add link to index page on left banner -->
+    <!-- TODO: Make index-base.html for the banner, as it's repetitive between index, contacts, about -->
+    <div class="landing-page">
+        <div class="langing-header initial-header">
+            <a href="{% url 'index' %}">
+                <img class="initial-logo" src="{% static '/images/logo1.jpg' %}" alt="">
+            </a>
+            <ul>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                <li><a href="{% url 'signin' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Register</a></li>
+            </ul>
+        </div>
+        <div class="heading-landing-page">
+            <h1>Tech Support System</h1>
+        </div>
+        <div class="landing-content">
+            <p>Welcome to TechSupportHub!</p>
+            <p>
+                Empower your team with seamless technical support. Our platform offers a streamlined ticketing system,
+                allowing you to efficiently manage and resolve technical issues. From IT troubleshooting to customer
+                support, TechSupportHub simplifies the process, so you can focus on what matters most – delivering
+                exceptional service.
+            </p>
+            <br>
+            <p>
+                Key Features:
+            </p>
+            <ul>
+                <li>Easy ticket submission</li>
+                <li>Automated workflows</li>
+                <li>Real-time status updates</li>
+                <li>Comprehensive reporting</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

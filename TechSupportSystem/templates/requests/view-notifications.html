@@ -24,6 +24,9 @@
     </div>
 </div>
 {% endfor %}
+{% if not unread_notifications and not read_notifications %}
+<p class="no-notifications">You have no notifications</p>
+{% endif %}
 </div>
 {% csrf_token %}
 

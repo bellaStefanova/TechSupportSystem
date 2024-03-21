@@ -1,0 +1,133 @@
+@import 'https://use.fontawesome.com/releases/v6.0.0/css/all.css';
+
+.landing-page{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(../images/background_landing.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 0 8em;
+    opacity: 0.9;
+}
+
+.initial-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.initial-header ul {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding-top: 2em;
+}
+
+.initial-header ul li a{
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.initial-header ul li a:hover{
+    opacity: 1;
+}
+
+
+.heading-landing-page h1 {
+    padding-top: 1.5em;
+    padding-bottom: 0.5em;
+    color: white;
+    font-size: 3.5em;
+    opacity: 1;
+}
+
+.landing-content {
+    width: 50%;
+}
+
+.landing-content p {
+    color: white;
+    padding-bottom: 1em;
+    font-size: 1.2em;
+    line-height: 1.4;
+}
+
+.landing-content ul li,
+.about-content ul li,
+.contacts-content ul li{
+    color: white;
+    font-size: 1.2em;
+    padding-bottom: 1em;
+    line-height: 1.4;
+    list-style-type:square;
+
+}
+.landing-content ul,
+.about-content ul,
+.contacts-content ul {
+    padding-left: 2em;
+}
+
+.about-page,
+.contacts-page{
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 8em;
+    position: relative;
+}
+
+.about-page::before,
+.contacts-page::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url(../images/background_about.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.7;
+}
+
+.about-header ul li a,
+.contacts-header ul li a {
+    position: relative;
+    color: black;
+}
+
+.heading-about-page h1,
+.heading-contacts-page h1 {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    font-size: 3.5em;
+    opacity: 0.8;
+}
+
+.about-content {
+    width: 70%;
+}
+
+.about-content p,
+.contacts-content p {
+    position: relative;
+    color: black;
+    padding-bottom: 1em;
+    font-size: 1.25em;
+    line-height: 1.5;
+    opacity: 1;
+}
+
+.about-content ul li,
+.contacts-content ul li{
+    position: relative;
+    color: black;
+    opacity: 1;
+}

@@ -7,24 +7,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Support</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.0/chart.js"></script>
     <script src="{% static '/scripts/profile-navbar-dynamic-menu.js' %}"></script>
     <script src="{% static '/scripts/user-homepage-actions.js' %}"></script>
     <script src="{% static '/scripts/notifications-reading.js' %}"></script>
     <script src="{% static '/scripts/take-request.js' %}"></script>
+    <script src="{% static '/scripts/charts.js' %}"></script>
+
 
 </head>
 
 <body>
     <header class="nav">
-        <h1>Tech Support System</h1>
+        <!-- <h1>Tech Support System</h1> -->
+        <a href="{% url 'index' %}">
+            <img class="logo" src="{% static '/images/logo1.jpg' %}" alt="">
+        </a>
         <div class="navigation-bar">
             {% if user.is_authenticated %}
 
             <!-- <ul> -->
             {% if user.is_superuser %}
             <div class="dashboard-nav-bar">
-                <a href="#">Dashboard</a>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
             </div>
             {% endif %}
             <div class="home-nav-bar">
@@ -38,7 +45,8 @@
             </div> <!-- about resolved tickets, messages, etc.-->
             <!-- <li><a href="#">Dashboard</a></li> seen only by admins -->
             <div class="profile-nav-bar">
-                <p>Profile</p> <!--profile page with employee info about company, department, etc.-->
+                <p class="profile-dynamic-dropdown-activate">Profile</p>
+                <!--profile page with employee info about company, department, etc.-->
                 <div class="profile-options">
                     <div class="profile-option">
                         <a href="{% url 'profile-details' %}">Profile details</a>
@@ -51,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- </ul> -->
             {% else %}
             <div class="signup-nav-bar">
@@ -64,11 +72,12 @@
         </div>
     </header>
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 
 
 </body>
+
 
 
 </html>

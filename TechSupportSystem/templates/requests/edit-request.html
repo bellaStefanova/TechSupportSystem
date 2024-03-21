@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="edit-request-pane form-container">
+        <form action="{% url 'edit-request' pk=request.pk %}" method="post">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form }}
+            </div>
+            <div class="form-buttons">
+                <a class="cancel-button" href="{% url 'view-request' pk=request.pk %}">Go back</a>
+                <button class="submit">Save</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

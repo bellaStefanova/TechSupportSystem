@@ -1,10 +1,12 @@
 @import "reset.css";
+@import "landing.css";
 @import "header.css";
 @import "main.css";
 @import "dashboard.css";
 @import "form.css";
 @import "user-home.css";
 @import "notifications.css";
+@import "departments.css";
 
 
 

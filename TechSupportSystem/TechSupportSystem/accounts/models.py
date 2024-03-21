@@ -13,6 +13,9 @@ class UserProfile(auth_models.AbstractUser):
         null=True,
         blank=True,
     )
+    skip_initial_profile_details = models.BooleanField(
+        default=False,
+    )
 
 
 '''Profile Model related to UserProfile, extenging its information with non-required one'''

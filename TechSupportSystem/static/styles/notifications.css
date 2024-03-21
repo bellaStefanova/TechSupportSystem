@@ -39,3 +39,14 @@
 .notification-container .notification-id {
     display: none;
 }
+
+.no-notifications {
+    color: #757575;
+    font-size: 1.5em;
+    font-weight: normal;
+    padding: 1em 4em;
+    width: 100%;
+    margin-bottom: 1em;
+    text-align: center;
+}
+

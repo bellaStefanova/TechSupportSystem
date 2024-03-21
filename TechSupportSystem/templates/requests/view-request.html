@@ -1,27 +1,57 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="request-page">
     <h1 class="request-page-heading">Request Details</h1>
     <div class="request-details">
-        <p class="request-id" id="request-id" request-id="{{ request.id }}">Request ID: {{ request.id }}</p>
-        <p class="request-title">Title: {{ request.title }}</p>
-        <p class="request-description">Description: {{ request.description }}</p>
-        <p class="request-status">Status: {{ request.status }}</p>
-        <p class="request-created-on">Created on: {{ request.created_on }}</p>
-        <p class="request-updated-on">Updated on: {{ request.updated_on }}</p>
+        <p class="request-id" id="request-id" request-id="{{ request.id }}">Request ID: <span>{{ request.id }}</span>
+        </p>
+        <p class="request-title">Title: <span>{{ request.title }}</span></p>
+        <p class="request-description">Description: <span>{{ request.description }}</span></p>
+        <p class="request-status">Status: <span>{{ request.status }}</span></p>
+        <p class="request-urgency">Urgency: <span>{{ request.urgency }}</span></p>
+        <p class="request-created-on">Created on: <span>{{ request.created_at|date:"Y-m-d H:i" }}</span></p>
+        <p class="request-updated-on">Updated on: <span>{{ request.updated_at|date:"Y-m-d H:i" }}</span></p>
         {% if user.is_superuser %}
-        <p class="request-user">Created by: {{ request.user }}</p>
+        <p class="request-user">Created by: <span>{{ request.user }}</span></p>
         {% endif %}
-        <p class="request-worked-by">Working on this request: {{ request.worked_on_by|default:'' }}</p>
+        <p class="request-worked-by">Working on this request: <span>{{ request.worked_on_by|default:'n/a' }}</span></p>
     </div>
     <div class="request-actions">
-        {% if user.is_superuser %}
-        <div class="take-request" id="take-request">Take Request</div>
-        {% endif %}
-        
+        <h2>Request actions</h2>
+        {% if request.status == 'Resolved' %}
+        <div class="disabled-buttons">
+            <div class="request-actions-buttons">
+                {% if user.is_superuser %}
+                <div class="take-request" id="take-request">Take Request</div>
+                {% endif %}
+                <div class="delete-request" id="delete-request">
+                    Delete Request
+                </div>
+                <div class="edit-request" id="edit-request">
+                    Edit Request
+                </div>
+            </div>
 
-        
+        </div>
+        {% else %}
+        <div class="enabled-buttons">
+            <div class="request-actions-buttons">
+                {% if user.is_superuser %}
+                <div class="take-request" id="take-request">Take Request</div>
+                {% endif %}
+                <a class="delete-request" id="delete-request" href="{% url 'delete-request' pk=request.pk %}">
+                    Delete Request
+                </a>
+                <a href="{% url 'edit-request' pk=request.pk %}" class="edit-request" id="edit-request">
+                    Edit Request
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+
 
     </div>
 </div>

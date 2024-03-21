@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Support</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+
+
+</head>
+
+<body>
+        <!-- TODO: Add link to index page on left banner -->
+    <div class="contacts-page">
+        <div class="contacts-header initial-header">
+            <a href="{% url 'index' %}">
+                <img class="initial-logo" src="{% static '/images/logo2.jpg' %}" alt="">
+            </a>
+            <ul>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                <li><a href="{% url 'signin' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Register</a>
+            </ul>
+        </div>
+        <div class="heading-contacts-page">
+            <h1>Contact Us</h1>
+        </div>
+        <div class="contacts-content">
+            <p>
+                If you have any questions or need assistance, feel free to reach out to us. Our team is here to help and
+                provide
+                the support you need.
+            </p>
+            <!-- TODO: Add more contacts -->
+            <ul>
+                <li>Email: some_email@gmail.com</li>
+                <li>GitHub: <a href="https://github.com/bellaStefanova/TechSupportSystem.git">Here</a></li>
+                <li>...</li>
+                <li>...</li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>
