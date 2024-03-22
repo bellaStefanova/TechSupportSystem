@@ -69,6 +69,7 @@
 
 .request-page .request-details p,
 .profile-details-page .profile-details p {
+    min-height: 32px;
     font-size: 1.2em;
     color: #4e4e4e;
     display: flex;
@@ -82,6 +83,7 @@
 
 .request-page .request-details p span,
 .profile-details-page .profile-details p span {
+    min-height: 32px;
     font-weight: normal;
     padding: 1em 0 0 1em;
     width: 70%;

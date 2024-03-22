@@ -29,9 +29,25 @@
             {% if user.is_authenticated %}
 
             <!-- <ul> -->
-            {% if user.is_superuser %}
+            {% if user.is_staff %}
             <div class="dashboard-nav-bar">
                 <a href="{% url 'dashboard' %}">Dashboard</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="admin-nav-bar">
+                <p class="admin-dynamic-dropdown-activate">Admin Panel</p>
+                <div class="admin-options">
+                    <div class="admin-option">
+                        <a href="#">Manage Departments</a>
+                    </div>
+                    <div class="admin-option">
+                        <a href="#">Manage Roles</a>
+                    </div>
+                    <div class="admin-option">
+                        <a href="#">Manage Users</a>
+                    </div>
+                </div>
             </div>
             {% endif %}
             <div class="home-nav-bar">

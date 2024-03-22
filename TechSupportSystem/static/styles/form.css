@@ -11,7 +11,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* width: 70%; */
     background-color: white;
     padding: 2.5em;
     border-radius: 3px;
@@ -26,7 +25,6 @@
 .form-container form .form-fields label,
 .form-container form .form-fields input,
 .form-container form .form-fields select{
-    /* min-width: 350px; */
     width: 100%;
     font-size: 1.1em;
     margin: 0.5em 0;
@@ -58,6 +56,18 @@
 
 }
 
+.signup-button {
+    background-color: #1D3B65;
+    color: white;
+    border: none;
+    padding: 1em 3em;
+    margin-top: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 120px;
+}
+
 .form-container form .submit {
     background-color: #1D3B65;
     color: white;
@@ -69,6 +79,8 @@
     font-size: 1em;
     width: 110px;
 }
+
+
 
 .cancel-button {
     background-color: #848484;
