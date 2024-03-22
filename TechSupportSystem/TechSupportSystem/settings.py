@@ -91,6 +91,8 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = 'signin'
+
 
 
 # Password validation

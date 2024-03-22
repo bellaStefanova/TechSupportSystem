@@ -5,7 +5,7 @@ from .models import Profile
 
 UserModel = get_user_model()
 
-
+'''these signals are not used, just left here, just in case they are needed in the future'''
 @receiver(post_save, sender=UserModel)
 def user_created(sender, instance, created, *args, **kwargs):
 	if created:

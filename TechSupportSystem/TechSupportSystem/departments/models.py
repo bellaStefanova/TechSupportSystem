@@ -36,3 +36,23 @@ class Department(models.Model):
 
     def __str__(self):
         return self.name
+
+
+'''Role Model for employees positions'''
+
+class Role(models.Model):
+        
+        TITLE_MAX_LENGTH = 50
+        DESCRIPTION_MAX_LENGTH = 1000
+    
+        title = models.CharField(
+            max_length=TITLE_MAX_LENGTH,
+        )
+
+        description = models.TextField(
+            max_length=DESCRIPTION_MAX_LENGTH,
+        )
+
+        is_eligible_for_staff = models.BooleanField(
+            default=False,
+        )

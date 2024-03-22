@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth import models as auth_models, get_user_model
 
-from TechSupportSystem.departments.models import Department
+from TechSupportSystem.departments.models import Department, Role
 
 
 '''Custom User Model'''
 class UserProfile(auth_models.AbstractUser):
+    
     department = models.ForeignKey(
         Department,
         on_delete=models.DO_NOTHING,
@@ -13,6 +14,7 @@ class UserProfile(auth_models.AbstractUser):
         null=True,
         blank=True,
     )
+    
     skip_initial_profile_details = models.BooleanField(
         default=False,
     )
@@ -42,30 +44,12 @@ class Profile(models.Model):
     )
 
     role = models.ForeignKey(
-        'Role',
+        Role,
         on_delete=models.DO_NOTHING,
         related_name='profiles',
         null=True,
         blank=True,
     )
 
-
-'''Role Model for employees positions'''
-
-class Role(models.Model):
-        
-        TITLE_MAX_LENGTH = 50
-        DESCRIPTION_MAX_LENGTH = 1000
-    
-        title = models.CharField(
-            max_length=TITLE_MAX_LENGTH,
-        )
-
-        description = models.TextField(
-            max_length=DESCRIPTION_MAX_LENGTH,
-        )
-
-        is_eligible_for_staff = models.BooleanField(
-            default=False,
-        )
-    
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
