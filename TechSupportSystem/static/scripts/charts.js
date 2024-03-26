@@ -60,10 +60,11 @@ if (window.location.pathname === '/dashboard/') {
         options: {
           plugins: {
             legend: {
-              display: true,
+              display: false,
             },
           },
           maintainAspectRatio: true,
+          aspectRatio: 1,
           responsive: true,
         }
       });
