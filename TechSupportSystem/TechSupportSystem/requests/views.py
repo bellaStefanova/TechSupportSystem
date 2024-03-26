@@ -56,7 +56,11 @@ class EditRequestView(views.UpdateView):
 class DeleteRequestView(GetNotificationsMixin, views.DeleteView):
     queryset = Request.objects.all()
     template_name = 'requests/delete-request.html'
-    success_url = reverse_lazy('user-home')
+    
+    def get_success_url(self):
+        if self.request.user.is_superuser:
+            return reverse_lazy('dashboard')
+        return reverse_lazy('user-home')
 
 
 
@@ -73,12 +77,13 @@ class TakeRequestView(View):
 
 class DashboardView(GetNotificationsMixin, views.TemplateView):
     
-    template_name = 'requests/dashboard.html'
+    template_name = 'requests/dashboard2.html'
     
     def get_context_data(self, **kwargs):
         all_requests = Request.objects.all().order_by('-created_at')
         context = super().get_context_data(**kwargs)
         context['requests'] = all_requests
+        context['last_requests'] = all_requests[:10]
         context['all_requests_count'] = len(all_requests)
         context['waiting_requests_count'] = len(all_requests.filter(status='Waiting'))
         context['assigned_requests_count'] = len(all_requests.filter(status='Assigned'))

@@ -42,9 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let child of allNotificationChildren) {
                 if (child.tagName === 'P' && child.classList.contains('notification-id')) {
                     let notificationId = child.getAttribute('notification-id');
+                    let userId = child.getAttribute('user-id');
                     let requestId = child.getAttribute('request-id');
-                    console.log(notificationId);
-                    console.log(requestId);
+                    if (requestId !== null) {
+                        windowLocationHref = "/view-request/" + requestId;
+                    } else if (userId !== null) {
+                        windowLocationHref = "/edit-user/" + userId;
+                    }
                                         fetch('/mark-notification-as-read/' + notificationId + '/', {
                                             method: 'POST',
                                             headers: {
@@ -54,15 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
                                         })
                                         .then(response => {
                                             if (response.ok) {
-                                                window.location.href = "/view-request/" + requestId;
+                                                window.location.href = windowLocationHref;
                                             } else {
                                                 console.log(response);
                                             }
                                         })
                                         .catch(error => {
                                             console.log('Error marking notification as read');
-                                            // console.log(error);
-                                            // console.log(requestId)
                                         });
                     };
             };

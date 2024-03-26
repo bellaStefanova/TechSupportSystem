@@ -13,6 +13,8 @@ def request_created(sender, instance, created, *args, **kwargs):
         notification = RequestNotification(
         request=instance,
             message=f'New request created.',
+            notification_type='REQUEST',
+            user_submitted_notification = instance.user
         )
         notification.save()
 
@@ -28,11 +30,14 @@ def take_request_handler(sender, instance, created, **kwargs):
         notification = RequestNotification.objects.filter(
             request=instance,
             message=f'Request has been taken by {instance.worked_on_by}',
+            notification_type='REQUEST',
         )
         if not notification:
             notification = RequestNotification(
                 request=instance,
                 message=f'Request has been taken by {instance.worked_on_by}',
+                notification_type='REQUEST',
+                user_submitted_notification = instance.worked_on_by
             )
             notification.save()
             notification.users_to_notify.add(instance.user)
@@ -47,6 +52,8 @@ def edit_request_handler(sender, instance, created, **kwargs):
             notification = RequestNotification(
                 request=instance,
                 message=f'Request has been marked as resolved by {instance.worked_on_by}',
+                notification_type='REQUEST',
+                user_submitted_notification = instance.last_updated_by
             )
             notification.save()
             notification.users_to_notify.add(instance.user)
@@ -57,7 +64,9 @@ def edit_request_handler(sender, instance, created, **kwargs):
             if instance.last_updated_by.is_superuser:
                 notification = RequestNotification(
                     request=instance, 
-                    message=f'Request has been updated by {instance.last_updated_by.username}',)
+                    message=f'Request has been updated by {instance.last_updated_by.username}',
+                    notification_type='REQUEST',
+                    user_submitted_notification = instance.last_updated_by)
                 notification.save()
                 notification.users_to_notify.add(instance.user)
                 notification.save()
@@ -65,7 +74,9 @@ def edit_request_handler(sender, instance, created, **kwargs):
             superusers = UserModel.objects.filter(is_superuser=True)
             notification = RequestNotification(
                 request=instance, 
-                message=f'Request has been updated by {instance.last_updated_by.username}',)
+                message=f'Request has been updated by {instance.last_updated_by.username}',
+                notification_type='REQUEST',
+                user_submitted_notification = instance.user)
             notification.save()
             notification.users_to_notify.set(superusers)
             notification.save()

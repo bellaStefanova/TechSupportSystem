@@ -9,7 +9,7 @@ class UserProfile(auth_models.AbstractUser):
     
     department = models.ForeignKey(
         Department,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
         related_name='employees',
         null=True,
         blank=True,
@@ -31,7 +31,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(
         UserModel, 
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         related_name='profile',
     )
 
@@ -45,7 +45,7 @@ class Profile(models.Model):
 
     role = models.ForeignKey(
         Role,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.SET_NULL,
         related_name='profiles',
         null=True,
         blank=True,

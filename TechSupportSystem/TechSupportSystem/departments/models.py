@@ -42,17 +42,28 @@ class Department(models.Model):
 
 class Role(models.Model):
         
-        TITLE_MAX_LENGTH = 50
-        DESCRIPTION_MAX_LENGTH = 1000
+    TITLE_MAX_LENGTH = 50
+    DESCRIPTION_MAX_LENGTH = 150
     
-        title = models.CharField(
-            max_length=TITLE_MAX_LENGTH,
-        )
+    title = models.CharField(
+        max_length=TITLE_MAX_LENGTH,
+    )
 
-        description = models.TextField(
-            max_length=DESCRIPTION_MAX_LENGTH,
-        )
+    description = models.TextField(
+        max_length=DESCRIPTION_MAX_LENGTH,
+    )
 
-        is_eligible_for_staff = models.BooleanField(
-            default=False,
-        )
+    is_eligible_for_staff = models.BooleanField(
+        default=False,
+    )
+    
+    department = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        related_name='roles',
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.title

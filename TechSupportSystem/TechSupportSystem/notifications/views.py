@@ -15,8 +15,18 @@ class ListNotificationView(GetNotificationsMixin, views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        read_notifications = UserNotification.objects.filter(user=self.request.user, is_read=True).order_by('-notification__created_at')
+        read_notifications = UserNotification.objects.filter(
+            user=self.request.user, 
+            is_read=True, 
+            notification__notification_type='REQUEST'
+        ).order_by('-notification__created_at')
+        user_notifications = UserNotification.objects.filter(
+            user=self.request.user, 
+            is_read=False, 
+            notification__notification_type='USER'
+        ).order_by('-notification__created_at')
         context['read_notifications'] = read_notifications
+        context['user_notifications'] = user_notifications
         return context
     
 

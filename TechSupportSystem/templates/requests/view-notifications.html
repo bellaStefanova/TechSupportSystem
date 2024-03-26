@@ -1,33 +1,56 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="notifications-page">
-<h1 class="notifications-page-heading">Your Notifications</h1>
-{% for notification in unread_notifications %}
-<div class="notification-container">
-    <div class="unread-notification">
-        <p class="notification-id" notification-id="{{ notification.id }}" request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
-        <p class="notification-message">{{ notification.notification.message }}</p>
-        <p class="notification-request">Request title: {{ notification.notification.request }}</p>
-        <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
-        <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+    <h1 class="notifications-page-heading">Your Notifications</h1>
+    <div class="request-notifications">
+        <h3>Request Notifications</h3>
+        {% for notification in unread_notifications %}
+        <div class="notification-container">
+            <div class="unread-notification">
+                <p class="notification-id" notification-id="{{ notification.id }}"
+                    request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
+                <p class="notification-message">{{ notification.notification.message }}</p>
+                <p class="notification-request">Request title: {{ notification.notification.request }}</p>
+                <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
+                <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% for notification in read_notifications %}
+        <div class="notification-container">
+            <div class="read-notification">
+                <p class="notification-id" notification-id="{{ notification.id }}"
+                    request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
+                <p class="notification-message">{{ notification.notification.message }}</p>
+                <p class="notification-request">Request title: {{ notification.notification.request }}</p>
+                <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
+                <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not unread_notifications and not read_notifications %}
+        <p class="no-notifications">No request notifications</p>
+        {% endif %}
     </div>
-</div>
-{% endfor %}
-{% for notification in read_notifications %}
-<div class="notification-container">
-    <div class="read-notification">
-        <p class="notification-id" notification-id="{{ notification.id }}" request-id="{{ notification.notification.request.id }}">{{ notification.id }}</p>
-        <p class="notification-message">{{ notification.notification.message }}</p>
-        <p class="notification-request">Request title: {{ notification.notification.request }}</p>
-        <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
-        <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+    <div class="user-notifications">
+        <h3>User notifications</h3>
+        {% for notification in user_notifications %}
+        <div class="notification-container">
+            <div class="unread-notification">
+                <p class="notification-id" notification-id="{{ notification.id }}"
+                    user-id="{{ notification.notification.user_submitted_notification.id }}">{{ notification.id }}</p>
+                <p class="notification-message">{{ notification.notification.message }}</p>
+                <p>Click here to edit their profile</p>
+                <!-- <p class="notification-request">Request title: {{ notification.notification.request }}</p>
+                <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
+                <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p> -->
+            </div>
+        </div>
+        {% endfor %}
+        {% if not user_notifications %}
+        <p class="no-notifications">No new user notifications</p>
+        {% endif %}
     </div>
-</div>
-{% endfor %}
-{% if not unread_notifications and not read_notifications %}
-<p class="no-notifications">You have no notifications</p>
-{% endif %}
-</div>
-{% csrf_token %}
+    {% csrf_token %}
 
-{% endblock %}
+    {% endblock %}

@@ -1,6 +1,7 @@
 .notifications-page {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     align-items: start;
     justify-content: center;
     /* padding: 3em 5em; */
@@ -17,10 +18,35 @@
     margin-bottom: 1em;
 }
 
+.request-notifications,
+.user-notifications {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 2em 10em;
+    justify-content: flex-start;
+}
+
+.request-notifications {
+    border-right: 1px solid grey;
+}
+
+.request-notifications h3,
+.user-notifications h3 {
+    color: #757575;
+    font-size: 1.5em;
+    font-weight: normal;
+    /* padding: 1em 4em; */
+    /* border-bottom: 1px solid grey; */
+    width: 100%;
+    margin-bottom: 1em;
+}
+
 .notification-container {
     border-radius: 3px;
     background-color: white;
-    margin: 1em 10em;
+    margin: 1em 10em 1em 0;
     padding: 0.5em;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
