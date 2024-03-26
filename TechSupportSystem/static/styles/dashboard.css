@@ -14,16 +14,21 @@
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     padding: 1em;
     width: 31%;
+   
 }
 
 .header-container a {
     text-decoration: none;
     color: rgb(68, 68, 68);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .header-container h4 {
     text-transform: uppercase;
     color: #7C7C7C;
+    width: 100%;
 }
 
 .header-container p {
@@ -31,6 +36,8 @@
     padding-top: 0.5em;
     color: black;
     font-weight: bold;
+    width: 50%;
+    /* display: inline-block; */
 }
 
 .header-container img {
@@ -41,18 +48,21 @@
 
 .header-container .header-image {
     text-align: right;
+    width: 35%;
+    /* display: inline; */
 }
 
 /* tickets part */
 .tickets {
     display: flex;
     flex-wrap: wrap;
-    width: 60%;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .ticket-container {
-    width: 48%;
-    margin: 1%;
+    width: 23%;
+    margin-bottom: 2em;
     border-radius: 3px;
 }
 
@@ -60,16 +70,17 @@
     text-decoration: none;
     color: white;
     text-align: center;
+    /* justify-content: space-around; */
 }
 
 .ticket-container a h1 {
     font-size: 2em;
-    padding-top: 1.5em;
+    padding-top: 0.3em;
 }
 
 .ticket-container a p {
     font-size: 0.9em;
-    padding: 1em 0 3em 0;
+    padding: 0.5em 0 1em 0;
 }
 
 .all-tickets {
@@ -94,14 +105,15 @@
 
 .ticket-diagram {
     background-color: white;
-    margin: 0.5em 0;
+    margin: 0.5em 0 2em 0;
     border-radius: 3px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     padding: 1em;
+    max-height: 300px;
 }
 
 .ticket-status {
-    width: 37%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,13 +133,13 @@
 }
 
 .pie-chart {
-    width: 100%;
+    width: 70%;
 }
 
 .ticket-priority,
 .ticket-per-product,
 .ticket-per-department {
-    width: 32%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- {{ userprofile_list }} -->
+
+<div class="users-main">
+    <div class="users-table-header">
+        <h1>Users</h1>
+        <!-- <a href="{% url 'create-department' %}">Create new department</a> -->
+    </div>
+    <div class="users-table">
+        <table>
+            <thead>
+                <tr>
+                    <th class="table-header-user-username">Username</th>
+                    <th class="table-header-user-email">Email</th>
+                    <th class="table-header-user-department">Department</th>
+                    <th class="table-header-user-role">Position</th>
+                    <th class="table-header-user-staff">Staff</th>
+                    <th class="table-header-user-superuser">Superuser</th>
+                    <th class="table-header-hidden"></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                    {% for user in userprofile_list %}
+                    <tr class="table-row">
+                        <td class="table-data-user-username" data-id="{{user.id}}">{{ user.username }}</td>
+                        <td class="table-data-user-email">{{ user.email }}</td>
+                        <td class="table-data-user-department">{{ user.department }}</td>
+                        <td class="table-data-user-role">{{ user.profile.role }}</td>
+                        <td class="table-data-user-staff">
+                            {% if user.is_staff %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                        <td class="table-data-user-superuser">
+                            {% if user.is_superuser %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
+                        <td class="table-icons">
+                            <a class="edit-user" href="{% url 'edit-user' pk=user.pk %}">
+                                <img src="{% static '/images/edit.jpg' %}" alt="">
+                            </a>
+                            <a class="delete-user" href="{% url 'delete-user' pk=user.pk %}">
+                                <img src="{% static '/images/delete.jpg' %}" alt="">
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr class="table-row-no-users">
+                        <td class="no-users-found">No users</td>
+                    </tr>
+                    {% endfor %}
+
+
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

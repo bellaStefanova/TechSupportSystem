@@ -45,7 +45,8 @@ header .navigation-bar div {
 
 header .navigation-bar div a,
 header .navigation-bar .profile-nav-bar,
-header .navigation-bar .admin-nav-bar {
+header .navigation-bar .admin-nav-bar,
+header .navigation-bar .my-team-nav-bar{
     color: white;
     text-decoration: none;
     cursor: pointer;
@@ -54,7 +55,8 @@ header .navigation-bar .admin-nav-bar {
 
 /* profile dropdown menu on hover */
 header .navigation-bar .profile-options,
-header .navigation-bar .admin-options {
+header .navigation-bar .admin-options,
+header .navigation-bar .my-team-options{
     display: none;
     position: absolute;
     /* bottom: -100%; */
@@ -70,7 +72,8 @@ header .navigation-bar .admin-options {
 }
 
 header .navigation-bar .profile-options .profile-option,
-header .navigation-bar .admin-options .admin-option {
+header .navigation-bar .admin-options .admin-option,
+header .navigation-bar .my-team-options .my-team-option{
     padding: 10px;
     cursor: pointer;
     /* background-color: #13364D; */
@@ -86,12 +89,14 @@ header .navigation-bar .admin-options .admin-option {
 } */
 
 header .navigation-bar .profile-options .profile-option a,
-header .navigation-bar .admin-options .admin-option a {
+header .navigation-bar .admin-options .admin-option a,
+header .navigation-bar .my-team-options .my-team-option a{
     width: 100%;
 }
   
 header .navigation-bar .profile-options .profile-option:hover,
-header .navigation-bar .admin-options .admin-option:hover {
+header .navigation-bar .admin-options .admin-option:hover,
+header .navigation-bar .my-team-options .my-team-option:hover{
     background-color: #122642;
 }
 

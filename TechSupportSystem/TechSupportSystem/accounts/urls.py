@@ -8,6 +8,9 @@ from .views import (
     NextToFirstLoginView, 
     ProfileEditView,
     ChangePasswordView,
+    ListUsersView,
+    EditUserView,
+    DeleteUserView,
 )
 
 
@@ -20,4 +23,7 @@ urlpatterns = (
     (path('add-profile-details', NextToFirstLoginView.as_view(), name='add-profile-details')),
     (path('edit-profile', ProfileEditView.as_view(), name='edit-profile')),
     (path('change-password', ChangePasswordView.as_view(), name='change-password')),
+    (path('users/', ListUsersView.as_view(), name='users')),
+    (path('edit-user/<int:pk>', EditUserView.as_view(), name='edit-user')),
+    (path('delete-user/<int:pk>', DeleteUserView.as_view(), name='delete-user')),
 )

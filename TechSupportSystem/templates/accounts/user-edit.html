@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="edit-department-pane form-container">
-        <form action="{% url 'edit-department' pk=department.pk %}" method="post">
+    <div class="edit-user-pane form-container">
+        <form action="{% url 'edit-user' pk=object.pk %}" method="post">
             {% csrf_token %}
             <div class="form-fields">
                 {{ form }}
             </div>
             <div class="form-buttons">
-                <a class="cancel-button" href="{% url 'departments' %}">Go back</a>
+                <a class="cancel-button" href="{% url 'dashboard' %}">Go back</a>
                 <button class="submit">Save</button>
             </div>
         </form>

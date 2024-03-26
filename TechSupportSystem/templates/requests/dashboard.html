@@ -84,7 +84,7 @@
 
         <div class="dashboard-last-tickets-pane">
             <h3>Most recent</h3>
-            {% for request in requests %}
+            {% for request in  last_requests %}
                 <a href="{% url 'view-request' request.id %}">
                     <div class="ticket-side-pane">
                         <h4>{{ request.user }}</h4>
