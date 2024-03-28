@@ -4,29 +4,29 @@
     <div class="dashboard-main">
         <div class="dashboard-body">
             <div class="tickets">
-                <div class="all-tickets ticket-container">
-                    <a href="#">
+                <div class="all-tickets ticket-container" id="allTickets">
+                    <div>
                         <h1 id="allRequestsCount">{{ all_requests_count }}</h1>
                         <p>All Tickets</p>
-                    </a>
+                    </div>
                 </div>
-                <div class="waiting-tickets ticket-container">
-                    <a href="#">
+                <div class="waiting-tickets ticket-container" id="waitingTickets">
+                    <div>
                         <h1 id="waitingRequestsCount">{{ waiting_requests_count }}</h1>
                         <p>Waiting</p>
-                    </a>
+                    </div>
                 </div>
-                <div class="assigned-tickets ticket-container">
-                    <a href="#">
+                <div class="assigned-tickets ticket-container" id="assignedTickets">
+                    <div>
                         <h1 id="assignedRequestsCount">{{ assigned_requests_count }}</h1>
                         <p>Assigned</p>
-                    </a>
+                    </div>
                 </div>
-                <div class="resolved-tickets ticket-container">
-                    <a href="#">
+                <div class="resolved-tickets ticket-container" id="resolvedTickets">
+                    <div>
                         <h1 id="resolvedRequestsCount">{{ resolved_requests_count }}</h1>
                         <p>Resolved</p>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="ticket-status ticket-diagram">
@@ -41,6 +41,10 @@
                     <canvas id="priorityDiagram"></canvas>
                 </div>
             </div>
+            <div id="lowUrgencyRequestsCount" number="{{ low_urgency_requests_count }}" style="display: none;"></div>
+            <div id="mediumUrgencyRequestsCount" number="{{ medium_urgency_requests_count }}" style="display: none;"></div>
+            <div id="highUrgencyRequestsCount" number="{{ high_urgency_requests_count }}" style="display: none;"></div>
+            <div id="criticalUrgencyRequestsCount" number="{{ critical_urgency_requests_count }}" style="display: none;"></div>
             <div class="dashboard-header">
                 <div class="employees header-container">
                     <a href="#">

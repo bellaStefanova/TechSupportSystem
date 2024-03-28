@@ -51,6 +51,7 @@
     border-right: 1px solid #ccc;
     padding: 8px 0;
     width: 9%;
+    min-width: 94px;
 }
 
 .search-filter-header .per-status .initial-option-container {
@@ -272,7 +273,7 @@
     color: #757575;
 }
 
-.delete-confirm h1 {
+.cancel-confirm h1 {
     color: #757575;
     font-weight: normal;
     text-align: left;
@@ -282,7 +283,7 @@
     border-bottom: 1px solid #b5b5b5;
 }
 
-.delete-confirm p {
+.cancel-confirm p {
     color: #757575;
     font-size: 1.2em;
     text-align: left;

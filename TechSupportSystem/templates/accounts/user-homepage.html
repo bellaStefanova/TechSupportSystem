@@ -53,8 +53,10 @@
                             <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
                             <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
                             <td class="table-icons">
-                                <a class="delete-request" href="{% url 'delete-request' pk=request.pk %}">
+                                <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
+                                    {% if request.status != 'Cancelled' and request.status != 'Resolved' %}
                                     <img src="{% static '/images/delete.jpg' %}" alt="">
+                                    {% endif %}
                                 </a>
                             </td>
                         <!-- </a> -->
@@ -67,8 +69,9 @@
 
                     {% endif %}
                     
+
                     {% if user.is_superuser %}
-                        {% for request in all_requests %}
+                        {% for request in request_list %}
                         <tr class="table-row">
                             <!-- <a href="#"> -->
                             <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
@@ -77,7 +80,7 @@
                             <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
                             <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
                             <td class="table-icons">
-                                <a class="delete-request" href="{% url 'delete-request' pk=request.pk %}">
+                                <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
                                     <img src="{% static '/images/delete.jpg' %}" alt="">
                                 </a>
                             </td>

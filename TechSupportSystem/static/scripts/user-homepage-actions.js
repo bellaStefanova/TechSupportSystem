@@ -1,4 +1,4 @@
-if (window.location.pathname === '/home') {
+if (window.location.pathname === '/home' || window.location.pathname === '/requests/') {
 
     document.addEventListener("DOMContentLoaded", function () {
         // Get all table rows from the requests table initially
@@ -19,6 +19,8 @@ if (window.location.pathname === '/home') {
                 cell.style.backgroundColor = '#BD9037';
             } else if (cell.textContent === 'Resolved') {
                 cell.style.backgroundColor = '#279127';
+            } else if (cell.textContent === 'Cancelled') {
+                cell.style.backgroundColor = '#757575';
             }
         });
 
@@ -47,10 +49,18 @@ if (window.location.pathname === '/home') {
                 selectedOptionValue.textContent = event.target.textContent;
                 optionsContainer.style.display = "none";
 
+                if (selectedOptionValue.textContent === 'All') {
+                    selectedOption.style.justifyContent = 'flex-end';
+                    selectedOption.style.gap = '3em';
+                } else {
+                    selectedOption.style.justifyContent = 'space-between';
+                    selectedOption.style.gap = '0';
+                }
+
                 // Filter the table per status and search input
-                filterTableRows();
+                let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
                 // Replace the table rows with the filtered ones
-                replaceTableRows()
+                replaceTableRows(tableRows)
 
             }
         });
@@ -77,63 +87,63 @@ if (window.location.pathname === '/home') {
         // Handle search input to filter the table rows
         input.addEventListener('input', () => {
             // Filter the table per status and search input
-            filterTableRows();
+            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
             // Replace the table rows with the filtered ones
-            replaceTableRows()
+            replaceTableRows(tableRows)
         });
 
-        // Function to filter the table rows
-        function filterTableRows() {
+        // // Function to filter the table rows
+        // function filterTableRows() {
 
-            const searchValue = input.value.toLowerCase();
-            if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
-                if (input.value === '') {
-                    tableRows = originalTableRows;
-                } else {
-                    tableRows = originalTableRows.filter(row => {
-                        const titleCell = row.querySelector('.table-data-subject');
-                        const idCell = row.querySelector('.table-data-request-id');
-                        return titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue);
-                    });
-                }
-            } else {
-                if (input.value === '') {
-                    tableRows = originalTableRows.filter(row => {
-                        const statusCell = row.querySelector('.table-data-status');
-                        return statusCell.textContent === selectedOptionValue.textContent;
-                    });
-                } else {
-                    tableRows = originalTableRows.filter(row => {
-                        const statusCell = row.querySelector('.table-data-status');
-                        const titleCell = row.querySelector('.table-data-subject');
-                        const idCell = row.querySelector('.table-data-request-id');
-                        return statusCell.textContent === selectedOptionValue.textContent && (titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue));
-                    });
-                }
-            }
-        }
+        //     const searchValue = input.value.toLowerCase();
+        //     if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
+        //         if (input.value === '') {
+        //             tableRows = originalTableRows;
+        //         } else {
+        //             tableRows = originalTableRows.filter(row => {
+        //                 const titleCell = row.querySelector('.table-data-subject');
+        //                 const idCell = row.querySelector('.table-data-request-id');
+        //                 return titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue);
+        //             });
+        //         }
+        //     } else {
+        //         if (input.value === '') {
+        //             tableRows = originalTableRows.filter(row => {
+        //                 const statusCell = row.querySelector('.table-data-status');
+        //                 return statusCell.textContent === selectedOptionValue.textContent;
+        //             });
+        //         } else {
+        //             tableRows = originalTableRows.filter(row => {
+        //                 const statusCell = row.querySelector('.table-data-status');
+        //                 const titleCell = row.querySelector('.table-data-subject');
+        //                 const idCell = row.querySelector('.table-data-request-id');
+        //                 return statusCell.textContent === selectedOptionValue.textContent && (titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue));
+        //             });
+        //         }
+        //     }
+        // }
 
         // Function to replace the table rows
-        function replaceTableRows() {
+        // function replaceTableRows() {
 
-            const table = document.querySelector('#tableBody');
+        //     const table = document.querySelector('#tableBody');
 
-            // Remove all existing table rows from the table
-            while (table.firstChild) {
-                table.removeChild(table.firstChild);
-            }
+        //     // Remove all existing table rows from the table
+        //     while (table.firstChild) {
+        //         table.removeChild(table.firstChild);
+        //     }
 
-            // Append the filtered rows to the table
-            tableRows.forEach(row => {
-                table.appendChild(row);
-            });
-            if (tableRows.length === 0) {
-                const noRequestsRow = document.createElement('tr');
-                noRequestsRow.classList.add('table-row-no-requests');
-                noRequestsRow.innerHTML = '<td class="no-requests-found" colspan="3">No requests</td>';
-                table.appendChild(noRequestsRow);
-            }
-        };
+        //     // Append the filtered rows to the table
+        //     tableRows.forEach(row => {
+        //         table.appendChild(row);
+        //     });
+        //     if (tableRows.length === 0) {
+        //         const noRequestsRow = document.createElement('tr');
+        //         noRequestsRow.classList.add('table-row-no-requests');
+        //         noRequestsRow.innerHTML = '<td class="no-requests-found" colspan="3">No requests</td>';
+        //         table.appendChild(noRequestsRow);
+        //     }
+        // };
 
         // Handle per period selector buttons to change color on click - the are mutually exclusive
         const perPeriodSelectors = document.querySelectorAll('.perPeriodSelector');
@@ -177,4 +187,59 @@ if (window.location.pathname === '/home') {
             });
         })
     });
+};
+
+// Function to filter the table rows
+export function filterTableRows(input, selectedOptionValue, originalTableRows) {
+// function filterTableRows() {
+
+    const searchValue = input.value.toLowerCase();
+    let tableRows;
+    if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
+        if (input.value === '') {
+            tableRows = originalTableRows;
+        } else {
+            tableRows = originalTableRows.filter(row => {
+                const titleCell = row.querySelector('.table-data-subject');
+                const idCell = row.querySelector('.table-data-request-id');
+                return titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue);
+            });
+        }
+    } else {
+        if (input.value === '') {
+            tableRows = originalTableRows.filter(row => {
+                const statusCell = row.querySelector('.table-data-status');
+                return statusCell.textContent === selectedOptionValue.textContent;
+            });
+        } else {
+            tableRows = originalTableRows.filter(row => {
+                const statusCell = row.querySelector('.table-data-status');
+                const titleCell = row.querySelector('.table-data-subject');
+                const idCell = row.querySelector('.table-data-request-id');
+                return statusCell.textContent === selectedOptionValue.textContent && (titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue));
+            });
+        }
+    }
+    return tableRows;
 }
+
+export function replaceTableRows(tableRows) {
+
+    const table = document.querySelector('#tableBody');
+
+    // Remove all existing table rows from the table
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+
+    // Append the filtered rows to the table
+    tableRows.forEach(row => {
+        table.appendChild(row);
+    });
+    if (tableRows.length === 0) {
+        const noRequestsRow = document.createElement('tr');
+        noRequestsRow.classList.add('table-row-no-requests');
+        noRequestsRow.innerHTML = '<td class="no-requests-found" colspan="3">No requests</td>';
+        table.appendChild(noRequestsRow);
+    }
+};

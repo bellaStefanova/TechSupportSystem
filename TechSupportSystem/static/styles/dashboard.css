@@ -66,21 +66,32 @@
     border-radius: 3px;
 }
 
-.ticket-container a {
+.ticket-container a,
+.ticket-container div {
+/* .ticket-container p,
+.ticket-container h1 { */
     text-decoration: none;
     color: white;
     text-align: center;
+    cursor: pointer;
     /* justify-content: space-around; */
 }
 
-.ticket-container a h1 {
+.ticket-container a h1,
+.ticket-container div h1 {
     font-size: 2em;
     padding-top: 0.3em;
+    color: white;
+    text-align: center;
 }
 
-.ticket-container a p {
+.ticket-container a p,
+.ticket-container div p
+ {
     font-size: 0.9em;
     padding: 0.5em 0 1em 0;
+    color: white;
+    text-align: center;
 }
 
 .all-tickets {
@@ -130,10 +141,12 @@
 
 .doughnut-chart {
     width: 70%;
+    max-width: 230px;
 }
 
 .pie-chart {
     width: 70%;
+    max-width: 230px;
 }
 
 .ticket-priority,

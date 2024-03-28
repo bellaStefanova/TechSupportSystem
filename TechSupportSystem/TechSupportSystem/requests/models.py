@@ -9,6 +9,7 @@ class StatusOptions(models.TextChoices):
     WAITING = 'Waiting', 'Waiting'
     ASSIGNED = 'Assigned', 'Assigned'
     RESOLVED = 'Resolved', 'Resolved'
+    CANCELLED = 'Cancelled', 'Cancelled'
     
 class UrgencyOptions(models.TextChoices):
     LOW = 'Low', 'Low'
@@ -19,7 +20,7 @@ class UrgencyOptions(models.TextChoices):
 class Request(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    urgency = models.CharField(max_length=10, choices=UrgencyOptions.choices, default=UrgencyOptions.LOW)
+    urgency = models.CharField(max_length=10, choices=UrgencyOptions.choices, default=UrgencyOptions.LOW, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=StatusOptions.choices, default=StatusOptions.WAITING)

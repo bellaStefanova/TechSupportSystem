@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="cancel-request-pane form-container">
+        <form action="{% url 'cancel-request' pk=request.pk %}" method="post">
+            {% csrf_token %}
+                <div class="cancel-confirm">
+                    <h1>Confirm withdraw</h1>
+                    <p>Are you sure you want to withdraw the request? You won't be able to revert this.</p>
+                </div>
+            <div class="form-buttons">
+                <a href="{% url 'view-request' pk=request.pk %}" class="cancel">Back</a>
+                <button class="submit">Withdraw</button>
+                
+            </div>
+        </form>
+    </div>
+{% endblock %}

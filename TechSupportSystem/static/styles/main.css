@@ -122,10 +122,10 @@
     width: 110px;
 }
 
-.request-page .request-actions .request-actions-buttons .delete-request,
+.request-page .request-actions .request-actions-buttons .cancel-request,
 .request-page .request-actions .request-actions-buttons .edit-request,
 .request-page .request-actions .request-actions-buttons .take-request,
-.request-page .request-actions .disabled-buttons .delete-request,
+.request-page .request-actions .disabled-buttons .cancel-request,
 .request-page .request-actions .disabled-buttons .edit-request,
 .request-page .request-actions .disabled-buttons .take-request,
 .profile-details-page .profile-actions .profile-actions-buttons .edit-profile,
@@ -141,7 +141,7 @@
     font-size: 1.05em;
 }
 
-.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request,
+.request-page .request-actions .enabled-buttons .request-actions-buttons .cancel-request,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile {
     background-color: #BE3A3A;
 }
@@ -157,7 +157,7 @@
     cursor: pointer;
 }
 
-.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request:hover,
+.request-page .request-actions .enabled-buttons .request-actions-buttons .cancel-request:hover,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile:hover {
     background-color: #820202
 }
@@ -172,7 +172,7 @@
     background-color: #142843
 }
 
-.request-page .request-actions .enabled-buttons .request-actions-buttons .delete-request:active,
+.request-page .request-actions .enabled-buttons .request-actions-buttons .cancel-request:active,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile:active {
     background-color: #600000
 }
@@ -182,7 +182,7 @@
     background-color: #aa905c;
 }
 
-.request-page .request-actions .disabled-buttons .delete-request,
+.request-page .request-actions .disabled-buttons .cancel-request,
 .request-page .request-actions .disabled-buttons .edit-request,
 .request-page .request-actions .disabled-buttons .take-request {
     background-color: #848484;
