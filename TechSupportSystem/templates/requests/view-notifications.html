@@ -13,6 +13,7 @@
                 <p class="notification-request">Request title: {{ notification.notification.request }}</p>
                 <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
                 <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+                <p class="notification-date">Updated on: {{ notification.notification.request.updated_at|date:"Y-m-d H:i" }}</p>
             </div>
         </div>
         {% endfor %}
@@ -25,6 +26,7 @@
                 <p class="notification-request">Request title: {{ notification.notification.request }}</p>
                 <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
                 <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p>
+                <p class="notification-date">Updated on: {{ notification.notification.request.updated_at|date:"Y-m-d H:i" }}</p>
             </div>
         </div>
         {% endfor %}

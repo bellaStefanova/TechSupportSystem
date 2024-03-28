@@ -20,14 +20,14 @@
     </div>
     <div class="request-actions">
         <h2>Request actions</h2>
-        {% if request.status == 'Resolved' %}
+        {% if request.status == 'Resolved' or request.status == 'Cancelled' %}
         <div class="disabled-buttons">
             <div class="request-actions-buttons">
                 {% if user.is_superuser %}
                 <div class="take-request" id="take-request">Take Request</div>
                 {% endif %}
-                <div class="delete-request" id="delete-request">
-                    Delete Request
+                <div class="cancel-request" id="cancel-request">
+                    Cancel Request
                 </div>
                 <div class="edit-request" id="edit-request">
                     Edit Request
@@ -41,8 +41,8 @@
                 {% if user.is_superuser %}
                 <div class="take-request" id="take-request">Take Request</div>
                 {% endif %}
-                <a class="delete-request" id="delete-request" href="{% url 'delete-request' pk=request.pk %}">
-                    Delete Request
+                <a class="cancel-request" id="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
+                    Cancel Request
                 </a>
                 <a href="{% url 'edit-request' pk=request.pk %}" class="edit-request" id="edit-request">
                     Edit Request
