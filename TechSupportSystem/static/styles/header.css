@@ -6,7 +6,7 @@ header {
     justify-content: space-between;
     align-items:stretch;
     /* padding: 1em 2em; */
-    background-color: #1D3B65;;
+    background-color: #1D3B65;
     /* background-color: #13364D; */
 }
 
@@ -27,7 +27,7 @@ header .navigation-bar {
     align-items: stretch;
     /* justify-content: space-between; */
     justify-content: flex-end;
-    gap: 4em;
+    /* gap: 4em; */
     padding: 0 2em;
     font-size: 14px;
 }
@@ -43,14 +43,40 @@ header .navigation-bar div {
 }
 
 
-header .navigation-bar div a,
+
+header .navigation-bar .signin-nav-bar,
+header .navigation-bar .signup-nav-bar,
+header .navigation-bar .home-nav-bar,
+header .navigation-bar .dashboard-nav-bar,
 header .navigation-bar .profile-nav-bar,
 header .navigation-bar .admin-nav-bar,
-header .navigation-bar .my-team-nav-bar{
+header .navigation-bar .my-team-nav-bar,
+header .navigation-bar .notifications-nav-bar{
     color: white;
     text-decoration: none;
     cursor: pointer;
+    padding: 1.25em 2em;
     /* text-align: center; */
+}
+
+header .navigation-bar div a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    /* padding: 1.25em 2em; */
+    /* text-align: center; */
+}
+
+header .navigation-bar .signin-nav-bar:hover,
+header .navigation-bar .signup-nav-bar:hover,
+header .navigation-bar .home-nav-bar:hover,
+header .navigation-bar .dashboard-nav-bar:hover,
+header .navigation-bar .profile-nav-bar:hover,
+header .navigation-bar .admin-nav-bar:hover,
+header .navigation-bar .my-team-nav-bar:hover,
+header .navigation-bar .notifications-nav-bar:hover{
+    background-color: #122642;
+    transition: all 0.4s;
 }
 
 /* profile dropdown menu on hover */
@@ -77,7 +103,7 @@ header .navigation-bar .my-team-options .my-team-option{
     padding: 10px;
     cursor: pointer;
     /* background-color: #13364D; */
-    background-color: #1D3B65;
+    background-color: #122642;
     max-height: 120px;
     transition: all 0.4s;
 
@@ -96,8 +122,9 @@ header .navigation-bar .my-team-options .my-team-option a{
   
 header .navigation-bar .profile-options .profile-option:hover,
 header .navigation-bar .admin-options .admin-option:hover,
-header .navigation-bar .my-team-options .my-team-option:hover{
-    background-color: #122642;
+header .navigation-bar .my-team-options .my-team-option:hover
+header .navigation-bar div:hover{
+    background-color: #0d1c30;
 }
 
 /* header .navigation-bar .profile-options .profile-option:hover + .profile-options {

@@ -36,9 +36,14 @@ if (window.location.pathname === '/dashboard/') {
         }
       });
 
+      let lowUrgency = document.getElementById('lowUrgencyRequestsCount').attributes.number.value;
+      let mediumUrgency = document.getElementById('mediumUrgencyRequestsCount').attributes.number.value;
+      let highUrgency = document.getElementById('highUrgencyRequestsCount').attributes.number.value;
+      let criticalUrgency = document.getElementById('criticalUrgencyRequestsCount').attributes.number.value;
+      
 
       const pValues = ["Critical", "High", "Medium", "Low"];
-      const pData = [5, 10, 35, 50];
+      const pData = [criticalUrgency, highUrgency, mediumUrgency, lowUrgency];
       const pColors = [
         "#323232",
         "#777777",

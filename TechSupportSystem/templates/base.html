@@ -11,93 +11,93 @@
     <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.0/chart.js"></script>
     <script src="{% static '/scripts/profile-navbar-dynamic-menu.js' %}"></script>
-    <script src="{% static '/scripts/user-homepage-actions.js' %}"></script>
+    <script src="{% static '/scripts/user-homepage-actions.js' %}" type="module"></script>
     <script src="{% static '/scripts/notifications-reading.js' %}"></script>
     <script src="{% static '/scripts/take-request.js' %}"></script>
     <script src="{% static '/scripts/charts.js' %}"></script>
+    <script src="{% static '/scripts/dashboard.js' %}" type="module"></script>
 
 
 </head>
 
 <body>
     <header class="nav">
-        <!-- <h1>Tech Support System</h1> -->
         <a href="{% url 'index' %}">
             <img class="logo" src="{% static '/images/logo1.jpg' %}" alt="">
         </a>
         <div class="navigation-bar">
             {% if user.is_authenticated %}
-
-            <!-- <ul> -->
-            {% if user.is_staff %}
-            <div class="dashboard-nav-bar">
-                <a href="{% url 'dashboard' %}">Dashboard</a>
-            </div>
-            {% endif %}
-            {% if user.is_superuser %}
-            <div class="admin-nav-bar">
-                <p class="admin-dynamic-dropdown-activate">Admin Panel</p>
-                <div class="admin-options">
-                    <div class="admin-option">
-                        <a href="{% url 'departments' %}">Manage Departments</a>
+                {% if user.is_staff %}
+                    <div class="dashboard-nav-bar" id="dashboardNavBar">
+                        <p>Dashboard</p>
                     </div>
-                    <div class="admin-option">
-                        <a href="{% url 'roles' %}">Manage Roles</a>
-                    </div>
-                    <div class="admin-option">
-                        <a href="{% url 'users' %}">Manage Users</a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            {% if user.is_staff and not user.is_superuser %}
-            <div class="my-team-nav-bar">
-                <p class="my-team-dynamic-dropdown-activate">My team</p>
-                <div class="my-team-options">
-                    {% for department in departments %}
-                    <div class="my-team-option">
-                        <a href="#">{{ department }}</a>
-                    </div>
-                </div>
-            </div>
-                {% endfor %}
-            {% endif %}
-            {% if not user.is_superuser %}
-            <div class="home-nav-bar">
-                <a href="{% url 'user-home' %}">Home</a>
-            </div> <!-- this will lead to home page with submit ticket, view tickets-->
-            {% endif %}
-            <div>
-                <a href="{% url 'view-notifications' %}">Notifications</a>
-                {% if notifications > 0 %}
-                <span class="notification-count">{{ notifications }}</span>
                 {% endif %}
-            </div> <!-- about resolved tickets, messages, etc.-->
-            <!-- <li><a href="#">Dashboard</a></li> seen only by admins -->
-            <div class="profile-nav-bar">
-                <p class="profile-dynamic-dropdown-activate">Profile</p>
-                <!--profile page with employee info about company, department, etc.-->
-                <div class="profile-options">
-                    <div class="profile-option">
-                        <a href="{% url 'profile-details' %}">Profile details</a>
+                {% if user.is_superuser %}
+                    <div class="admin-nav-bar" id="adminNavBar">
+                        <p class="admin-dynamic-dropdown-activate">Admin Panel</p>
+                        <div class="admin-options">
+                            <div class="admin-option" id="manageDepartments">
+                                <p>Manage Departments</p>
+                            </div>
+                            <div class="admin-option" id="manageRoles">
+                                <p>Manage Roles</p>
+                            </div>
+                            <div class="admin-option" id="manageUsers">
+                                <p>Manage Users</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="profile-option">
-                        <a href="#">Change password</a>
-                    </div>
-                    <div class="profile-option">
-                        <a href="{% url 'signout' %}">Sign out</a>
+                {% endif %}
+                {% if user.is_staff and not user.is_superuser %}
+                <!-- TO FIX THIS PART -->
+                <div class="my-team-nav-bar">
+                    <p class="my-team-dynamic-dropdown-activate">My team</p>
+                    <div class="my-team-options">
+                        {% for department in departments %}
+                        <div class="my-team-option">
+                            <a href="#">{{ department }}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+                    {% endfor %}
+                {% endif %}
+                <!-- END TO FIX THIS PART -->
 
-            <!-- </ul> -->
+                {% if not user.is_superuser %}
+                    <div class="home-nav-bar" id="homeNavBar">
+                        <p>Home</p>
+                    </div>
+                {% endif %}
+
+                <div class="notifications-nav-bar" id="notificationsNavBar">
+                    <p>Notifications</p>
+                    {% if notifications > 0 %}
+                        <span class="notification-count">{{ notifications }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="profile-nav-bar" id="profileNavBar">
+                    <p class="profile-dynamic-dropdown-activate">Profile</p>
+                    <div class="profile-options">
+                        <div class="profile-option" id="profileDetails">
+                            <p>Profile details</p>
+                        </div>
+                        <div class="profile-option" id="changePassword">
+                            <p>Change password</p>
+                        </div>
+                        <div class="profile-option" id="signOut">
+                            <p>Sign out</p>
+                        </div>
+                    </div>
+                </div>
+
             {% else %}
-            <div class="signup-nav-bar">
-                <a href="{% url 'signup' %}">Sign Up</a>
-            </div>
-            <div class="signin-nav-bar">
-                <a href="{% url 'signin' %}">Sign In</a>
-            </div>
+                <div class="signup-nav-bar profile-nav-bar" id="signupNavBar">
+                    <p>Sign Up</p>
+                </div>
+                <div class="signin-nav-bar profile-nav-bar" id="signinNavBar">
+                    <p>Sign In</p>
+                </div>
             {% endif %}
         </div>
     </header>
