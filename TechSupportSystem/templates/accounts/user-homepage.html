@@ -2,99 +2,71 @@
 {% load static %}
 
 {% block content %}
-    <div class="user-homepage-main">
-        <div class="tickets-table-header">
-            <h1>Submitted requests</h1>
-            <a href="{% url 'create-request' %}">Create new request</a>
-        </div>
-        <div class="search-filter-header">
-            <div class="per-status">
-                <div class="initial-option-container">
-                    <p class="initial-option">Status</p>
-                    <img src="{% static '/images/arrow-down.jpg' %}">
-                </div>
-                <div class="filter-per-status-options">
-                    <div class="option">All</div>
-                    <div class="option">Waiting</div>
-                    <div class="option">Assigned</div>
-                    <div class="option">Resolved</div>
-                </div>
+<div class="user-homepage-main">
+    <div class="tickets-table-header">
+        <h1>Submitted requests</h1>
+        <a href="{% url 'create-request' %}">Create new request</a>
+    </div>
+    <div class="search-filter-header">
+        <div class="per-status">
+            <div class="initial-option-container">
+                <p class="initial-option">Status</p>
+                <img src="{% static '/images/arrow-down.jpg' %}">
             </div>
-            <div class="per-details">
-                <img src="{% static '/images/look-for.jpg' %}" alt="">
-                <input type="text" name="details" id="perDetailsInput" placeholder="Search by Request ID or subject">
-            </div>
-            <div class="per-period">
-                <a href="#" class="perPeriodSelector">Week</a>
-                <a href="#" class="perPeriodSelector">Month</a>
-                <a href="#" class="perPeriodSelector">Year</a>
+            <div class="filter-per-status-options">
+                <div class="option">All</div>
+                <div class="option">Waiting</div>
+                <div class="option">Assigned</div>
+                <div class="option">Resolved</div>
             </div>
         </div>
-        <div class="tickets-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="table-header-request-id">Request ID</th>
-                        <th class="table-header-subject">Subject</th>
-                        <th class="table-header-status">Status</th>
-                        <th class="table-header-created-on">Created on</th>
-                        <th class="table-header-updated-on">Updated on</th>
-                        <th class="table-header-hidden"></th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    {% if not user.is_superuser %}
-                        {% for request in requests %}
-                        <tr class="table-row">
-                            <!-- <a href="#"> -->
-                            <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
-                            <td class="table-data-subject">{{request.title}}</td>
-                            <td class="table-data-status-cell"><div class="table-data-status">{{request.status}}</div></td>
-                            <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
-                            <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
-                            <td class="table-icons">
-                                <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
-                                    {% if request.status != 'Cancelled' and request.status != 'Resolved' %}
-                                    <img src="{% static '/images/delete.jpg' %}" alt="">
-                                    {% endif %}
-                                </a>
-                            </td>
-                        <!-- </a> -->
-                        </tr>
-                        {% empty %}
-                        <tr class="table-row-no-requests">
-                            <td class="no-requests-found">No requests</td>
-                        </tr>
-                        {% endfor %}
-
-                    {% endif %}
-                    
-
-                    {% if user.is_superuser %}
-                        {% for request in request_list %}
-                        <tr class="table-row">
-                            <!-- <a href="#"> -->
-                            <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
-                            <td class="table-data-subject">{{request.title}}</td>
-                            <td class="table-data-status-cell"><div class="table-data-status">{{request.status}}</div></td>
-                            <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
-                            <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
-                            <td class="table-icons">
-                                <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
-                                    <img src="{% static '/images/delete.jpg' %}" alt="">
-                                </a>
-                            </td>
-                        <!-- </a> -->
-                        </tr>
-                        
-                        {% empty %}
-                        <tr class="table-row-no-requests">
-                            <td class="no-requests-found">No requests</td>
-                        </tr>
-                        {% endfor %}
-                    {% endif %}
-                </tbody>
-            </table>
+        <div class="per-details">
+            <img src="{% static '/images/look-for.jpg' %}" alt="">
+            <input type="text" name="details" id="perDetailsInput" placeholder="Search by Request ID or subject">
+        </div>
+        <div class="per-period">
+            <a href="#" class="perPeriodSelector">Week</a>
+            <a href="#" class="perPeriodSelector">Month</a>
+            <a href="#" class="perPeriodSelector">Year</a>
         </div>
     </div>
+    <div class="tickets-table">
+        <table>
+            <thead>
+                <tr>
+                    <th class="table-header-request-id">Request ID</th>
+                    <th class="table-header-subject">Subject</th>
+                    <th class="table-header-status">Status</th>
+                    <th class="table-header-created-on">Created on</th>
+                    <th class="table-header-updated-on">Updated on</th>
+                    <th class="table-header-hidden"></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+
+                {% for request in request_list %}
+                <tr class="table-row">
+                    <td class="table-data-request-id" data-id="{{request.id}}">{{request.id}}</td>
+                    <td class="table-data-subject">{{request.title}}</td>
+                    <td class="table-data-status-cell">
+                        <div class="table-data-status">{{request.status}}</div>
+                    </td>
+                    <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
+                    <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
+                    <td class="table-icons">
+                        <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
+                            <img src="{% static '/images/delete.jpg' %}" alt="">
+                        </a>
+                    </td>
+                </tr>
+
+                {% empty %}
+                <tr class="table-row-no-requests">
+                    <td class="no-requests-found">No requests</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

@@ -1,5 +1,6 @@
 if (window.location.pathname === '/dashboard/') {
   document.addEventListener("DOMContentLoaded", function () {
+    // Doughnut chart with requests count per status
       const waitingRequestsCount = document.getElementById('waitingRequestsCount').innerText;
       const assignedRequestsCount = document.getElementById('assignedRequestsCount').innerText;
       const resolvedRequestsCount = document.getElementById('resolvedRequestsCount').innerText;
@@ -36,6 +37,7 @@ if (window.location.pathname === '/dashboard/') {
         }
       });
 
+      // Pie chart with requests count per priority
       let lowUrgency = document.getElementById('lowUrgencyRequestsCount').attributes.number.value;
       let mediumUrgency = document.getElementById('mediumUrgencyRequestsCount').attributes.number.value;
       let highUrgency = document.getElementById('highUrgencyRequestsCount').attributes.number.value;
@@ -132,39 +134,34 @@ if (window.location.pathname === '/dashboard/') {
           }
         }
       });
+      
+      // Bar chart with requests count per department
+      const topDepartmentElements = document.querySelectorAll('#topDepartment');
+      const topDeparmentNames = Array.from(topDepartmentElements).map(element => element.attributes.name.value);
+      const topDeparmentValues = Array.from(topDepartmentElements).map(element => element.attributes.number.value);
 
-      const dValues = ["Product1", "Product2", "Product3", "Product4"];
-      const dData = [[5, null, null, null], [null, 10, null, null], [null, null, 35, null], [null, null, null, 50]];
-      const dColors = [
-        "#323232",
-        "#777777",
-        "#A2A2A2",
-        "#E6E6E6",
-      ];
+      const dColors = ["#323232", "#777777", "#A2A2A2", "#E6E6E6",];
+
+      let dataset = [];
+      for (let i = 0; i < topDeparmentValues.length; i++) {
+        let data = Array.from({ length: topDeparmentValues.length }, () => null);
+        data[i] = topDeparmentValues[i];
+        dataset.push(
+          {
+            backgroundColor: dColors[i],
+            label: topDeparmentNames[i],
+            data: data,
+          }
+        );
+      }
 
       let dtx = document.getElementById('departmentDiagram').getContext('2d'); // node
 
       let departmentDiagram = new Chart(dtx, {
         type: "bar",
         data: {
-          labels: dValues,
-          datasets: [{
-            backgroundColor: dColors[0],
-            label: dValues[0],
-            data: dData[0],
-          }, {
-            backgroundColor: dColors[1],
-            label: dValues[1],
-            data: dData[1],
-          }, {
-            backgroundColor: dColors[2],
-            label: dValues[2],
-            data: dData[2],
-          }, {
-            backgroundColor: dColors[3],
-            label: dValues[3],
-            data: dData[3],
-          }]
+          labels: topDeparmentNames,
+          datasets: dataset
         },
         options: {
           indexAxis: 'x',

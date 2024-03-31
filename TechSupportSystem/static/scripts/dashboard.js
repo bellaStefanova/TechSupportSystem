@@ -8,6 +8,7 @@ if (window.location.pathname === '/dashboard/') {
             const url = `/requests/`;
             window.location.href = url;
         }
+        
         const allTicketsElement = document.getElementById('allTickets');
         const waitingTicketsElement = document.getElementById('waitingTickets');
         const assignedTicketsElement = document.getElementById('assignedTickets');
@@ -23,11 +24,14 @@ if (window.location.pathname === '/dashboard/') {
         assignedTicketsElement.addEventListener('click', function() {
             optionStatus = 'Assigned';
             redirectToRequests(optionStatus);
+            optionStatus = 'All';
         });
         resolvedTicketsElement.addEventListener('click', function() {
             optionStatus = 'Resolved';
             redirectToRequests(optionStatus);
+            optionStatus = 'All';
         });
+       
     });
 
 }
@@ -36,8 +40,12 @@ if (window.location.pathname === '/requests/') {
     document.addEventListener("DOMContentLoaded", function () {
         optionStatus = sessionStorage.getItem('optionStatus');
         const selectedOptionValue = document.querySelector(".initial-option");
-        selectedOptionValue.textContent = optionStatus;
-        console.log(optionStatus);
+
+        if (optionStatus) {
+            selectedOptionValue.textContent = optionStatus;
+        } else {
+            selectedOptionValue.textContent = 'Status';
+        }
         const input = document.getElementById('perDetailsInput');
         let originalTableRows;
         if (!originalTableRows) {
@@ -45,6 +53,10 @@ if (window.location.pathname === '/requests/') {
         };
         let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
         replaceTableRows(tableRows)
-        // };
+
+        window.onbeforeunload = function () {
+            sessionStorage.removeItem('optionStatus');
+        };
+        
     });
 };

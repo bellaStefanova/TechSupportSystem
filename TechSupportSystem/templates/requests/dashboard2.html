@@ -47,7 +47,7 @@
             <div id="criticalUrgencyRequestsCount" number="{{ critical_urgency_requests_count }}" style="display: none;"></div>
             <div class="dashboard-header">
                 <div class="employees header-container">
-                    <a href="#">
+                    <a href="{% url 'users' %}">
                         <h4>Employees</h4>
                         <p>{{ users_count }}</p>
                         <div class="employees-image header-image">
@@ -74,6 +74,9 @@
                     </a>
                 </div>
             </div>
+            {% for dep in top_five_departments %}
+            <div id="topDepartment" name="{{ dep.user__department__name }}" number="{{ dep.num_requests }}" style="display: none;"></div>
+        {% endfor %}
             <div class="ticket-per-product ticket-diagram">
                 <h4>Tickets per product</h4>
                 <div class="product-diagram">
