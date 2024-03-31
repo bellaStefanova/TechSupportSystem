@@ -53,7 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 const signOutElement = document.getElementById("signOut");
                 signOutElement.addEventListener("click", function () {
-                    window.location.href = "/signout";
+                    fetch('/signout/', {
+                        method: 'GET',
+                    })
+                    .then(response => {
+                        window.location.href = "/signout/";
+                    });
                 });
             };
         });
@@ -95,25 +100,30 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         };
 
-        // const myTeamDropdown = document.querySelector(".my-team-options");
-        // const myTeamNav = document.querySelector(".my-team-nav-bar");
-
-        // const myTeamDynamicDropdownActivate = document.querySelector(".my-team-dynamic-dropdown-activate");
-        //     if (myTeamDynamicDropdownActivate) {
-        //     myTeamDynamicDropdownActivate.addEventListener("click", function () {
-        //         if (myTeamDropdown.style.display === "block") {
-        //             myTeamDropdown.style.display = "none";
-        //         } else {
-        //             myTeamDropdown.style.display = "block";
-        //             };
-
-        //     });
-        //     window.addEventListener('click', function(){
-        //         if (event.target !== myTeamDynamicDropdownActivate && event.target !== myTeamDropdown) {
-        //             myTeamDropdown.style.display = "none";
-        //         };
-                
-        //     });
-        // };
+        // Accessing my-team sub navbar URL from navbar
+        const myTeamDropdown = document.querySelector(".my-team-options");
+        const myTeamNavElement = document.getElementById("myTeamNavBar");
+        if (myTeamNavElement) {
+            myTeamNavElement.addEventListener("click", function () {
+                if (myTeamDropdown.style.display === "block") {
+                    myTeamDropdown.style.display = "none";
+                } else {
+                    myTeamDropdown.style.display = "block";
+                    const teamMembersElement = document.getElementById("teamMembers");
+                    teamMembersElement.addEventListener("click", function () {
+                        window.location.href = "/users";
+                    });
+                    const teamRequestsElement = document.getElementById("teamRequests");
+                    teamRequestsElement.addEventListener("click", function () {
+                        window.location.href = "/requests";
+                    });
+                };
+            });
+            window.addEventListener('click', function(){
+                if (event.target !== myTeamNavElement && !myTeamNavElement.contains(event.target) && event.target !== myTeamDropdown) {
+                    myTeamDropdown.style.display = "none";
+                };
+            });
+        };
     };
 });

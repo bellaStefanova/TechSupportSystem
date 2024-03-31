@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- {{ userprofile_list }} -->
 
 <div class="users-main">
     <div class="users-table-header">
         <h1>Users</h1>
-        <!-- <a href="{% url 'create-department' %}">Create new department</a> -->
     </div>
+
     <div class="users-table">
         <table>
             <thead>
@@ -22,45 +21,65 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
-                    {% for user in userprofile_list %}
-                    <tr class="table-row">
-                        <td class="table-data-user-username" data-id="{{user.id}}">{{ user.username }}</td>
-                        <td class="table-data-user-email">{{ user.email }}</td>
-                        <td class="table-data-user-department">{{ user.department }}</td>
-                        <td class="table-data-user-role">{{ user.profile.role }}</td>
-                        <td class="table-data-user-staff">
-                            {% if user.is_staff %}
-                            Yes
-                            {% else %}
-                            No
-                            {% endif %}
-                        </td>
-                        <td class="table-data-user-superuser">
-                            {% if user.is_superuser %}
-                            Yes
-                            {% else %}
-                            No
-                            {% endif %}
-                        </td>
-                        <td class="table-icons">
-                            <a class="edit-user" href="{% url 'edit-user' pk=user.pk %}">
-                                <img src="{% static '/images/edit.jpg' %}" alt="">
-                            </a>
-                            <a class="delete-user" href="{% url 'delete-user' pk=user.pk %}">
-                                <img src="{% static '/images/delete.jpg' %}" alt="">
-                            </a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr class="table-row-no-users">
-                        <td class="no-users-found">No users</td>
-                    </tr>
-                    {% endfor %}
+                {% for user in page_obj %}
+                <tr class="table-row">
+                    <td class="table-data-user-username" data-id="{{user.id}}">{{ user.username }}</td>
+                    <td class="table-data-user-email">{{ user.email }}</td>
+                    <td class="table-data-user-department">{{ user.department }}</td>
+                    <td class="table-data-user-role">{{ user.profile.role }}</td>
+                    <td class="table-data-user-staff">
+                        {% if user.is_staff %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                    <td class="table-data-user-superuser">
+                        {% if user.is_superuser %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                    <td class="table-icons">
+                        {% if current_user.is_superuser %}
+                        <a class="edit-user" href="{% url 'edit-user' pk=user.pk %}">
+                            <img src="{% static '/images/edit.jpg' %}" alt="">
+                        </a>
+                        <a class="delete-user" href="{% url 'delete-user' pk=user.pk %}">
+                            <img src="{% static '/images/delete.jpg' %}" alt="">
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr class="table-row-no-users">
+                    <td class="no-users-found">No users</td>
+                </tr>
+                {% endfor %}
 
-
-                
             </tbody>
         </table>
+
+    </div>
+    <div class="pagination">
+            <p class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </p>
+            <div class="paginator-links">
+                <a class="paginator-link" href="?page=1"><<</a>
+                {% if page_obj.has_previous %}
+                <a class="paginator-link" href="?page={{ page_obj.previous_page_number }}"><</a>
+                {% else %}
+                <a class="paginator-link" href="?page=1"><</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <a class="paginator-link" href="?page={{ page_obj.next_page_number }}">></a>
+                {% else %}
+                <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">></a>
+                {% endif %}
+                <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+            </div>
     </div>
 </div>
 

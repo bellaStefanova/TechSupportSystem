@@ -243,3 +243,13 @@ export function replaceTableRows(tableRows) {
         table.appendChild(noRequestsRow);
     }
 };
+
+
+// if (window.location.pathname === '/signout/') {
+    
+//     window.addEventListener("beforeunload", function() {
+//         console.log('signout');
+//         localStorage.clear();
+//         sessionStorage.clear();
+//     });
+// }

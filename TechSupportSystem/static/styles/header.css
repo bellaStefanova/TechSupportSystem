@@ -4,10 +4,8 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items:stretch;
-    /* padding: 1em 2em; */
+    align-items: stretch;
     background-color: #1D3B65;
-    /* background-color: #13364D; */
 }
 
 header h1 {
@@ -22,12 +20,9 @@ header h1:hover {
 header .navigation-bar {
     flex-grow: 1;
     display: flex;
-    /* max-width: 35%; */
     height: 100%;
     align-items: stretch;
-    /* justify-content: space-between; */
     justify-content: flex-end;
-    /* gap: 4em; */
     padding: 0 2em;
     font-size: 14px;
 }
@@ -36,45 +31,22 @@ header .navigation-bar div {
     display: flex;
     align-items: stretch;
     padding: 1.25em 0;
-
-    /* flex-grow: 1; */
-    /* align-items: center;
-    gap: 1em; */
 }
 
-
-
-header .navigation-bar .signin-nav-bar,
-header .navigation-bar .signup-nav-bar,
-header .navigation-bar .home-nav-bar,
-header .navigation-bar .dashboard-nav-bar,
-header .navigation-bar .profile-nav-bar,
-header .navigation-bar .admin-nav-bar,
-header .navigation-bar .my-team-nav-bar,
-header .navigation-bar .notifications-nav-bar{
+header .navigation-bar .element-nav-bar {
     color: white;
     text-decoration: none;
     cursor: pointer;
     padding: 1.25em 2em;
-    /* text-align: center; */
 }
 
-header .navigation-bar div a{
+header .navigation-bar div a {
     color: white;
     text-decoration: none;
     cursor: pointer;
-    /* padding: 1.25em 2em; */
-    /* text-align: center; */
 }
 
-header .navigation-bar .signin-nav-bar:hover,
-header .navigation-bar .signup-nav-bar:hover,
-header .navigation-bar .home-nav-bar:hover,
-header .navigation-bar .dashboard-nav-bar:hover,
-header .navigation-bar .profile-nav-bar:hover,
-header .navigation-bar .admin-nav-bar:hover,
-header .navigation-bar .my-team-nav-bar:hover,
-header .navigation-bar .notifications-nav-bar:hover{
+header .navigation-bar .element-nav-bar:hover {
     background-color: #122642;
     transition: all 0.4s;
 }
@@ -82,11 +54,9 @@ header .navigation-bar .notifications-nav-bar:hover{
 /* profile dropdown menu on hover */
 header .navigation-bar .profile-options,
 header .navigation-bar .admin-options,
-header .navigation-bar .my-team-options{
+header .navigation-bar .my-team-options {
     display: none;
     position: absolute;
-    /* bottom: -100%; */
-    /* right: 0; */
     top: 2.45em;
     right: 0;
     width: 26%;
@@ -94,44 +64,34 @@ header .navigation-bar .my-team-options{
     z-index: 1000;
     background-color: transparent;
     padding-bottom: 0;
-    /* opacity: 0.9; */
 }
 
 header .navigation-bar .profile-options .profile-option,
 header .navigation-bar .admin-options .admin-option,
-header .navigation-bar .my-team-options .my-team-option{
+header .navigation-bar .my-team-options .my-team-option {
     padding: 10px;
     cursor: pointer;
-    /* background-color: #13364D; */
     background-color: #122642;
     max-height: 120px;
     transition: all 0.4s;
 
 }
 
-/* header .navigation-bar .profile-options .profile-option {
-    max-height: 120px;
-    transition: all 0.4s;
-} */
 
 header .navigation-bar .profile-options .profile-option a,
 header .navigation-bar .admin-options .admin-option a,
-header .navigation-bar .my-team-options .my-team-option a{
+header .navigation-bar .my-team-options .my-team-option a {
     width: 100%;
 }
-  
+
 header .navigation-bar .profile-options .profile-option:hover,
 header .navigation-bar .admin-options .admin-option:hover,
-header .navigation-bar .my-team-options .my-team-option:hover
-header .navigation-bar div:hover{
+header .navigation-bar .my-team-options .my-team-option:hover header .navigation-bar div:hover {
     background-color: #0d1c30;
 }
 
-/* header .navigation-bar .profile-options .profile-option:hover + .profile-options {
-    animation: rollUp 2s ease;
-} */
 
-.signup-nav-bar{
+.signup-nav-bar {
     margin-left: 8em;
 }
 
@@ -140,30 +100,26 @@ header .navigation-bar div:hover{
 }
 
 .notification-count {
-  background-color: red;
-  color: white;
-  border-radius: 50px;
-  padding: 1px 5px;
-  margin-left: 5px;
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    padding: 1px 5px;
+    margin-left: 5px;
 }
 
-
-@keyframes rollDown {
-    from {
-      height: 0;
+@media screen and (max-width: 700px) {
+    .nav {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 2em;
     }
 
-    to {
-      height: 100px;
-      max-height: 100px; /* Adjust the max height based on your content */
+    .navigation-bar {
+        flex-direction: column;
+        align-items: center;
     }
-  }
-  
-  @keyframes rollUp {
-    from {
-      max-height: 200px; /* Adjust the max height based on your content */
+
+    .navigation-bar div {
+        justify-content: center;
     }
-    to {
-      max-height: 0;
-    }
-  }
+}
