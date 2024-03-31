@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Tech Support</title>
     <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
@@ -27,13 +30,13 @@
         </a>
         <div class="navigation-bar">
             {% if user.is_authenticated %}
-                {% if user.is_staff %}
-                    <div class="dashboard-nav-bar" id="dashboardNavBar">
+                {% if user.is_superuser %}
+                    <div class="dashboard-nav-bar element-nav-bar" id="dashboardNavBar">
                         <p>Dashboard</p>
                     </div>
                 {% endif %}
                 {% if user.is_superuser %}
-                    <div class="admin-nav-bar" id="adminNavBar">
+                    <div class="admin-nav-bar element-nav-bar" id="adminNavBar">
                         <p class="admin-dynamic-dropdown-activate">Admin Panel</p>
                         <div class="admin-options">
                             <div class="admin-option" id="manageDepartments">
@@ -50,33 +53,34 @@
                 {% endif %}
                 {% if user.is_staff and not user.is_superuser %}
                 <!-- TO FIX THIS PART -->
-                <div class="my-team-nav-bar">
+                <div class="my-team-nav-bar element-nav-bar" id="myTeamNavBar">
                     <p class="my-team-dynamic-dropdown-activate">My team</p>
                     <div class="my-team-options">
-                        {% for department in departments %}
-                        <div class="my-team-option">
-                            <a href="#">{{ department }}</a>
+                        <div class="my-team-option" id="teamMembers">
+                            <p>Team Members</p>
+                        </div>
+                        <div class="my-team-option" id="teamRequests">
+                            <p>Team Requests</p>
                         </div>
                     </div>
                 </div>
-                    {% endfor %}
                 {% endif %}
                 <!-- END TO FIX THIS PART -->
-
                 {% if not user.is_superuser %}
-                    <div class="home-nav-bar" id="homeNavBar">
+                
+                    <div class="home-nav-bar element-nav-bar" id="homeNavBar">
                         <p>Home</p>
                     </div>
                 {% endif %}
 
-                <div class="notifications-nav-bar" id="notificationsNavBar">
+                <div class="notifications-nav-bar element-nav-bar" id="notificationsNavBar">
                     <p>Notifications</p>
                     {% if notifications > 0 %}
                         <span class="notification-count">{{ notifications }}</span>
                     {% endif %}
                 </div>
 
-                <div class="profile-nav-bar" id="profileNavBar">
+                <div class="profile-nav-bar element-nav-bar" id="profileNavBar">
                     <p class="profile-dynamic-dropdown-activate">Profile</p>
                     <div class="profile-options">
                         <div class="profile-option" id="profileDetails">
@@ -92,15 +96,16 @@
                 </div>
 
             {% else %}
-                <div class="signup-nav-bar profile-nav-bar" id="signupNavBar">
+                <div class="signup-nav-bar element-nav-bar" id="signupNavBar">
                     <p>Sign Up</p>
                 </div>
-                <div class="signin-nav-bar profile-nav-bar" id="signinNavBar">
+                <div class="signin-nav-bar element-nav-bar" id="signinNavBar">
                     <p>Sign In</p>
                 </div>
             {% endif %}
         </div>
     </header>
+
 
     {% block content %}
     {% endblock %}

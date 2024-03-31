@@ -17,14 +17,14 @@ class DepartmentListView(GetNotificationsMixin, VisibleToSuperUserMixin, views.L
 class DepartmentCreateView(GetNotificationsMixin, VisibleToSuperUserMixin, views.CreateView):
     template_name = 'departments/create-department.html'
     model = Department
-    fields = ('name', 'description', 'location', 'manager')
+    fields = ('name', 'description', 'location', 'management_role', 'manager')
     success_url = reverse_lazy('departments')
     
     
 class DepartmentEditView(GetNotificationsMixin, VisibleToSuperUserMixin, views.UpdateView):
     template_name = 'departments/edit-department.html'
     model = Department
-    fields = ('name', 'description', 'location', 'manager')
+    fields = ('name', 'description', 'location', 'management_role', 'manager')
     success_url = reverse_lazy('departments')
     
     

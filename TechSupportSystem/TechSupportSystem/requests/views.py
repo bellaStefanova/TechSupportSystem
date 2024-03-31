@@ -3,13 +3,14 @@ from django.forms.models import BaseModelForm
 from django.shortcuts import render
 from django.views import generic as views
 from django.contrib.auth import get_user_model
+from django.db.models import Count
 
 from TechSupportSystem.notifications.models import RequestNotification
 from TechSupportSystem.departments.models import Department
 from .models import Request
 from django.forms import modelform_factory, modelformset_factory
 from django.urls import reverse_lazy
-from TechSupportSystem.helpers.mixins import GetNotificationsMixin
+from TechSupportSystem.helpers.mixins import GetNotificationsMixin, VisibleToSuperUserMixin
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.db.models.signals import post_save
@@ -71,7 +72,7 @@ class CancelRequestView(GetNotificationsMixin, views.DeleteView):
     
     def get_success_url(self):
         if self.request.user.is_superuser:
-            return reverse_lazy('dashboard')
+            return reverse_lazy('requests')
         return reverse_lazy('user-home')
     
     def form_valid(self, form):
@@ -95,13 +96,25 @@ class TakeRequestView(View):
         post_save.connect(edit_request_handler, sender=Request)
         return JsonResponse({'message': 'Request taken'}, status=200)
     
+class MarkRequestDoneView(View):
+    def post(self, request, request_id):
+        support_request = Request.objects.get(id=request_id)
+        print(support_request)
+        support_request.status = 'Resolved'
+        # post_save.disconnect(edit_request_handler, sender=Request)
+        support_request.save()
+        # post_save.connect(edit_request_handler, sender=Request)
+        return JsonResponse({'message': 'Request done'}, status=200)
 
-class DashboardView(GetNotificationsMixin, views.TemplateView):
+class DashboardView(GetNotificationsMixin, VisibleToSuperUserMixin, views.TemplateView):
     
     template_name = 'requests/dashboard2.html'
     
     def get_context_data(self, **kwargs):
         all_requests = Request.objects.all().order_by('-created_at')
+        top_departments = Request.objects.values('user__department__name').annotate(num_requests=Count('id'))
+        top_departments = top_departments.order_by('-num_requests')
+        top_five_departments = top_departments[:5]
         context = super().get_context_data(**kwargs)
         context['requests'] = all_requests
         context['last_requests'] = all_requests[:10]
@@ -113,6 +126,7 @@ class DashboardView(GetNotificationsMixin, views.TemplateView):
         context['medium_urgency_requests_count'] = len(all_requests.filter(urgency='Medium'))
         context['high_urgency_requests_count'] = len(all_requests.filter(urgency='High'))
         context['critical_urgency_requests_count'] = len(all_requests.filter(urgency='Critical'))
+        context['top_five_departments'] = top_five_departments
         context['users'] = UserModel.objects.all()
         context['users_count'] = len(context['users'])
         context['departments_count'] = len(Department.objects.all())

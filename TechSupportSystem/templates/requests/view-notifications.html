@@ -4,6 +4,9 @@
     <h1 class="notifications-page-heading">Your Notifications</h1>
     <div class="request-notifications">
         <h3>Request Notifications</h3>
+        <div class="read-all-notifications-button" id="readAllNotifications">
+            <p>Read all</p>
+        </div>
         {% for notification in unread_notifications %}
         <div class="notification-container">
             <div class="unread-notification">

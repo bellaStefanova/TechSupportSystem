@@ -42,3 +42,15 @@ class MarkNotificationAsReadView(View):
     def get(self, request, *args, **kwargs):
         print('GET')
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+class ReadAllNotificationsView(View):
+    def post(self, request):
+        user_notifications = UserNotification.objects.filter(user=request.user, is_read=False, notification__notification_type='REQUEST')
+        for notification in user_notifications:
+            notification.is_read = True
+            notification.save()
+        return JsonResponse({'message': 'All notifications marked as read'}, status=200)
+    
+    def get(self, request, *args, **kwargs):
+        print('GET')
+        return JsonResponse({'error': 'Invalid request method'}, status=400)

@@ -15,6 +15,14 @@ class Department(models.Model):
 
     description = models.TextField(
     )
+    
+    management_role = models.ForeignKey(
+        'departments.Role',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='managed_departments',
+    )
 
     manager = models.ForeignKey(
         'accounts.UserProfile',
@@ -53,9 +61,9 @@ class Role(models.Model):
         max_length=DESCRIPTION_MAX_LENGTH,
     )
 
-    is_eligible_for_staff = models.BooleanField(
-        default=False,
-    )
+    # is_eligible_for_staff = models.BooleanField(
+    #     default=False,
+    # )
     
     department = models.ForeignKey(
         Department,

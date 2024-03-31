@@ -18,6 +18,8 @@ class UserProfile(auth_models.AbstractUser):
     skip_initial_profile_details = models.BooleanField(
         default=False,
     )
+    
+
 
 
 '''Profile Model related to UserProfile, extenging its information with non-required one'''
@@ -47,6 +49,14 @@ class Profile(models.Model):
         Role,
         on_delete=models.SET_NULL,
         related_name='profiles',
+        null=True,
+        blank=True,
+    )
+    
+    last_updated_by = models.ForeignKey(
+        UserModel,
+        on_delete=models.SET_NULL,
+        related_name='updated_users',
         null=True,
         blank=True,
     )

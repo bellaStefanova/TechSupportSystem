@@ -125,9 +125,11 @@
 .request-page .request-actions .request-actions-buttons .cancel-request,
 .request-page .request-actions .request-actions-buttons .edit-request,
 .request-page .request-actions .request-actions-buttons .take-request,
+.request-page .request-actions .request-actions-buttons .mark-request-done,
 .request-page .request-actions .disabled-buttons .cancel-request,
 .request-page .request-actions .disabled-buttons .edit-request,
 .request-page .request-actions .disabled-buttons .take-request,
+.request-page .request-actions .disabled-buttons .mark-request-done,
 .profile-details-page .profile-actions .profile-actions-buttons .edit-profile,
 .profile-details-page .profile-actions .profile-actions-buttons .change-password,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile {
@@ -157,6 +159,11 @@
     cursor: pointer;
 }
 
+.request-page .request-actions .enabled-buttons .request-actions-buttons .mark-request-done{
+    background-color: #047829;
+    cursor: pointer;
+}
+
 .request-page .request-actions .enabled-buttons .request-actions-buttons .cancel-request:hover,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile:hover {
     background-color: #820202
@@ -172,9 +179,17 @@
     background-color: #142843
 }
 
+.request-page .request-actions .enabled-buttons .request-actions-buttons .mark-request-done:hover{
+    background-color: #026020;
+}
+
 .request-page .request-actions .enabled-buttons .request-actions-buttons .cancel-request:active,
 .profile-details-page .profile-actions .profile-actions-buttons .delete-profile:active {
     background-color: #600000
+}
+
+.request-page .request-actions .enabled-buttons .request-actions-buttons .mark-request-done:active{
+    background-color: #014e19;
 }
 
 .request-page .request-actions .enabled-buttons .request-actions-buttons .edit-request:hover,
@@ -184,7 +199,8 @@
 
 .request-page .request-actions .disabled-buttons .cancel-request,
 .request-page .request-actions .disabled-buttons .edit-request,
-.request-page .request-actions .disabled-buttons .take-request {
+.request-page .request-actions .disabled-buttons .take-request,
+.request-page .request-actions .disabled-buttons .mark-request-done {
     background-color: #848484;
     cursor: not-allowed;
 }

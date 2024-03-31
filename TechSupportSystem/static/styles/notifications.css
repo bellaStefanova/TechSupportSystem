@@ -22,10 +22,11 @@
 .user-notifications {
     width: 50%;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     flex-wrap: wrap;
-    padding: 2em 10em;
+    padding: 2em 8em;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .request-notifications {
@@ -39,8 +40,25 @@
     font-weight: normal;
     /* padding: 1em 4em; */
     /* border-bottom: 1px solid grey; */
-    width: 100%;
+    width: 50%;
     margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.read-all-notifications-button {
+    background-color: #1D3B65;
+    color: white;
+    text-align: center;
+    width: 25%;
+    font-size: 1em;
+    cursor: pointer;
+
+    padding: 1em 1.4em;
+    border-radius: 5px;
+    margin-left: 8em;
+    /* margin-bottom: 1em; */
+    /* margin-left: 10em; */
+
 }
 
 .notification-container {
@@ -50,7 +68,7 @@
     padding: 0.5em;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    width: 300px;
+    width: 400px;
 }
 
 .notification-container .unread-notification p{
