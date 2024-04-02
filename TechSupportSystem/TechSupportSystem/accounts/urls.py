@@ -8,7 +8,6 @@ from .views import (
     NextToFirstLoginView, 
     ProfileEditView,
     ChangePasswordView,
-    # logout_view
 )
 
 
@@ -16,7 +15,6 @@ urlpatterns = (
     (path('signup/', SignupView.as_view(), name='signup')),
     (path('signin/', SignInView.as_view(), name='signin')),
     (path('signout/', SignOutView.as_view(), name='signout')),
-    # (path('signout/', logout_view, name='signout')),
     (path('home', UserHomeView.as_view(), name='user-home')),
     (path('profile/', ProfileDetailsView.as_view(), name='profile-details')),
     (path('add-profile-details', NextToFirstLoginView.as_view(), name='add-profile-details')),

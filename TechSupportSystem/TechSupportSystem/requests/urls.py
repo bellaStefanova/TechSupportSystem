@@ -9,7 +9,4 @@ urlpatterns = (
     (path('edit-request/<int:pk>/', EditRequestView.as_view(), name='edit-request')),
     (path('dashboard/', DashboardView.as_view(), name='dashboard')),
     (path('mark-request-done/<int:request_id>/', MarkRequestDoneView.as_view(), name='mark-request-done')),
-    # (path('signin/', SignInView.as_view(), name='signin')),
-    # (path('signout/', SignOutView.as_view(), name='signout')),
-    # (path('home', UserHomeView.as_view(), name='user-home')),
 )

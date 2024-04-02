@@ -41,7 +41,7 @@ class DetailsRequestView(GetNotificationsMixin, views.DetailView):
     template_name = 'requests/view-request.html'
 
 
-class EditRequestView(views.UpdateView):
+class EditRequestView(GetNotificationsMixin, views.UpdateView):
     queryset = Request.objects.all()
     template_name = 'requests/edit-request.html'
     
@@ -86,7 +86,7 @@ class CancelRequestView(GetNotificationsMixin, views.DeleteView):
         return HttpResponseRedirect(success_url)
     
 
-class TakeRequestView(View):
+class TakeRequestView(VisibleToSuperUserMixin, View):
     def post(self, request, request_id):
         support_request = Request.objects.get(id=request_id)
         support_request.status = 'Assigned'
@@ -96,14 +96,15 @@ class TakeRequestView(View):
         post_save.connect(edit_request_handler, sender=Request)
         return JsonResponse({'message': 'Request taken'}, status=200)
     
-class MarkRequestDoneView(View):
+class MarkRequestDoneView(VisibleToSuperUserMixin, View):
     def post(self, request, request_id):
         support_request = Request.objects.get(id=request_id)
         print(support_request)
         support_request.status = 'Resolved'
-        # post_save.disconnect(edit_request_handler, sender=Request)
+        if not support_request.worked_on_by:
+            support_request.worked_on_by = request.user
+        support_request.last_updated_by = request.user
         support_request.save()
-        # post_save.connect(edit_request_handler, sender=Request)
         return JsonResponse({'message': 'Request done'}, status=200)
 
 class DashboardView(GetNotificationsMixin, VisibleToSuperUserMixin, views.TemplateView):

@@ -131,8 +131,8 @@
     flex-grow: 1;
 }
 
-.search-filter-header .per-period a{
-    text-decoration: none;
+.search-filter-header .per-period div{
+    cursor: pointer;
     color: #7b7b7b;
     background-color: #dbdbdb;
     padding: 0.5em 2em;

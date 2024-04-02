@@ -51,7 +51,7 @@ if (window.location.pathname === '/requests/') {
         if (!originalTableRows) {
             originalTableRows = Array.from(document.querySelectorAll('.table-row'));
         };
-        let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
+        let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, new Array());
         replaceTableRows(tableRows)
 
         window.onbeforeunload = function () {

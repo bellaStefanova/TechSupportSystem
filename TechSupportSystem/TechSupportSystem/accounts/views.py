@@ -1,10 +1,11 @@
 from django.db.models.base import Model as Model
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model
-from django.forms.models import modelform_factory
+from django.forms.models import BaseModelForm, modelform_factory
 from django.views.decorators.cache import cache_control
 from django.utils.decorators import method_decorator
 from django.contrib import auth
@@ -120,7 +121,7 @@ class ProfileDetailsView(GetNotificationsMixin, views.DetailView):
 '''Profile edit view - accessible for authenticated users only'''
 class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     queryset = UserModel.objects.all()
-    form_class = modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
+    # form_class = modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
     template_name = 'accounts/profile-edit.html'
 
     def get_object(self):
@@ -129,7 +130,15 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     def get_success_url(self) -> str:
         return reverse_lazy('profile-details')
     
+    def get_form_class(self):
+        if not self.request.user.is_superuser:
+            return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
+        return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff', 'department'))
+    
     def get_form(self, form_class=None):
+        if self.request.user.is_superuser and not hasattr(self.request.user, 'profile'):
+            profile = Profile(user=self.request.user)
+            profile.save()
         form = super().get_form(form_class)
         if self.request.user.department:
             department_roles = self.request.user.department.roles.all()
@@ -139,6 +148,11 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
             else:
                 form.fields['role'].queryset = department_roles
         return form
+    
+    # def form_valid(self, form):
+    #     instance = Profile.objects.get(user=self.request.user)
+    #     instance.department = None
+    #     return super().form_valid(form)
 
 '''Change password view - accessible for authenticated users only'''
 class ChangePasswordView(GetNotificationsMixin, auth_views.PasswordChangeView):

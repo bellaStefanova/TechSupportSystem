@@ -57,9 +57,7 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
                     selectedOption.style.gap = '0';
                 }
 
-                // Filter the table per status and search input
-                let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
-                // Replace the table rows with the filtered ones
+                let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, timeRows);
                 replaceTableRows(tableRows)
 
             }
@@ -86,66 +84,14 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
 
         // Handle search input to filter the table rows
         input.addEventListener('input', () => {
-            // Filter the table per status and search input
-            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows);
-            // Replace the table rows with the filtered ones
+            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, timeRows);
             replaceTableRows(tableRows)
         });
 
-        // // Function to filter the table rows
-        // function filterTableRows() {
-
-        //     const searchValue = input.value.toLowerCase();
-        //     if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
-        //         if (input.value === '') {
-        //             tableRows = originalTableRows;
-        //         } else {
-        //             tableRows = originalTableRows.filter(row => {
-        //                 const titleCell = row.querySelector('.table-data-subject');
-        //                 const idCell = row.querySelector('.table-data-request-id');
-        //                 return titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue);
-        //             });
-        //         }
-        //     } else {
-        //         if (input.value === '') {
-        //             tableRows = originalTableRows.filter(row => {
-        //                 const statusCell = row.querySelector('.table-data-status');
-        //                 return statusCell.textContent === selectedOptionValue.textContent;
-        //             });
-        //         } else {
-        //             tableRows = originalTableRows.filter(row => {
-        //                 const statusCell = row.querySelector('.table-data-status');
-        //                 const titleCell = row.querySelector('.table-data-subject');
-        //                 const idCell = row.querySelector('.table-data-request-id');
-        //                 return statusCell.textContent === selectedOptionValue.textContent && (titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue));
-        //             });
-        //         }
-        //     }
-        // }
-
-        // Function to replace the table rows
-        // function replaceTableRows() {
-
-        //     const table = document.querySelector('#tableBody');
-
-        //     // Remove all existing table rows from the table
-        //     while (table.firstChild) {
-        //         table.removeChild(table.firstChild);
-        //     }
-
-        //     // Append the filtered rows to the table
-        //     tableRows.forEach(row => {
-        //         table.appendChild(row);
-        //     });
-        //     if (tableRows.length === 0) {
-        //         const noRequestsRow = document.createElement('tr');
-        //         noRequestsRow.classList.add('table-row-no-requests');
-        //         noRequestsRow.innerHTML = '<td class="no-requests-found" colspan="3">No requests</td>';
-        //         table.appendChild(noRequestsRow);
-        //     }
-        // };
-
         // Handle per period selector buttons to change color on click - the are mutually exclusive
+        let weekIsSelected = false;
+        let monthIsSelected = false;
+        let yearIsSelected = false;
         const perPeriodSelectors = document.querySelectorAll('.perPeriodSelector');
         perPeriodSelectors.forEach(selector => {
             selector.addEventListener('click', function () {
@@ -160,7 +106,92 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
                 this.style.backgroundColor = isColored ? '#dbdbdb' : '#1D3B65';
                 this.style.color = isColored ? '#7b7b7b' : 'white'
 
+                if (selector.id === 'weekSelector') {
+                    weekIsSelected = isColored ? false : true;
+                } else if (selector.id === 'monthSelector') {
+                    monthIsSelected = isColored ? false : true;
+                } else if (selector.id === 'yearSelector') {
+                    yearIsSelected = isColored ? false : true;
+                }
             });
+        });
+
+        const weekSelector = document.getElementById('weekSelector');
+        const monthSelector = document.getElementById('monthSelector');
+        const yearSelector = document.getElementById('yearSelector');
+        let timeRows = new Array();
+
+        weekSelector.addEventListener('click', function () {
+            if (weekIsSelected) {
+                timeRows = [];
+                const today = new Date();
+                const weekAgo = new Date(today.setDate(today.getDate() - 7));
+                originalTableRows.forEach (row => {
+                    const dateCell = row.querySelector('.table-data-created-on');
+                    const date = new Date(dateCell.textContent);
+                    if (date > weekAgo) {
+                        timeRows.push(row);
+                    };
+
+                });
+            } else {
+                timeRows = [];
+            };
+            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, timeRows);
+            replaceTableRows(tableRows)
+        });
+
+        monthSelector.addEventListener('click', function () {
+            if (monthIsSelected) {
+                timeRows = [];
+                const today = new Date();
+                let monthAgo;
+                if ([1, 2, 4, 6, 8, 9, 11].includes(Number(today.getMonth()))) {
+                    monthAgo = new Date(today.setDate(today.getDate() - 31));
+                } else if ([5, 7, 10, 12].includes(today.getMonth())) {
+                    monthAgo = new Date(today.setDate(today.getDate() - 30));
+                } else if (today.getFullYear() % 4 === 0) {
+                    monthAgo = new Date(today.setDate(today.getDate() - 29));
+                } else {
+                    monthAgo = new Date(today.setDate(today.getDate() - 28));
+                };
+                originalTableRows.forEach (row => {
+                    const dateCell = row.querySelector('.table-data-created-on');
+                    const date = new Date(dateCell.textContent);
+                    if (date > monthAgo) {
+                        timeRows.push(row);
+                    };
+
+                });
+            } else {
+                timeRows = [];
+            };
+            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, timeRows);
+            replaceTableRows(tableRows)
+        });
+        yearSelector.addEventListener('click', function () {
+            if (yearIsSelected) {
+                timeRows = [];
+                const today = new Date();
+                let yearAgo;
+                if (today.getFullYear() % 4 === 0) {
+                    yearAgo = new Date(today.setDate(today.getDate() - 366));
+                } else {
+                    yearAgo = new Date(today.setDate(today.getDate() - 365));
+                }
+                originalTableRows.forEach (row => {
+                    const dateCell = row.querySelector('.table-data-created-on');
+                    const date = new Date(dateCell.textContent);
+                    if (date > yearAgo) {
+                        timeRows.push(row);
+                    };
+
+                });
+            } else {
+                timeRows = [];
+            };
+            let tableRows = filterTableRows(input, selectedOptionValue, originalTableRows, timeRows);
+            replaceTableRows(tableRows)
         });
 
         // Handle table row click to redirect to the specific request details page
@@ -190,16 +221,23 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
 };
 
 // Function to filter the table rows
-export function filterTableRows(input, selectedOptionValue, originalTableRows) {
+export function filterTableRows(input, selectedOptionValue, originalTableRows, weekRows) {
 // function filterTableRows() {
 
     const searchValue = input.value.toLowerCase();
     let tableRows;
+    let orgTableRows;
+    if (weekRows.length > 0) {
+        orgTableRows = weekRows.slice();
+    } else {
+        orgTableRows = originalTableRows.slice();
+    };
+    console.log(orgTableRows);
     if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
         if (input.value === '') {
-            tableRows = originalTableRows;
+            tableRows = orgTableRows;
         } else {
-            tableRows = originalTableRows.filter(row => {
+            tableRows = orgTableRows.filter(row => {
                 const titleCell = row.querySelector('.table-data-subject');
                 const idCell = row.querySelector('.table-data-request-id');
                 return titleCell.textContent.toLowerCase().includes(searchValue) || idCell.textContent.toLowerCase().includes(searchValue);
@@ -207,12 +245,12 @@ export function filterTableRows(input, selectedOptionValue, originalTableRows) {
         }
     } else {
         if (input.value === '') {
-            tableRows = originalTableRows.filter(row => {
+            tableRows = orgTableRows.filter(row => {
                 const statusCell = row.querySelector('.table-data-status');
                 return statusCell.textContent === selectedOptionValue.textContent;
             });
         } else {
-            tableRows = originalTableRows.filter(row => {
+            tableRows = orgTableRows.filter(row => {
                 const statusCell = row.querySelector('.table-data-status');
                 const titleCell = row.querySelector('.table-data-subject');
                 const idCell = row.querySelector('.table-data-request-id');
@@ -243,13 +281,3 @@ export function replaceTableRows(tableRows) {
         table.appendChild(noRequestsRow);
     }
 };
-
-
-// if (window.location.pathname === '/signout/') {
-    
-//     window.addEventListener("beforeunload", function() {
-//         console.log('signout');
-//         localStorage.clear();
-//         sessionStorage.clear();
-//     });
-// }

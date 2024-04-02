@@ -14,7 +14,9 @@ class ListNotificationView(GetNotificationsMixin, views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        max_notifications = 20
+        
+        
         read_notifications = UserNotification.objects.filter(
             user=self.request.user, 
             is_read=True, 
@@ -27,11 +29,17 @@ class ListNotificationView(GetNotificationsMixin, views.ListView):
         ).order_by('-notification__created_at')
         context['read_notifications'] = read_notifications
         context['user_notifications'] = user_notifications
+        
+        if context['unread_notifications'].count() >= max_notifications:
+            context['unread_notifications'] = context['unread_notifications'][:max_notifications]
+        else:
+            context['read_notifications'] = context['read_notifications'][:(max_notifications - context['unread_notifications'].count())]
+
         return context
     
 
 
-class MarkNotificationAsReadView(View):
+class MarkNotificationAsReadView(GetNotificationsMixin, View):
     def post(self, request, notification_id):
 
         user_notification = UserNotification.objects.get(id=notification_id)
@@ -43,7 +51,7 @@ class MarkNotificationAsReadView(View):
         print('GET')
         return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-class ReadAllNotificationsView(View):
+class ReadAllNotificationsView(GetNotificationsMixin, View):
     def post(self, request):
         user_notifications = UserNotification.objects.filter(user=request.user, is_read=False, notification__notification_type='REQUEST')
         for notification in user_notifications:

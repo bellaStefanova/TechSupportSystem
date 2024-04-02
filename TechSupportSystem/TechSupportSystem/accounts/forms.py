@@ -47,7 +47,8 @@ class EditProfileForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(EditProfileForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        user.department = self.cleaned_data['department']
+        if not user.is_superuser:
+            user.department = self.cleaned_data['department']
         if commit:
             user.save()
         if user.profile:
