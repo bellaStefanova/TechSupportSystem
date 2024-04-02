@@ -5,6 +5,7 @@
 <p>The platform has the functionality to create Departments, Roles and Users and connect them to each other. It has three levels of users: superusers that administrate everything from managing departments, roles, users to taking requests and mark them as resolved; staff users, who are department managers, where they have the functionality to review their team members and team requests; regular users who have the functionality to create/edit/delete requests, edit profile, view their requests.</p>
 
 <p>Register Form:
+  <br>
 <img width="355" alt="image" src="https://github.com/bellaStefanova/TechSupportSystem/assets/123555303/6085dcc3-12c2-4199-92d2-bf803f1ca3c5"></p>
 
 <p> Login Form:
