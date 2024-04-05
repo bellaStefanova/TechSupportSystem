@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python version
         uses: actions/setup-python@v1
@@ -33,14 +33,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: List files in working directory
-        run: ls -R
+      # - name: List files in working directory
+      #   run: ls -R
 
-      - name: cd
-        run: cd TechSupportSystem/TechSupportSystem
+      # - name: cd
+      #   run: cd TechSupportSystem/TechSupportSystem
 
-      - name: Run collectstatic
-        run: python manage.py collectstatic
+      # - name: Run collectstatic
+      #   run: python manage.py collectstatic
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
