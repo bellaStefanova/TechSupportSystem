@@ -46,7 +46,7 @@ DATABASES = {
         'NAME': os.environ['DBNAME'],
         'USER': os.environ['DBUSER'],
         'PASSWORD': os.environ['DBPASS'],
-        'HOST': os.environ['DBHOST'],
+        'HOST': os.environ['DBHOST'] + '.postgres.database.azure.com',
         'PORT': '5432',
     }
 }
