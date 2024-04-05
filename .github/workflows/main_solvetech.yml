@@ -36,8 +36,11 @@ jobs:
       - name: List files in working directory
         run: ls -R
 
+      - name: cd
+        run: cd TechSupportSystem/TechSupportSystem
+
       - name: Run collectstatic
-        run: python TechSupportSystem/TechSupportSystem/manage.py collectstatic
+        run: python manage.py collectstatic
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
