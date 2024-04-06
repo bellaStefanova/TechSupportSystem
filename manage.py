@@ -6,7 +6,10 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.settings')
+    if 'DBHOST' in os.environ:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.deployment')
+    else:
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
