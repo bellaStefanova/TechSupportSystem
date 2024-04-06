@@ -76,7 +76,7 @@ jobs:
         with:
           app-name: 'solveTech2'
           slot-name: 'Production'
-          publish-profile: ${{ env.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25A7B62CCC9E4636995185905D8F9DAB }}
 
       - name: Post Run actions/checkout@v2
         uses: actions/checkout@v2
