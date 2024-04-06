@@ -5,8 +5,14 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+SECRET_KEY = os.environ['SECRET']
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
+DEBUG = False
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -15,14 +21,21 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DBNAME'],
+        'USER': os.environ['DBUSER'],
+        'PASSWORD': os.environ['DBPASS'],
+        'HOST': os.environ['DBHOST'] + '.postgres.database.azure.com',
+        'PORT': '5432',
+    }
+}
 
 AUTH_USER_MODEL = "accounts.UserProfile"
-
-SECRET_KEY = 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
@@ -38,6 +51,7 @@ INSTALLED_APPS = [
     'TechSupportSystem.requests.apps.RequestsConfig',
     'TechSupportSystem.notifications.apps.NotificationsConfig',
 ]
+
 
 ROOT_URLCONF = 'TechSupportSystem.urls'
 
@@ -59,17 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'TechSupportSystem.wsgi.application'
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'techsupportsystem_db',
-        'USER': 'root',
-        'PASSWORD': 'Test',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
 
 LOGIN_URL = 'signin'
 
