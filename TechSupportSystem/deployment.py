@@ -9,6 +9,7 @@ SECRET_KEY = os.environ['SECRET']
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']]
 CSRF_TRUSTED_ORIGINS = ['https://' + os.environ['WEBSITE_HOSTNAME']]
 DEBUG = False
+SECURE_SSL_REDIRECT=0
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
