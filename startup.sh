@@ -1,3 +1,4 @@
+# Set-AzWebApp -ResourceGroupName <group-name> -Name <app-name> -AppSettings @{"WEBSITES_PORT"="8000"}
 python manage.py qcluster &
 gunicorn --bind=0.0.0.0 --timeout 600 TechSupportSystem.wsgi --access-logfile '-' --error-logfile '-'
 
