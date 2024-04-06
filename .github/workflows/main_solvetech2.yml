@@ -69,6 +69,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+
       
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -76,7 +82,7 @@ jobs:
         with:
           app-name: 'solveTech2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_600c8efcd042470f91a867ec2f037372 }}
+        #   publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_600c8efcd042470f91a867ec2f037372 }}
 
       - name: Post Run actions/checkout@v2
         uses: actions/checkout@v2
