@@ -210,3 +210,11 @@
     color: #4e4e4e;
 }
 
+.error-heading {
+    padding: 1em 0;
+    font-size: 4em;
+}
+
+.error-text {
+    font-size: 2em;
+}
