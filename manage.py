@@ -7,7 +7,7 @@ import sys
 def main():
     """Run administrative tasks."""
     if 'DBHOST' in os.environ:
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.deployment')
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.settings')
     else:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.settings')
     try:
