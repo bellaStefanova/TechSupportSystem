@@ -19,12 +19,18 @@ MIDDLEWARE = [
 
 AUTH_USER_MODEL = "accounts.UserProfile"
 
-SECRET_KEY = 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n'
+# SECRET_KEY = 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n'
 
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
+SECRET_KEY = os.environ.get('SECRET', 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n')
+DEBUG = os.environ.get('DEBUG', False)
+
+ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost')]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
+SECURE_SSL_REDIRECT=0
 
 INSTALLED_APPS = [
     'django.contrib.admin',
