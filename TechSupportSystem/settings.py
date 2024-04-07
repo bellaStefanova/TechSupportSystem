@@ -21,7 +21,7 @@ AUTH_USER_MODEL = "accounts.UserProfile"
 
 SECRET_KEY = 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -63,16 +63,28 @@ TEMPLATE_DIRS = (BASE_DIR / 'templates',)
 WSGI_APPLICATION = 'TechSupportSystem.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'techsupportsystem_db',
-        'USER': 'root',
-        'PASSWORD': 'Test',
-        'HOST': 'localhost',
-        'PORT': '3306',
+if 'DBHOST' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['DBNAME'],
+            'USER': os.environ['DBUSER'],
+            'PASSWORD': os.environ['DBPASS'],
+            'HOST': os.environ['DBHOST'] + '.postgres.database.azure.com',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'techsupportsystem_db',
+            'USER': 'root',
+            'PASSWORD': 'Test',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
 
 LOGIN_URL = 'signin'
 
