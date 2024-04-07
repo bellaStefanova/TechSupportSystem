@@ -26,11 +26,12 @@ AUTH_USER_MODEL = "accounts.UserProfile"
 # ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = os.environ.get('SECRET', 'django-insecure-fxj8dsj^^q#pe7riz%&(7^bsr1a66#!48*dg)6#2k3%h)!525n')
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', False) == 'True'
 
-ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', 'localhost')]
+ALLOWED_HOSTS = [os.environ.get('DJANGO_HOST', '127.0.0.1')]
 CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
 SECURE_SSL_REDIRECT=0
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
