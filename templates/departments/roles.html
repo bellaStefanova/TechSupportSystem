@@ -15,7 +15,6 @@
                     <th class="table-header-role-title">Position</th>
                     <th class="table-header-role-description">Short description</th>
                     <th class="table-header-role-department">Department</th>
-                    <!-- <th class="table-header-role-is-eligible-staff">Staff</th> -->
                     <th class="table-header-hidden"></th>
                 </tr>
             </thead>
@@ -25,13 +24,6 @@
                         <td class="table-data-role-title" data-id="{{role.id}}">{{ role.title }}</td>
                         <td class="table-data-role-description">{{ role.description }}</td>
                         <td class="table-data-role-department">{{ role.department|default:'-' }}</td>
-                        <!-- <td class="table-data-role-is-eligible-staff">
-                            {% if role.is_eligible_for_staff %}
-                            Yes
-                            {% else %}
-                            No
-                            {% endif %}
-                        </td> -->
                         <td class="table-icons">
                             <a class="edit-role" href="{% url 'edit-role' pk=role.pk %}">
                                 <img src="{% static '/images/edit.jpg' %}" alt="">
@@ -40,16 +32,12 @@
                                 <img src="{% static '/images/delete.jpg' %}" alt="">
                             </a>
                         </td>
-                    <!-- </a> -->
                     </tr>
                     {% empty %}
                     <tr class="table-row-no-roles">
                         <td class="no-roles-found">No positions</td>
                     </tr>
                     {% endfor %}
-
-
-                
             </tbody>
         </table>
     </div>

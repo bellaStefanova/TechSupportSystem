@@ -1,19 +1,6 @@
+{% extends 'index-base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Support</title>
-    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
-    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
-
-
-</head>
-
-<body>
-    <!-- TODO: Add link to index page on left banner -->
+{% block content %}
     <div class="about-page">
         <div class="about-header initial-header">
             <a href="{% url 'index' %}">
@@ -61,6 +48,4 @@
 
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}

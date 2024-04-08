@@ -20,12 +20,12 @@
     min-width: 400px;
     width: 75%;
 }
+
 .form-container form .form-fields {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     width: 100%;
-    
 }
 
 .form-container form .form-fields label,
@@ -60,7 +60,6 @@
     gap: 2em;
     display: flex;
     justify-content: center;
-
 }
 
 .signup-button {
@@ -87,8 +86,6 @@
     width: 110px;
 }
 
-
-
 .cancel-button {
     background-color: #848484;
     color: white;
@@ -105,7 +102,6 @@
     color: #848484;
     font-size: 0.9em;
     margin-top: 0.5em;
-
 }
 
 .form-fields .helptext ul {
@@ -157,9 +153,11 @@ input#id_is_staff {
 }
 
 @media screen and (max-width: 450px) {
+
     .form-container {
         width: 90%;
     }
+
     .form-container form {
         width: 100%;
         min-width: 0;
@@ -169,5 +167,4 @@ input#id_is_staff {
         flex-direction: column;
         align-items: center;
     }
-    
 }

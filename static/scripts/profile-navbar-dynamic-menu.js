@@ -31,9 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Accessing notifications URL from navbar
         const notificationsNavElement = document.getElementById("notificationsNavBar");
-        notificationsNavElement.addEventListener("click", function () {
-            window.location.href = "/view-notifications";
-        });
+        if (notificationsNavElement) {
+            notificationsNavElement.addEventListener("click", function () {
+                window.location.href = "/view-notifications";
+            });
+        }
 
         // Accessing profile sub navbar URL from navbar
         const dropdown = document.querySelector(".profile-options");

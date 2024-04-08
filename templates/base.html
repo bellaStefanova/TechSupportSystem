@@ -52,7 +52,6 @@
                     </div>
                 {% endif %}
                 {% if user.is_staff and not user.is_superuser %}
-                <!-- TO FIX THIS PART -->
                 <div class="my-team-nav-bar element-nav-bar" id="myTeamNavBar">
                     <p class="my-team-dynamic-dropdown-activate">My team</p>
                     <div class="my-team-options">
@@ -65,7 +64,6 @@
                     </div>
                 </div>
                 {% endif %}
-                <!-- END TO FIX THIS PART -->
                 {% if not user.is_superuser %}
                 
                     <div class="home-nav-bar element-nav-bar" id="homeNavBar">

@@ -90,6 +90,7 @@
 }
 
 @media screen and (max-width: 1150px) {
+
     .notification-container {
         width: 100%;
         margin: 1em 0;
@@ -97,10 +98,12 @@
 }
 
 @media screen and (max-width: 900px) {
+
     .request-notifications,
     .user-notifications {
         padding: 2em 4em;
     }
+
     .notifications-page .notifications-page-heading {
         font-size: 2em;
         padding: 1em 2em;
@@ -108,16 +111,19 @@
 }
 
 @media screen and (max-width: 800px) {
+
     .request-notifications,
     .user-notifications {
         padding: 2em;
     }
+
     .notifications-page .notifications-page-heading {
         padding: 1em;
     }
 }
 
 @media screen and (max-width: 500px) {
+    
     .notifications-page {
         flex-direction: column;
     }

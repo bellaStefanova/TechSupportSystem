@@ -4,12 +4,10 @@
     <div class="delete-role-pane form-container">
         <form action="{% url 'delete-role' pk=role.pk %}" method="post">
             {% csrf_token %}
-            <!-- <div class="form-fields"> -->
                 <div class="delete-confirm">
                     <h1>Confirm delete</h1>
                     <p>Are you sure you want to delete the position? You won't be able to revert this.</p>
                 </div>
-            <!-- </div> -->
             <div class="form-buttons">
                 <a href="{% url 'roles' %}" class="cancel">Cancel</a>
                 <button class="submit">Delete</button>

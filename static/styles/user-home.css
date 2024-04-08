@@ -129,7 +129,7 @@
     flex-grow: 1;
 }
 
-.search-filter-header .per-period div{
+.search-filter-header .per-period div {
     cursor: pointer;
     color: #7b7b7b;
     background-color: #dbdbdb;
@@ -170,20 +170,20 @@
     overflow: hidden;
 }
 
-.tickets-table table tbody .table-row td.table-data-status-cell{
+.tickets-table table tbody .table-row td.table-data-status-cell {
     width: 12%;
     text-align: center;
     border-radius: 5px;
     color: white;
 }
 
-.tickets-table table tbody .table-row td.table-data-status-cell .table-data-status{
+.tickets-table table tbody .table-row td.table-data-status-cell .table-data-status {
     padding: 0.5em;
     border-radius: 3px;
     min-width: 62px;
 }
 
-.tickets-table table thead tr th.table-header-status{
+.tickets-table table thead tr th.table-header-status {
     width: 12%;
     text-align: center;
 }
@@ -197,12 +197,12 @@
 .tickets-table table thead tr th.table-header-created-on,
 .tickets-table table tbody .table-row td.table-data-created-on,
 .tickets-table table thead tr th.table-header-updated-on,
-.tickets-table table tbody .table-row td.table-data-updated-on{
+.tickets-table table tbody .table-row td.table-data-updated-on {
     width: 17%;
 }
 
 .tickets-table table thead tr th.table-header-hidden,
-.tickets-table table tbody .table-row td.table-icons{
+.tickets-table table tbody .table-row td.table-icons {
     width: 4%;
     padding: 0 1em 0 1.5em;
 }
@@ -212,11 +212,11 @@
     height: 15px;
 }
 
-.tickets-table table tbody .table-row td.table-icons a img:hover  {
+.tickets-table table tbody .table-row td.table-icons a img:hover {
     cursor: pointer;
 }
 
-.tickets-table table tbody{
+.tickets-table table tbody {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -251,6 +251,7 @@
     margin: 0.5em 15%;
     padding: 1.5em 0;
 }
+
 .no-requests-found {
     font-size: 2em;
     color: #757575;
@@ -275,6 +276,7 @@
 }
 
 @media screen and (max-width: 900px) {
+
     .user-homepage-main {
         flex-direction: row;
         justify-content:space-around;
@@ -301,14 +303,17 @@
         border-right: none;
         justify-content: space-between;
     }
+
     .search-filter-header .per-status .initial-option-container {
         padding: 0;
     }
+    
     .search-filter-header .per-details {
         width: 100%;
         margin-top: 1em;
     }
-    .search-filter-header .per-details img{
+
+    .search-filter-header .per-details img {
         display: none;
     }
 
@@ -319,32 +324,32 @@
         align-items: start;
     }
 
-    .search-filter-header .per-period .perPeriodSelector{
+    .search-filter-header .per-period .perPeriodSelector {
         width: 82px;
         text-align: center;
     }
 
     .tickets-table table thead {
         margin: 0.5em 0.5em;
-        
     }
 
     .tickets-table table thead tr {
         padding: 1em 0;
         box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
     }
+
     .tickets-table table tbody {
         max-height: 65vh;
     }
+
     .tickets-table table tbody .table-row {
         margin: 0.5em 0.5em;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
     }
 
     .tickets-table table tbody .table-row td.table-data-subject,
-    .tickets-table table thead tr th.table-header-subject{
+    .tickets-table table thead tr th.table-header-subject {
         width: 41%;
-
     }
 
     .tickets-table table thead tr th.table-header-created-on, 
@@ -356,6 +361,7 @@
 }
 
 @media screen and (max-width: 700px) {
+
     .user-homepage-main .search-filter-header {
         width: 50%;
         justify-content: center;
@@ -368,7 +374,7 @@
     }
 
     .search-filter-header .per-status,
-    .search-filter-header .per-details{
+    .search-filter-header .per-details {
         width: 90%;
     }
 
@@ -380,7 +386,7 @@
         justify-content: space-between;
     }
 
-    .search-filter-header .per-period .perPeriodSelector{
+    .search-filter-header .per-period .perPeriodSelector {
         width: 82px;
         text-align: center;
     }
@@ -391,6 +397,7 @@
 }
 
 @media screen and (max-width: 600px) {
+
     .search-filter-header .per-period {
         width: 100%;
         flex-direction: column;
@@ -405,34 +412,43 @@
 }
 
 @media screen and (max-width: 500px) {
+
     .user-homepage-main .tickets-table-header {
         flex-direction: column;
     }
+
     .user-homepage-main .tickets-table-header h1 {
         margin-bottom: 1em;
     }
+
     .tickets-table table thead tr th.table-header-created-on, 
     .tickets-table table tbody .table-row td.table-data-created-on {
         display: none;
     }
+
     .tickets-table table tbody .table-row td.table-data-subject, 
     .tickets-table table thead tr th.table-header-subject {
         width: 65%;
     }
+
     .tickets-table table tbody .table-row td.table-data-status-cell, 
     .tickets-table table thead tr th.table-header-status {
         width: 26%;
     }
+
     .tickets-table table tbody {
         overflow: visible;
         max-height: none;
     }
+
     .tickets-table table tbody tr td {
         padding: 1em 0 1em 1em;
     }
+
     .tickets-table table thead tr th {
         margin-left: 1em;
     }
+    
     .tickets-table table {
         margin-bottom: 1em;
     }

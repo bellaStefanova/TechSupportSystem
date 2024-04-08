@@ -1,5 +1,4 @@
 if (window.location.pathname === '/view-notifications/') {
-    // console.log('View notifications page');
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -76,7 +75,6 @@ if (window.location.pathname === '/view-notifications/') {
             });
         });
         readAllNotificationsButton.addEventListener('click', function() {
-            console.log('Read all notifications');
             fetch('/mark-all-notifications-as-read/', {
                 method: 'POST',
                 headers: {

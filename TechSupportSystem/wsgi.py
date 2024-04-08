@@ -3,8 +3,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 
-settings_module = "TechSupportSystem.deployment" if 'DBHOST' in os.environ else 'TechSupportSystem.settings'
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TechSupportSystem.settings')
 
 application = get_wsgi_application()

@@ -38,7 +38,6 @@
     opacity: 1;
 }
 
-
 .heading-landing-page h1 {
     padding-top: 1.4em;
     padding-bottom: 0.5em;
@@ -133,6 +132,7 @@
 }
 
 @media screen and (max-width: 800px) {
+
     .initial-header {
         flex-direction: column;
     }
@@ -149,12 +149,13 @@
 }
 
 @media screen and (max-width: 600px) {
+
     .landing-page,
     .about-page,
-    .contacts-page{
+    .contacts-page {
         padding: 0 2em;
-    
     }
+
     .landing-content,
     .about-content,
     .contacts-content {
@@ -163,8 +164,8 @@
 
     .initial-header ul{
         flex-direction: column;
-        
     }
+    
     .initial-header ul li {
         padding: 1em 0;
     }

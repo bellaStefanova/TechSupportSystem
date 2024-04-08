@@ -23,8 +23,6 @@ class UserProfile(auth_models.AbstractUser):
         return self.profile.__str__() if hasattr(self, 'profile') else self.username
     
 
-
-
 '''Profile Model related to UserProfile, extenging its information with non-required one'''
 UserModel = get_user_model()
 

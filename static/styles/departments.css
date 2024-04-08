@@ -173,9 +173,11 @@
 }
 
 @media screen and (max-width: 800px) {
+
     .departments-table table tbody tr td {
         padding: 1em 0 1em 1em;
     }
+
     .departments-table table thead tr th {
         margin-left: 1em;
     }
@@ -199,26 +201,32 @@
 }
 
 @media screen and (max-width: 500px) {
+
     .departments-main .departments-table-header {
         flex-direction: column;
     }
+
     .departments-main .departments-table-header h1 {
         margin-bottom: 1em;
     }
+
     .departments-table table thead tr th.table-header-department-location, 
     .departments-table table tbody .table-row td.table-data-department-location,
     .departments-table table thead tr th.table-header-department-manager, 
     .departments-table table tbody .table-row td.table-data-department-manager {
         width: 27%;
     }
+
     .departments-table table thead tr th.table-header-department-name, 
     .departments-table table tbody .table-row td.table-data-department-name {
         width: 29%;
     }
+
     .departments-table table thead tr th.table-header-hidden, 
     .departments-table table tbody .table-row td.table-icons {
         width: 15%;
     }
+
     .departments-table table thead tr th.table-header-department-description, 
     .departments-table table tbody .table-row td.table-data-department-description {
         display: none;
@@ -239,14 +247,17 @@
     .departments-table table tbody .table-row td.table-data-department-location {
         display: none;
     }
+
     .departments-table table thead tr th.table-header-department-manager, 
     .departments-table table tbody .table-row td.table-data-department-manager {
         width: 35%;
     }
+
     .departments-table table thead tr th.table-header-department-name, 
     .departments-table table tbody .table-row td.table-data-department-name {
         width: 40%;
     }
+    
     .departments-table table thead tr th.table-header-hidden, 
     .departments-table table tbody .table-row td.table-icons {
         width: 25%;

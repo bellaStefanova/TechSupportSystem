@@ -196,7 +196,6 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
 
         // Handle table row click to redirect to the specific request details page
         let newTableRows = document.querySelectorAll('.table-row');
-        // console.log(newTableRows);
         newTableRows.forEach(row => {
             row.addEventListener("click", function (event) {
                 var target = event.target.parentNode;
@@ -222,7 +221,6 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
 
 // Function to filter the table rows
 export function filterTableRows(input, selectedOptionValue, originalTableRows, weekRows) {
-// function filterTableRows() {
 
     const searchValue = input.value.toLowerCase();
     let tableRows;
@@ -232,7 +230,6 @@ export function filterTableRows(input, selectedOptionValue, originalTableRows, w
     } else {
         orgTableRows = originalTableRows.slice();
     };
-    console.log(orgTableRows);
     if (selectedOptionValue.textContent === 'All' || selectedOptionValue.textContent === 'Status') {
         if (input.value === '') {
             tableRows = orgTableRows;

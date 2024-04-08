@@ -63,32 +63,31 @@
 .users-table table thead tr th.table-header-user-email,
 .users-table table tbody .table-row td.table-data-user-email {
     width: 25%;
-
 }
 
 .users-table table thead tr th.table-header-user-staff,
 .users-table table tbody .table-row td.table-data-user-staff,
 .users-table table thead tr th.table-header-user-superuser,
-.users-table table tbody .table-row td.table-data-user-superuser{
+.users-table table tbody .table-row td.table-data-user-superuser {
     width: 10%;
 
 }
+
 .users-table table tbody tr td {
     padding: 1em 0 1em 2em;
     text-align: left;
     box-sizing: content-box;
 }
 
-
 .users-table table thead tr th.table-header-hidden,
-.users-table table tbody .table-row td.table-icons{
+.users-table table tbody .table-row td.table-icons {
     width: 10%;
     margin-left: 0.5%;
     padding-left: 0;
 }
 
 .users-table table tbody .table-row td.table-icons .delete-user,
-.users-table table tbody .table-row td.table-icons .edit-user{
+.users-table table tbody .table-row td.table-icons .edit-user {
     margin-right: 0.5em;
     text-decoration: none;
 }
@@ -103,7 +102,7 @@
     height: 15px;
 }
 
-.users-table table tbody{
+.users-table table tbody {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -137,6 +136,7 @@
     margin: 0.5em 15%;
     padding: 1.5em 0;
 }
+
 .no-users-found {
     font-size: 2em;
     color: #757575;
@@ -160,8 +160,11 @@
     line-height: 1.5em;
 }
 
-
 .pagination {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #F9F9F9;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -191,7 +194,6 @@
 .pagination form label,
 .pagination form input {
     color: #757575;
-    /* font-size: 1.1em; */
     margin-right: 0.5em;
 }
 
@@ -201,12 +203,8 @@
 
 .pagination form input[type="number"]::-webkit-inner-spin-button,
 .pagination form input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none; /* Hide the default spinner in WebKit browsers */
-  appearance: none; /* Hide the default spinner in non-WebKit browsers */
-}
-
-.pagination form button {
-    display: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 @media screen and (max-width: 1200px) {
@@ -228,6 +226,7 @@
     .users-table table tbody .table-row td.table-data-user-email {
         display: none;
     }
+
     .users-table table thead tr th.table-header-user-username, 
     .users-table table tbody .table-row td.table-data-user-username, 
     .users-table table thead tr th.table-header-user-role, 
@@ -236,28 +235,40 @@
     .users-table table tbody .table-row td.table-data-user-department {
         width: 23%;
     }
+
     .users-table table thead tr th.table-header-hidden, 
     .users-table table tbody .table-row td.table-icons {
         width: 11%;
     }
 }
 
+@media screen and (max-width: 900px){
+
+    .pagination {
+        position: inherit;
+    }
+}
+
 @media screen and (max-width: 700px) {
+
     .users-table table tbody tr td {
         padding: 1em 0 1em 1em;
     }
+
     .users-table table thead tr th {
         margin-left: 1em;
     }
 }
 
 @media screen and (max-width: 600px) {
+
     .users-table table thead tr th.table-header-user-staff, 
     .users-table table tbody .table-row td.table-data-user-staff, 
     .users-table table thead tr th.table-header-user-superuser, 
     .users-table table tbody .table-row td.table-data-user-superuser {
         display: none;
     }
+
     .users-table table thead tr th.table-header-user-username, 
     .users-table table tbody .table-row td.table-data-user-username, 
     .users-table table thead tr th.table-header-user-role, 
@@ -276,12 +287,15 @@
 }
 
 @media screen and (max-width: 500px) {
+
     .users-main .users-table-header {
         flex-direction: column;
     }
+
     .users-main .users-table-header h1 {
         margin-bottom: 1em;
     }
+
     .users-table table thead tr th.table-header-user-username, 
     .users-table table tbody .table-row td.table-data-user-username, 
     .users-table table thead tr th.table-header-user-department, 
@@ -295,6 +309,7 @@
         margin-left: 0.5%;
         padding-left: 0;
     }
+
     .users-table table thead tr th.table-header-user-role, 
     .users-table table tbody .table-row td.table-data-user-role {
         display: none;
@@ -320,6 +335,7 @@
     .users-table table tbody .table-row td.table-icons {
         width: 25%;
     }
+    
     .users-table table thead tr th.table-header-user-department, 
     .users-table table tbody .table-row td.table-data-user-department {
         display: none;

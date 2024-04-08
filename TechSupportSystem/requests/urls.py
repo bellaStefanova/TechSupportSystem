@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import CreateRequestView, CancelRequestView, DetailsRequestView, TakeRequestView, DashboardView, EditRequestView, MarkRequestDoneView
+from .views import (
+    CreateRequestView, 
+    CancelRequestView, 
+    DetailsRequestView, 
+    TakeRequestView, 
+    DashboardView, 
+    EditRequestView, 
+    MarkRequestDoneView
+)
 
 urlpatterns = (
     (path('create-request/', CreateRequestView.as_view(), name='create-request')),

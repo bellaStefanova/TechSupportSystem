@@ -1,6 +1,8 @@
 from django.db import models
 
+
 class Department(models.Model):
+    
     DEPARTMENT_MAX_LENGTH = 50
     LOCATION_MAX_LENGTH = 50
 
