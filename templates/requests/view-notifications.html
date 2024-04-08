@@ -42,13 +42,15 @@
         {% for notification in user_notifications %}
         <div class="notification-container">
             <div class="unread-notification">
+                {% if notification.user.is_superuser %}
                 <p class="notification-id" notification-id="{{ notification.id }}"
                     user-id="{{ notification.notification.user_submitted_notification.id }}">{{ notification.id }}</p>
+                {% else %}
+                <p class="notification-id" notification-id="{{ notification.id }}"
+                    user-id="myId">{{ notification.id }}</p>
+                {% endif %}
                 <p class="notification-message">{{ notification.notification.message }}</p>
 
-                <!-- <p class="notification-request">Request title: {{ notification.notification.request }}</p>
-                <p class="notification-request-id">Request ID: {{ notification.notification.request.id }}</p>
-                <p class="notification-date">Created on: {{ notification.notification.request.created_at|date:"Y-m-d H:i" }}</p> -->
             </div>
         </div>
         {% endfor %}

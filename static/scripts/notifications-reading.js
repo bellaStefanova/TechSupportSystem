@@ -49,8 +49,10 @@ if (window.location.pathname === '/view-notifications/') {
                         let requestId = child.getAttribute('request-id');
                         if (requestId !== null) {
                             windowLocationHref = "/view-request/" + requestId;
-                        } else if (userId !== null) {
+                        } else if (userId !== null && userId !== 'myId') {
                             windowLocationHref = "/edit-user/" + userId;
+                        } else if (userId === 'myId') {
+                            windowLocationHref = "/profile";
                         }
                                             fetch('/mark-notification-as-read/' + notificationId + '/', {
                                                 method: 'POST',
@@ -93,7 +95,7 @@ if (window.location.pathname === '/view-notifications/') {
                 console.log('Error marking notification as read');
             });
         });
-        // });
+
 
     });
 };
