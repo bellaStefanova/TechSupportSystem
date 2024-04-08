@@ -1,4 +1,3 @@
-
 .users-main {
     width: 100%;
     display: flex;
@@ -104,21 +103,6 @@
     height: 15px;
 }
 
-/* TODO: add tooltip on hovering the delete icon */
-/* .tickets-table table tbody .table-row td.table-icons a img:hover::after {
-    content: "Delete request";
-    position: absolute;
-    background-color: #000;
-    color: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    opacity: 0.7;
-} */
-
 .users-table table tbody{
     display: flex;
     flex-direction: column;
@@ -176,16 +160,6 @@
     line-height: 1.5em;
 }
 
-.cancel {
-    background-color: #757575;
-    color: white;
-    font-size: 1em;
-    text-decoration: none;
-    padding: 1em 3em;
-    border-radius: 5px;
-    margin-right: 2em;
-    margin-top: 1em;
-}
 
 .pagination {
     display: flex;
@@ -212,4 +186,121 @@
     text-decoration: none;
     color: #757575;
     font-size: 1.1em;
+}
+
+@media screen and (max-width: 1200px) {
+    
+    .users-main .users-table-header {
+        width: 80%;
+        margin-bottom: 2em;
+    }
+
+    .users-table table thead tr {
+        padding: 1em 10%;
+    }
+
+    .users-table table tbody .table-row {
+        margin: 0.5em 10%;
+    }
+
+    .users-table table thead tr th.table-header-user-email, 
+    .users-table table tbody .table-row td.table-data-user-email {
+        display: none;
+    }
+    .users-table table thead tr th.table-header-user-username, 
+    .users-table table tbody .table-row td.table-data-user-username, 
+    .users-table table thead tr th.table-header-user-role, 
+    .users-table table tbody .table-row td.table-data-user-role, 
+    .users-table table thead tr th.table-header-user-department, 
+    .users-table table tbody .table-row td.table-data-user-department {
+        width: 23%;
+    }
+    .users-table table thead tr th.table-header-hidden, 
+    .users-table table tbody .table-row td.table-icons {
+        width: 11%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .users-table table tbody tr td {
+        padding: 1em 0 1em 1em;
+    }
+    .users-table table thead tr th {
+        margin-left: 1em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .users-table table thead tr th.table-header-user-staff, 
+    .users-table table tbody .table-row td.table-data-user-staff, 
+    .users-table table thead tr th.table-header-user-superuser, 
+    .users-table table tbody .table-row td.table-data-user-superuser {
+        display: none;
+    }
+    .users-table table thead tr th.table-header-user-username, 
+    .users-table table tbody .table-row td.table-data-user-username, 
+    .users-table table thead tr th.table-header-user-role, 
+    .users-table table tbody .table-row td.table-data-user-role, 
+    .users-table table thead tr th.table-header-user-department, 
+    .users-table table tbody .table-row td.table-data-user-department {
+        width: 29%;
+    }
+
+    .users-table table thead tr th.table-header-hidden, 
+    .users-table table tbody .table-row td.table-icons {
+        width: 13%;
+        margin-left: 0.5%;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .users-main .users-table-header {
+        flex-direction: column;
+    }
+    .users-main .users-table-header h1 {
+        margin-bottom: 1em;
+    }
+    .users-table table thead tr th.table-header-user-username, 
+    .users-table table tbody .table-row td.table-data-user-username, 
+    .users-table table thead tr th.table-header-user-department, 
+    .users-table table tbody .table-row td.table-data-user-department {
+        width: 41%;
+    }
+
+    .users-table table thead tr th.table-header-hidden, 
+    .users-table table tbody .table-row td.table-icons {
+        width: 18%;
+        margin-left: 0.5%;
+        padding-left: 0;
+    }
+    .users-table table thead tr th.table-header-user-role, 
+    .users-table table tbody .table-row td.table-data-user-role {
+        display: none;
+    }
+
+    .roles-table table thead tr {
+        padding: 1em 5%;
+    }
+
+    .roles-table table tbody .table-row {
+        margin: 0.5em 5%;
+    }
+}
+
+@media screen and (max-width: 340px) {
+
+    .users-table table thead tr th.table-header-user-username, 
+    .users-table table tbody .table-row td.table-data-user-username {
+        width: 75%;
+    }
+
+    .users-table table thead tr th.table-header-hidden, 
+    .users-table table tbody .table-row td.table-icons {
+        width: 25%;
+    }
+    .users-table table thead tr th.table-header-user-department, 
+    .users-table table tbody .table-row td.table-data-user-department {
+        display: none;
+    }
 }

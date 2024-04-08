@@ -74,7 +74,6 @@ header .navigation-bar .my-team-options .my-team-option {
     background-color: #122642;
     max-height: 120px;
     transition: all 0.4s;
-
 }
 
 
@@ -122,4 +121,9 @@ header .navigation-bar .my-team-options .my-team-option:hover header .navigation
     .navigation-bar div {
         justify-content: center;
     }
+
+    .element-nav-bar {
+        margin: 0;
+    }
 }
+

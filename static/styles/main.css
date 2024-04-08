@@ -1,5 +1,4 @@
 /* formatting main content */
-
 .logo {
     width: 80px;
     height: 40px;
@@ -10,7 +9,6 @@
 .initial-logo {
     width: 120px;
     height: 60px;
-    /* margin-left: 1em; */
     margin-top: 2em;
     position: relative;
 }
@@ -38,7 +36,6 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
 }
 
 .request-title span{
@@ -58,9 +55,9 @@
 
 .request-page .request-details,
 .profile-details-page .profile-details {
-    margin-left: 10em;
+    margin-left: 9em;
     width: 60%;
-    margin-right: 8%;
+    margin-right: 7.5%;
     padding: 2em;
     background-color: white;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
@@ -90,6 +87,8 @@
     text-align: left;
     border-left: 1px solid #eaeaea;
     height: auto;
+    display: inline-block;
+
 }
 
 .request-page .request-actions,
@@ -217,4 +216,65 @@
 
 .error-text {
     font-size: 2em;
+}
+
+@media screen and (max-width: 800px) {
+
+    .request-page,
+    .profile-details-page {
+        flex-direction: column;
+        align-items: center;
+    }
+    .request-page .request-page-heading, 
+    .profile-details-page .profile-details-page-heading {
+        padding: 1em 1.3em;
+    }
+
+    .request-page .request-details,
+    .profile-details-page .profile-details {
+        margin: 0;
+        width: 90%;
+    }   
+    
+    .request-page .request-actions,
+    .profile-details-page .profile-actions {
+        margin: 3em 0;
+        min-width: 115px;
+        align-items: center;
+    }
+    .request-page .request-actions h2,
+    .profile-details-page .profile-actions h2 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .request-page .request-page-heading, 
+    .profile-details-page .profile-details-page-heading {
+        font-size: 2em;
+    }
+
+    .request-page .request-details p, 
+    .profile-details-page .profile-details p {
+        font-size: 1.1em;
+    }
+
+    .error-heading {
+        font-size: 3em;
+        padding: 1em;
+    }
+    .error-text {
+        font-size: 1.5em;
+        padding: 0 1em;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .request-page .request-details p span,
+    .profile-details p span {
+        padding: 0.5em 0 0 0.5em;
+        max-width: 67%;
+        overflow: hidden;
+    }
 }

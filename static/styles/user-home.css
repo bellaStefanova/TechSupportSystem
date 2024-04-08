@@ -1,6 +1,4 @@
-/* User home page */
 
-/* search bar for filtering requests */
 .user-homepage-main {
     width: 100%;
     display: flex;
@@ -138,7 +136,6 @@
     padding: 0.5em 2em;
 }
 
-/* requests table */
 .tickets-table,
 .tickets-table table {
     display: flex;
@@ -164,12 +161,12 @@
 
 .tickets-table table thead tr th.table-header-request-id,
 .tickets-table table tbody .table-row td.table-data-request-id{
-    width: 12%;
+    width: 5%;
 }
 
 .tickets-table table thead tr th.table-header-subject,
 .tickets-table table tbody .table-row td.table-data-subject{
-    width: 40%;
+    width: 45%;
     overflow: hidden;
 }
 
@@ -183,6 +180,7 @@
 .tickets-table table tbody .table-row td.table-data-status-cell .table-data-status{
     padding: 0.5em;
     border-radius: 3px;
+    min-width: 62px;
 }
 
 .tickets-table table thead tr th.table-header-status{
@@ -200,12 +198,13 @@
 .tickets-table table tbody .table-row td.table-data-created-on,
 .tickets-table table thead tr th.table-header-updated-on,
 .tickets-table table tbody .table-row td.table-data-updated-on{
-    width: 16%;
+    width: 17%;
 }
 
 .tickets-table table thead tr th.table-header-hidden,
 .tickets-table table tbody .table-row td.table-icons{
     width: 4%;
+    padding: 0 1em 0 1.5em;
 }
 
 .tickets-table table tbody .table-row td.table-icons a img {
@@ -216,22 +215,6 @@
 .tickets-table table tbody .table-row td.table-icons a img:hover  {
     cursor: pointer;
 }
-/* TODO: add tooltip on hovering the delete icon */
-/* .tickets-table table tbody .table-row td.table-icons a img:hover::after {
-    content: "Delete request";
-    position: absolute;
-    background-color: #000;
-    color: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-    opacity: 0.7;
-    
-} */
-
 
 .tickets-table table tbody{
     display: flex;
@@ -291,13 +274,166 @@
     line-height: 1.5em;
 }
 
-.cancel {
-    background-color: #757575;
-    color: white;
-    font-size: 1em;
-    text-decoration: none;
-    padding: 1em 3em;
-    border-radius: 5px;
-    margin-right: 2em;
-    margin-top: 1em;
+@media screen and (max-width: 900px) {
+    .user-homepage-main {
+        flex-direction: row;
+        justify-content:space-around;
+        align-items: start;
+    } 
+    
+    .user-homepage-main .tickets-table-header {
+        width: 90%;
+        margin-bottom: 2em;
+    }
+    
+    .user-homepage-main .search-filter-header {
+        width: 20%;
+        flex-direction: column;
+        
+    }
+
+    .user-homepage-main .tickets-table {
+        width: 70%;
+    }
+
+    .search-filter-header .per-status {
+        width: 100%;
+        border-right: none;
+        justify-content: space-between;
+    }
+    .search-filter-header .per-status .initial-option-container {
+        padding: 0;
+    }
+    .search-filter-header .per-details {
+        width: 100%;
+        margin-top: 1em;
+    }
+    .search-filter-header .per-details img{
+        display: none;
+    }
+
+    .search-filter-header .per-period {
+        width: 100%;
+        flex-direction: column;
+        margin: 2em 0;
+        align-items: start;
+    }
+
+    .search-filter-header .per-period .perPeriodSelector{
+        width: 82px;
+        text-align: center;
+    }
+
+    .tickets-table table thead {
+        margin: 0.5em 0.5em;
+        
+    }
+
+    .tickets-table table thead tr {
+        padding: 1em 0;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+    }
+    .tickets-table table tbody {
+        max-height: 65vh;
+    }
+    .tickets-table table tbody .table-row {
+        margin: 0.5em 0.5em;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .tickets-table table tbody .table-row td.table-data-subject,
+    .tickets-table table thead tr th.table-header-subject{
+        width: 41%;
+
+    }
+
+    .tickets-table table thead tr th.table-header-created-on, 
+    .tickets-table table tbody .table-row td.table-data-created-on, 
+    .tickets-table table thead tr th.table-header-updated-on, 
+    .tickets-table table tbody .table-row td.table-data-updated-on {
+        width: 19%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .user-homepage-main .search-filter-header {
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        padding: 1em 0.5em;
+    }
+
+    .user-homepage-main .tickets-table {
+        width: 90%;
+    }
+
+    .search-filter-header .per-status,
+    .search-filter-header .per-details{
+        width: 90%;
+    }
+
+    .search-filter-header .per-period {
+        width: 90%;
+        flex-direction: row;
+        margin: 2em 0;
+        align-items: start;
+        justify-content: space-between;
+    }
+
+    .search-filter-header .per-period .perPeriodSelector{
+        width: 82px;
+        text-align: center;
+    }
+
+    .search-filter-header .per-details input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .search-filter-header .per-period {
+        width: 100%;
+        flex-direction: column;
+        margin: 2em 0;
+        align-items: center;
+    }
+
+    .tickets-table table thead tr th.table-header-updated-on, 
+    .tickets-table table tbody .table-row td.table-data-updated-on {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .user-homepage-main .tickets-table-header {
+        flex-direction: column;
+    }
+    .user-homepage-main .tickets-table-header h1 {
+        margin-bottom: 1em;
+    }
+    .tickets-table table thead tr th.table-header-created-on, 
+    .tickets-table table tbody .table-row td.table-data-created-on {
+        display: none;
+    }
+    .tickets-table table tbody .table-row td.table-data-subject, 
+    .tickets-table table thead tr th.table-header-subject {
+        width: 65%;
+    }
+    .tickets-table table tbody .table-row td.table-data-status-cell, 
+    .tickets-table table thead tr th.table-header-status {
+        width: 26%;
+    }
+    .tickets-table table tbody {
+        overflow: visible;
+        max-height: none;
+    }
+    .tickets-table table tbody tr td {
+        padding: 1em 0 1em 1em;
+    }
+    .tickets-table table thead tr th {
+        margin-left: 1em;
+    }
+    .tickets-table table {
+        margin-bottom: 1em;
+    }
 }

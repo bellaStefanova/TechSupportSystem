@@ -1,11 +1,10 @@
-/* dashboard header format */
-
 .dashboard-header {
-    width: 100%;
+    width: 40%;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 1em;
+    justify-content: space-around;
+    padding-left: 1em;
 }
 
 .header-container {
@@ -13,8 +12,7 @@
     border-radius: 3px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     padding: 1em;
-    width: 31%;
-   
+    width: 90%;
 }
 
 .header-container a {
@@ -37,7 +35,6 @@
     color: black;
     font-weight: bold;
     width: 50%;
-    /* display: inline-block; */
 }
 
 .header-container img {
@@ -49,7 +46,6 @@
 .header-container .header-image {
     text-align: right;
     width: 35%;
-    /* display: inline; */
 }
 
 /* tickets part */
@@ -61,35 +57,33 @@
 }
 
 .ticket-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 23%;
     margin-bottom: 2em;
+    padding: 1em 0;
     border-radius: 3px;
 }
 
-.ticket-container a,
 .ticket-container div {
-/* .ticket-container p,
-.ticket-container h1 { */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
     text-decoration: none;
     color: white;
     text-align: center;
     cursor: pointer;
-    /* justify-content: space-around; */
 }
 
-.ticket-container a h1,
 .ticket-container div h1 {
     font-size: 2em;
-    padding-top: 0.3em;
     color: white;
     text-align: center;
 }
 
-.ticket-container a p,
-.ticket-container div p
- {
-    font-size: 0.9em;
-    padding: 0.5em 0 1em 0;
+.ticket-container div p {
+    font-size: 1em;
     color: white;
     text-align: center;
 }
@@ -116,7 +110,7 @@
 
 .ticket-diagram {
     background-color: white;
-    margin: 0.5em 0 2em 0;
+    margin: 2em 0 2em 0;
     border-radius: 3px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     padding: 1em;
@@ -150,8 +144,8 @@
 }
 
 .ticket-priority,
-.ticket-per-product,
 .ticket-per-department {
+    min-height: fit-content;
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -159,14 +153,25 @@
     padding-bottom: 2em;
 }
 
-.product-diagram,
+.lower-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.ticket-per-department {
+    width: 55%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
 .department-diagram {
-    padding-top: 4em;
     display: flex;
     width: 100%;
 }
 
-.product-diagram canvas,
 .department-diagram canvas {
     flex-grow: 1;
     flex-shrink: 0;
@@ -176,14 +181,13 @@
 
 /* Side pane with last 10 tickets */
 .dashboard-last-tickets-pane {
-    max-height: 920px;
+    max-height: 750px;
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
     padding: 1em;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     overflow-y: scroll;
 }
 
@@ -245,11 +249,6 @@
     padding-bottom: 1em;
 }
 
-/* .ticket-side-pane .ticket-title {
-    overflow:;
-} */
-
-
 @media screen and (max-width: 1000px) {
     .dashboard-last-tickets-pane {
         display: none;
@@ -257,5 +256,48 @@
 
     .dashboard-body {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .dashboard-header {
+        justify-content: space-between;
+        padding-left: 0;
+    }
+    .header-container img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .tickets {
+        flex-direction: column;
+    }
+
+    .lower-container {
+        flex-direction: column-reverse;
+        margin-top: 2em;
+        gap: 4em;
+    }
+
+    .ticket-container,
+    .ticket-diagram,
+    .dashboard-header { 
+        width: 100%;
+    }
+
+    .dashboard-header {
+        gap: 2em;
+    }
+
+    .header-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .ticket-per-department{
+        display: none;
     }
 }

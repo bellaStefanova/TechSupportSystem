@@ -109,7 +109,7 @@ class MarkRequestDoneView(VisibleToSuperUserMixin, View):
 
 class DashboardView(GetNotificationsMixin, VisibleToSuperUserMixin, views.TemplateView):
     
-    template_name = 'requests/dashboard2.html'
+    template_name = 'requests/dashboard.html'
     
     def get_context_data(self, **kwargs):
         all_requests = Request.objects.all().order_by('-created_at')

@@ -16,7 +16,7 @@
         {% if user.is_superuser %}
         <p class="request-user">Created by: <span>{{ request.user }}</span></p>
         {% endif %}
-        <p class="request-worked-by">Working on this request: <span>{{ request.worked_on_by|default:'n/a' }}</span></p>
+        <p class="request-worked-by">Assigned: <span>{{ request.worked_on_by|default:'n/a' }}</span></p>
     </div>
     <div class="request-actions">
         <h2>Request actions</h2>

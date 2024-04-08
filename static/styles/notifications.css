@@ -1,10 +1,8 @@
 .notifications-page {
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
     align-items: start;
     justify-content: center;
-    /* padding: 3em 5em; */
     width: 100%;
 }
 
@@ -12,7 +10,7 @@
     color: #757575;
     font-size: 2.5em;
     font-weight: normal;
-    padding: 1em 4em;
+    padding: 1em 3em;
     border-bottom: 1px solid grey;
     width: 100%;
     margin-bottom: 1em;
@@ -20,13 +18,14 @@
 
 .request-notifications,
 .user-notifications {
+    min-height: 100vh;
     width: 50%;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     flex-wrap: wrap;
     padding: 2em 8em;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start
 }
 
 .request-notifications {
@@ -35,30 +34,26 @@
 
 .request-notifications h3,
 .user-notifications h3 {
+    width: 100%;
     color: #757575;
     font-size: 1.5em;
     font-weight: normal;
-    /* padding: 1em 4em; */
-    /* border-bottom: 1px solid grey; */
-    width: 50%;
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
 .read-all-notifications-button {
+    margin-left: 0;
+    min-width: 95px;
+    margin-bottom: 1em;
     background-color: #1D3B65;
     color: white;
     text-align: center;
     width: 25%;
     font-size: 1em;
     cursor: pointer;
-
     padding: 1em 1.4em;
     border-radius: 5px;
-    margin-left: 8em;
-    /* margin-bottom: 1em; */
-    /* margin-left: 10em; */
-
 }
 
 .notification-container {
@@ -94,3 +89,53 @@
     text-align: center;
 }
 
+@media screen and (max-width: 1150px) {
+    .notification-container {
+        width: 100%;
+        margin: 1em 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .request-notifications,
+    .user-notifications {
+        padding: 2em 4em;
+    }
+    .notifications-page .notifications-page-heading {
+        font-size: 2em;
+        padding: 1em 2em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .request-notifications,
+    .user-notifications {
+        padding: 2em;
+    }
+    .notifications-page .notifications-page-heading {
+        padding: 1em;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .notifications-page {
+        flex-direction: column;
+    }
+
+    .notifications-page .notifications-page-heading {
+        font-size: 2em;
+        margin-bottom: 0;
+    }
+
+    .request-notifications,
+    .user-notifications {
+        width: 100%;
+        border: none;
+        min-height: auto;
+        border-bottom: 1px solid grey;
+    }
+
+    .request-notifications {
+        border-bottom: 1px solid grey;
+    }
+}

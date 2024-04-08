@@ -131,3 +131,41 @@
     color: black;
     opacity: 1;
 }
+
+@media screen and (max-width: 800px) {
+    .initial-header {
+        flex-direction: column;
+    }
+
+    .initial-header ul {
+        width: 100%;
+        justify-content: space-around;
+        padding-top: 2em;
+    }
+
+    .landing-content {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .landing-page,
+    .about-page,
+    .contacts-page{
+        padding: 0 2em;
+    
+    }
+    .landing-content,
+    .about-content,
+    .contacts-content {
+        width: 90%;
+    }
+
+    .initial-header ul{
+        flex-direction: column;
+        
+    }
+    .initial-header ul li {
+        padding: 1em 0;
+    }
+}

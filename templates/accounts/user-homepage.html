@@ -22,7 +22,7 @@
         </div>
         <div class="per-details">
             <img src="{% static '/images/look-for.jpg' %}" alt="">
-            <input type="text" name="details" id="perDetailsInput" placeholder="Search by Request ID or subject">
+            <input type="text" name="details" id="perDetailsInput" placeholder="Search by ID/subject">
         </div>
         <div class="per-period">
             <div class="perPeriodSelector" id="weekSelector">Week</div>
@@ -34,7 +34,7 @@
         <table>
             <thead>
                 <tr>
-                    <th class="table-header-request-id">Request ID</th>
+                    <th class="table-header-request-id">ID</th>
                     <th class="table-header-subject">Subject</th>
                     <th class="table-header-status">Status</th>
                     <th class="table-header-created-on">Created on</th>
@@ -51,8 +51,8 @@
                     <td class="table-data-status-cell">
                         <div class="table-data-status">{{request.status}}</div>
                     </td>
-                    <td class="table-data-created-on">{{request.created_at|date:"Y-m-d H:i"}}</td>
-                    <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d H:i"}}</td>
+                    <td class="table-data-created-on">{{request.created_at|date:"Y-m-d"}}</td>
+                    <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d"}}</td>
                     <td class="table-icons">
                         <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
                             <img src="{% static '/images/delete.jpg' %}" alt="">

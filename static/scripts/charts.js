@@ -13,7 +13,7 @@ if (window.location.pathname === '/dashboard/') {
         "#279127",
       ];
 
-      let stx = document.getElementById('statusDiagram').getContext('2d'); // node
+      let stx = document.getElementById('statusDiagram').getContext('2d');
 
       let statusDiagram = new Chart(stx, {
         type: "doughnut",
@@ -53,7 +53,7 @@ if (window.location.pathname === '/dashboard/') {
         "#E6E6E6",
       ];
 
-      let ptx = document.getElementById('priorityDiagram').getContext('2d'); // node
+      let ptx = document.getElementById('priorityDiagram').getContext('2d');
 
       let priorityDiagram = new Chart(ptx, {
         type: "pie",
@@ -73,65 +73,6 @@ if (window.location.pathname === '/dashboard/') {
           maintainAspectRatio: true,
           aspectRatio: 1,
           responsive: true,
-        }
-      });
-
-      const prValues = ["Product1", "Product2", "Product3", "Product4"];
-      const prData = [[5, null, null, null], [null, 10, null, null], [null, null, 35, null], [null, null, null, 50]];
-      const prColors = [
-        "#323232",
-        "#777777",
-        "#A2A2A2",
-        "#E6E6E6",
-      ];
-
-      let prtx = document.getElementById('productDiagram').getContext('2d'); // node
-
-      let productDiagram = new Chart(prtx, {
-        type: "bar",
-        data: {
-          labels: prValues,
-          datasets: [{
-            backgroundColor: prColors[0],
-            label: prValues[0],
-            data: prData[0],
-          }, {
-            backgroundColor: prColors[1],
-            label: prValues[1],
-            data: prData[1],
-          }, {
-            backgroundColor: prColors[2],
-            label: prValues[2],
-            data: prData[2],
-          }, {
-            backgroundColor: prColors[3],
-            label: prValues[3],
-            data: prData[3],
-          }]
-        },
-        options: {
-          indexAxis: 'x',
-          skipNull: true,
-          maintainAspectRatio: true,
-          responsive: true,
-          plugins: {
-            legend: {
-              display: false,
-              position: 'top', // Adjust legend position as needed
-            },
-          },
-          scales: {
-            x: {
-              grid: {
-                display: false,
-              }
-            },
-            y: {
-              grid: {
-                display: false,
-              }
-            }
-          }
         }
       });
       
@@ -155,7 +96,7 @@ if (window.location.pathname === '/dashboard/') {
         );
       }
 
-      let dtx = document.getElementById('departmentDiagram').getContext('2d'); // node
+      let dtx = document.getElementById('departmentDiagram').getContext('2d');
 
       let departmentDiagram = new Chart(dtx, {
         type: "bar",
@@ -171,7 +112,7 @@ if (window.location.pathname === '/dashboard/') {
           plugins: {
             legend: {
               display: false,
-              position: 'top', // Adjust legend position as needed
+              position: 'top',
             },
           },
           scales: {

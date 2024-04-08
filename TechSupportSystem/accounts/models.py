@@ -19,6 +19,9 @@ class UserProfile(auth_models.AbstractUser):
         default=False,
     )
     
+    def __str__(self):
+        return self.profile.__str__() if hasattr(self, 'profile') else self.username
+    
 
 
 

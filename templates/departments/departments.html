@@ -1,42 +1,19 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- {{ department_list }} -->
 
 <div class="departments-main">
     <div class="departments-table-header">
         <h1>Departments</h1>
-        <a href="{% url 'create-department' %}">Create new department</a>
+        <a href="{% url 'create-department' %}">Create department</a>
     </div>
-    <!-- <div class="search-filter-header">
-        <div class="per-status">
-            <div class="initial-option-container">
-                <p class="initial-option">Status</p>
-                <img src="{% static '/images/arrow-down.jpg' %}">
-            </div>
-            <div class="filter-per-status-options">
-                <div class="option">All</div>
-                <div class="option">Waiting</div>
-                <div class="option">Assigned</div>
-                <div class="option">Resolved</div>
-            </div>
-        </div>
-        <div class="per-details">
-            <img src="{% static '/images/look-for.jpg' %}" alt="">
-            <input type="text" name="details" id="perDetailsInput" placeholder="Search by Request ID or subject">
-        </div>
-        <div class="per-period">
-            <a href="#" class="perPeriodSelector">Week</a>
-            <a href="#" class="perPeriodSelector">Month</a>
-            <a href="#" class="perPeriodSelector">Year</a>
-        </div>
-    </div> -->
+
     <div class="departments-table">
         <table>
             <thead>
                 <tr>
                     <th class="table-header-department-name">Department</th>
-                    <th class="table-header-department-description">Short description</th>
+                    <th class="table-header-department-description">Description</th>
                     <th class="table-header-department-manager">Manager</th>
                     <th class="table-header-department-location">Location</th>
                     <th class="table-header-hidden"></th>
@@ -47,7 +24,7 @@
                     <tr class="table-row">
                         <td class="table-data-department-name" data-id="{{department.id}}">{{ department.name }}</td>
                         <td class="table-data-department-description">{{ department.description }}</td>
-                        <td class="table-data-department-manager">{{ department.manager }}</td>
+                        <td class="table-data-department-manager">{{ department.manager|default:'-' }}</td>
                         <td class="table-data-department-location">{{ department.location }}</td>
                         <td class="table-icons">
                             <a class="edit-department" href="{% url 'edit-department' pk=department.pk %}">
