@@ -38,6 +38,7 @@ header .navigation-bar .element-nav-bar {
     text-decoration: none;
     cursor: pointer;
     padding: 1.25em 2em;
+    position: relative;
 }
 
 header .navigation-bar div a {
@@ -59,7 +60,8 @@ header .navigation-bar .my-team-options {
     position: absolute;
     top: 2.45em;
     right: 0;
-    width: 26%;
+    width: auto;
+    min-width: 155px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     background-color: transparent;
@@ -124,6 +126,7 @@ header .navigation-bar .my-team-options .my-team-option:hover header .navigation
 
     .element-nav-bar {
         margin: 0;
+        min-width: 155px;
     }
 }
 

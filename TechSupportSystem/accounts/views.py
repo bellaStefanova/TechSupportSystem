@@ -133,7 +133,8 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     def get_form_class(self):
         if not self.request.user.is_superuser:
             return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
-        return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff', 'department'))
+        print('test')
+        return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff', 'department', 'role'))
     
     def get_form(self, form_class=None):
         if self.request.user.is_superuser and not hasattr(self.request.user, 'profile'):

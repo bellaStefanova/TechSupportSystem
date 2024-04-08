@@ -11,7 +11,7 @@
         <p class="user-first-name">First Name: <span>{{ user.profile.first_name }}</span></p>
         <p class="user-last-name">Last Name: <span>{{ user.profile.last_name }}</span></p>
         <p class="user-role">Position: <span>{{ user.profile.role|default:'Not specified' }}</span></p>
-        <p class="user-department">Department: <span>{{ user.department }}</span></p>
+        <p class="user-department">Department: <span>{{ user.department|default:'Not specified' }}</span></p>
         <p class="user-level">Level: <span>
             {% if user.is_superuser %}
                 Superuser
