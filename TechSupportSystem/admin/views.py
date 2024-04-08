@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import get_user_model
@@ -21,7 +22,6 @@ class ListRequestsView(GetNotificationsMixin, VisibleToStaffMixin, views.ListVie
     
 
 class ListUsersView(GetNotificationsMixin, VisibleToStaffMixin, views.ListView):
-    # queryset = UserModel.objects.all()
     model = UserModel
     template_name = 'accounts/users.html'
     paginate_by = 10
@@ -45,11 +45,27 @@ class EditUserView(GetNotificationsMixin, VisibleToSuperUserMixin, views.UpdateV
     template_name = 'accounts/user-edit.html'
     
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.save()
+        was_manager = False
+        if form.instance.profile.role == form.instance.department.management_role:
+            was_manager = True
+        user = form.save()
+        print('Saving first time')
         user.profile.last_updated_by = self.request.user
         user.profile.save()
-        return super().form_valid(form)
+        print('Saving second time')
+        # user.save()
+        print(form.instance)
+        if form.instance.profile.role == form.instance.department.management_role and not form.instance.department.manager:
+            form.instance.department.manager = form.instance
+            form.instance.department.save()
+        if was_manager and form.instance.profile.role != form.instance.department.management_role:
+            form.instance.department.manager = None
+            form.instance.department.save()
+            form.instance.is_staff = False
+            form.instance.save()
+            
+        return HttpResponseRedirect(self.get_success_url())
+
 
     def get_success_url(self) -> str:
         return reverse_lazy('users')

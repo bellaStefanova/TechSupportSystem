@@ -1,6 +1,38 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Tech Support</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/styles/styles.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.0/chart.js"></script>
+    <script src="{% static '/scripts/profile-navbar-dynamic-menu.js' %}"></script>
+    <script src="{% static '/scripts/user-homepage-actions.js' %}" type="module"></script>
+    <script src="{% static '/scripts/notifications-reading.js' %}"></script>
+    <script src="{% static '/scripts/take-request.js' %}"></script>
+    <script src="{% static '/scripts/charts.js' %}"></script>
+    <script src="{% static '/scripts/dashboard.js' %}" type="module"></script>
+
+
+</head>
+
+<body>
+    <header class="nav">
+        <a href="{% url 'index' %}">
+            <img class="logo" src="{% static '/images/logo1.jpg' %}" alt="">
+        </a>
+    </header>
     <h1 class="error-heading">Error!</h1>
     <p class="error-text">The page you are looking for is not existing.</p>
-{% endblock %}
+
+</body>
+
+
+
+</html>

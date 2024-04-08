@@ -34,6 +34,7 @@ class EditProfileForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['department'].required = True
         
         if self.instance and self.instance.profile:
             self.fields['first_name'].initial = self.instance.profile.first_name
@@ -41,8 +42,6 @@ class EditProfileForm(forms.ModelForm):
             self.fields['role'].initial = self.instance.profile.role
             if 'is_staff' in self.fields:
                 self.fields['is_staff'].help_text = ''
-            # self.fields['is_staff'].help_text = ''
-            # self.fields['is_staff'].help_text = None
             
     def save(self, commit=True):
         user = super(EditProfileForm, self).save(commit=False)

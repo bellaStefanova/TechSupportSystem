@@ -25,7 +25,7 @@
                         <td class="table-data-department-name" data-id="{{department.id}}">{{ department.name }}</td>
                         <td class="table-data-department-description">{{ department.description }}</td>
                         <td class="table-data-department-manager">{{ department.manager|default:'-' }}</td>
-                        <td class="table-data-department-location">{{ department.location }}</td>
+                        <td class="table-data-department-location">{{ department.location|default:'-' }}</td>
                         <td class="table-icons">
                             <a class="edit-department" href="{% url 'edit-department' pk=department.pk %}">
                                 <img src="{% static '/images/edit.jpg' %}" alt="">

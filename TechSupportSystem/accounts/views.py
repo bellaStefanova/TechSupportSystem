@@ -1,5 +1,5 @@
 from django.db.models.base import Model as Model
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
@@ -80,11 +80,13 @@ class NextToFirstLoginView(LoginRequiredMixin, views.CreateView):
         form = super().get_form(form_class)
         if self.request.user.department:
             department_roles = self.request.user.department.roles.all()
-            manager = UserModel.objects.filter(department=self.request.user.department, profile__role=self.request.user.department.management_role).first()
-            if manager:
-                form.fields['role'].queryset = department_roles.exclude(pk=manager.profile.role.pk)
-            else:
-                form.fields['role'].queryset = department_roles
+            if self.request.user.department.manager:
+                department_roles = department_roles.exclude(pk=self.request.user.department.manager.profile.role.pk)
+            # manager = UserModel.objects.filter(department=self.request.user.department, profile__role=self.request.user.department.management_role).first()
+            # if manager:
+            #     form.fields['role'].queryset = department_roles.exclude(pk=manager.profile.role.pk)
+            # else:
+            form.fields['role'].queryset = department_roles
         return form
 
 
@@ -121,7 +123,6 @@ class ProfileDetailsView(GetNotificationsMixin, views.DetailView):
 '''Profile edit view - accessible for authenticated users only'''
 class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     queryset = UserModel.objects.all()
-    # form_class = modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
     template_name = 'accounts/profile-edit.html'
 
     def get_object(self):
@@ -133,7 +134,6 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     def get_form_class(self):
         if not self.request.user.is_superuser:
             return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff'))
-        print('test')
         return modelform_factory(UserModel, form=EditProfileForm, exclude=('password', 'is_staff', 'department', 'role'))
     
     def get_form(self, form_class=None):
@@ -143,18 +143,33 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
         form = super().get_form(form_class)
         if self.request.user.department:
             department_roles = self.request.user.department.roles.all()
-            manager = UserModel.objects.filter(department=self.request.user.department, profile__role=self.request.user.department.management_role).first()
-            if manager:
-                form.fields['role'].queryset = department_roles.exclude(pk=manager.profile.role.pk)
+            existing_department_manager = None
+            if self.request.user.department:
+                existing_department_manager = Department.objects.filter(pk=self.request.user.department.pk, manager__isnull=False).first()
+                if existing_department_manager and existing_department_manager.manager == self.request.user:
+                    existing_department_manager = None
+            if existing_department_manager:
+                form.fields['role'].queryset = department_roles.exclude(pk=self.request.user.department.management_role.pk)
             else:
                 form.fields['role'].queryset = department_roles
         return form
     
-    # def form_valid(self, form):
-    #     instance = Profile.objects.get(user=self.request.user)
-    #     instance.department = None
-    #     return super().form_valid(form)
-
+    def form_valid(self, form):
+        was_manager = False
+        if self.request.user.profile.role == self.request.user.department.management_role:
+            was_manager = True
+        self.object.profile.last_updated_by = self.request.user
+        self.object = form.save()
+        if form.instance.profile.role == self.request.user.department.management_role and not self.request.user.department.manager:
+            self.request.user.department.manager = self.request.user
+            self.request.user.department.save()
+        if was_manager and form.instance.profile.role != self.request.user.department.management_role:
+            self.request.user.department.manager = None
+            self.request.user.department.save()
+            self.request.user.is_staff = False
+            self.request.user.save()
+        return HttpResponseRedirect(self.get_success_url())
+    
 '''Change password view - accessible for authenticated users only'''
 class ChangePasswordView(GetNotificationsMixin, auth_views.PasswordChangeView):
     template_name = 'accounts/change-password.html'

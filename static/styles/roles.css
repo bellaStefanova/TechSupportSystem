@@ -62,10 +62,10 @@
 .roles-table table thead tr th.table-header-role-title,
 .roles-table table tbody .table-row td.table-data-role-title,
 .roles-table table thead tr th.table-header-role-department,
-.roles-table table tbody .table-row td.table-data-role-department,
-.roles-table table thead tr th.table-header-role-is-eligible-staff,
-.roles-table table tbody .table-row td.table-data-role-is-eligible-staff{
-    width: 14%;
+.roles-table table tbody .table-row td.table-data-role-department {
+/* .roles-table table thead tr th.table-header-role-is-eligible-staff,
+.roles-table table tbody .table-row td.table-data-role-is-eligible-staff{ */
+    width: 21%;
 }
 
 .roles-table table thead tr th.table-header-role-description,
@@ -212,15 +212,15 @@
     .roles-table table tbody .table-row td.table-data-role-title,
     .roles-table table thead tr th.table-header-role-department, 
     .roles-table table tbody .table-row td.table-data-role-department {
-        width: 30%;
+        width: 40%;
     }
-    .roles-table table thead tr th.table-header-role-is-eligible-staff, 
+    /* .roles-table table thead tr th.table-header-role-is-eligible-staff, 
     .roles-table table tbody .table-row td.table-data-role-is-eligible-staff {
         width: 21%;
-    }
+    } */
     .roles-table table thead tr th.table-header-hidden, 
     .roles-table table tbody .table-row td.table-icons {
-        width: 19%;
+        width: 20%;
     }
     .roles-table table thead tr th.table-header-role-description, 
     .roles-table table tbody .table-row td.table-data-role-description {
@@ -238,10 +238,10 @@
 
 @media screen and (max-width: 300px) {
 
-    .roles-table table thead tr th.table-header-role-is-eligible-staff, 
+    /* .roles-table table thead tr th.table-header-role-is-eligible-staff, 
     .roles-table table tbody .table-row td.table-data-role-is-eligible-staff {
         display: none;
-    }
+    } */
     .roles-table table thead tr th.table-header-role-title, 
     .roles-table table tbody .table-row td.table-data-role-title,
     .roles-table table thead tr th.table-header-role-department, 

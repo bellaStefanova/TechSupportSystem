@@ -1,54 +1,92 @@
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.contrib.auth import get_user_model
 from .models import Profile
 from TechSupportSystem.notifications.models import RequestNotification
-from TechSupportSystem.departments.models import Department
 
 UserModel = get_user_model()
 
-		
-@receiver(post_save, sender=Profile)
-def profile_role_modified(sender, instance, created, *args, **kwargs):
-    department = instance.user.department
-    if instance.role:
-        if instance.role == department.management_role and instance.last_updated_by == instance.user and not instance.user.is_superuser:
+@receiver(pre_save, sender=Profile)
+def track_changes(sender, instance, **kwargs):
+    changed_fields = []
+    try:
+        old_instance = Profile.objects.get(pk=instance.pk)
+    except Profile.DoesNotExist:
+        return
+
+    for field in instance._meta.fields:
+        if getattr(instance, field.attname) != getattr(old_instance, field.attname):
+            changed_fields.append(field.attname)
+
+    # Now changed_fields contains a list of fields that have changed
+    print("Changed fields in Profile:", changed_fields)
+    if changed_fields:
+        if 'role_id' in changed_fields:
+            department = instance.user.department
+            if instance.role == department.management_role and instance.last_updated_by == instance.user and not instance.user.is_superuser:
+                notification = RequestNotification(
+                    message=f'{instance.user.username} has registered as {instance.role} of {department} department.\nClick here to edit their profile',
+                    notification_type='USER',
+                    user_submitted_notification=instance.user
+                )
+                notification.save()
+                notification.users_to_notify.set(UserModel.objects.filter(is_superuser=True))
+                notification.save()
+        elif 'first_name' in changed_fields or 'last_name' in changed_fields:
+            if instance.last_updated_by.is_superuser:
+                notification = RequestNotification(
+                    message=f'Your profile has been updated by {instance.last_updated_by}.\n Go to profile details to see the changes.',
+                    notification_type='USER',
+                    user_submitted_notification=instance.user #this is not correct but won't be used so it's fine for now
+                )
+                notification.save()
+                notification.users_to_notify.add(instance.user)
+                notification.save()
+                
+            
+@receiver(pre_save, sender=UserModel)
+def track_changes(sender, instance, **kwargs):
+    changed_fields = []
+    try:
+        old_instance = UserModel.objects.get(pk=instance.pk)
+    except UserModel.DoesNotExist:
+        return
+
+    for field in instance._meta.fields:
+        if getattr(instance, field.attname) != getattr(old_instance, field.attname):
+            changed_fields.append(field.attname)
+
+    # Now changed_fields contains a list of fields that have changed
+    print("Changed fields in User:", changed_fields)
+    
+    if 'is_staff' in changed_fields:
+        if instance.profile.last_updated_by.is_superuser and instance.is_staff:
             notification = RequestNotification(
-                message=f'{instance.user.username} has registered as {instance.role} of {department} department.',
+                message=f'Your level has been updated to manager.\n You can now see your team members and their requests.',
                 notification_type='USER',
-                user_submitted_notification=instance.user
+                user_submitted_notification=instance #this is not correct but won't be used so it's fine for now
             )
             notification.save()
-            notification.users_to_notify.set(UserModel.objects.filter(is_superuser=True))
-            # notification.user_submitted_notification = instance.user
+            notification.users_to_notify.add(instance)
             notification.save()
-        if instance.last_updated_by.is_superuser and instance.user.is_staff:
+        elif instance.profile.last_updated_by.is_superuser and not instance.is_staff:
             notification = RequestNotification(
-                message=f'Your role has been updated to staff.\n You can now see your team members and their requests.',
+                message=f'Your manager level has been deleted.\n You can see the change in your profile details.',
                 notification_type='USER',
-                user_submitted_notification=instance.user #this is not correct but won't be used so it's fine for now
+                user_submitted_notification=instance #this is not correct but won't be used so it's fine for now
             )
             notification.save()
-            notification.users_to_notify.add(instance.user)
+            notification.users_to_notify.add(instance)
             notification.save()
+    elif 'email' in changed_fields or 'department_id' in changed_fields:
+            if instance.profile.last_updated_by.is_superuser:
+                notification = RequestNotification(
+                    message=f'Your profile has been updated by {instance.profile.last_updated_by}.\n Go to profile details to see the changes.',
+                    notification_type='USER',
+                    user_submitted_notification=instance #this is not correct but won't be used so it's fine for now
+                )
+                notification.save()
+                notification.users_to_notify.add(instance)
+                notification.save()
 
-# @receiver(post_save, sender=Profile)
-# def control_manager(sender, instance, created, *args, **kwargs):
-#     role = instance.role
-#     if not instance.role.is_eligible_for_staff and instance.user.is_staff:
-#         instance.user.is_staff = False
-#         instance.user.save()
-        
-
-# @receiver(post_save, sender=Profile)
-# def control_staff_option(sender, instance, created, *args, **kwargs):
-#     if not instance.role.is_eligible_for_staff and instance.user.is_staff:
-#         instance.user.is_staff = False
-#         instance.user.save()
-        
-        
-
-# @receiver(post_save, sender=Profile)
-# def 
-        
 		
