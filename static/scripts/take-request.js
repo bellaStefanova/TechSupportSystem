@@ -17,48 +17,51 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
     document.addEventListener("DOMContentLoaded", function () {
         const takeRequestButton = document.getElementById('take-request');
         let requestId = document.getElementById('request-id').getAttribute('request-id');
-        takeRequestButton.addEventListener('click', function () {
-            fetch('/take-request/' + requestId + '/', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = "/view-request/" + requestId;
-                    } else {
-                        console.log(response);
-                    }
+        if (takeRequestButton) {
+            takeRequestButton.addEventListener('click', function () {
+                fetch('/take-request/' + requestId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
+                        'Content-Type': 'application/json'
+                    },
                 })
-                .catch(error => {
-                    console.log('');
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = "/view-request/" + requestId;
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(error => {
+                        console.log('');
+                    });
 
-        });
+            });
+        };
 
         const markRequestDoneButton = document.getElementById('markRequestDone');
-        // let requestId = document.getElementById('request-id').getAttribute('request-id');
-        markRequestDoneButton.addEventListener('click', function () {
-            fetch('/mark-request-done/' + requestId + '/', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
-                    'Content-Type': 'application/json'
-                },
-            })
-                .then(response => {
-                    if (response.ok) {
-                        window.location.href = "/view-request/" + requestId;
-                    } else {
-                        console.log(response);
-                    }
+        if (markRequestDoneButton) {
+            markRequestDoneButton.addEventListener('click', function () {
+                fetch('/mark-request-done/' + requestId + '/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),  // Include CSRF token
+                        'Content-Type': 'application/json'
+                    },
                 })
-                .catch(error => {
-                    console.log('');
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = "/view-request/" + requestId;
+                        } else {
+                            console.log(response);
+                        }
+                    })
+                    .catch(error => {
+                        console.log('');
+                    });
 
-        });
+            });
+        };
     });
 }

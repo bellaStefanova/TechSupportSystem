@@ -16,6 +16,7 @@ from django.views import View
 from django.db.models.signals import post_save
 from .signals import edit_request_handler
 
+
 UserModel = get_user_model()
 
 class CreateRequestView(GetNotificationsMixin, views.CreateView):
@@ -51,20 +52,25 @@ class EditRequestView(GetNotificationsMixin, views.UpdateView):
                                      widgets={
                                      'urgency': forms.Select(attrs={'required': True})
                                  })
-            
-        return modelform_factory(Request, exclude=('status', 'user', 'worked_on_by', 'last_updated_by'),
+        form = modelform_factory(Request, exclude=('status', 'user', 'worked_on_by', 'last_updated_by'),
                                  widgets={
-                                     'title': forms.TextInput(attrs={'readonly': 'readonly'}),
+                                     'title': forms.TextInput(attrs={'readonly': 'readonly',}),
                                      'urgency': forms.Select(attrs={'disabled': 'disabled', 'required': False})
                                  })
+        return form
     
-
     def form_valid(self, form):
+        initial_title = self.get_object().title
         form.instance.last_updated_by = self.request.user
-        return super().form_valid(form)
-    
+        self.object = form.save(commit=False)
+        if form.instance.title != initial_title:
+            form.instance.title = initial_title
+            form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
     def get_success_url(self) -> str:
         return reverse_lazy('view-request', kwargs={'pk': self.object.id})
+
 
 class CancelRequestView(GetNotificationsMixin, views.DeleteView):
     queryset = Request.objects.all()

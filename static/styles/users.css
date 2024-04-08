@@ -188,6 +188,27 @@
     font-size: 1.1em;
 }
 
+.pagination form label,
+.pagination form input {
+    color: #757575;
+    /* font-size: 1.1em; */
+    margin-right: 0.5em;
+}
+
+.pagination form input {
+    width: 3em;
+} 
+
+.pagination form input[type="number"]::-webkit-inner-spin-button,
+.pagination form input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Hide the default spinner in WebKit browsers */
+  appearance: none; /* Hide the default spinner in non-WebKit browsers */
+}
+
+.pagination form button {
+    display: none;
+}
+
 @media screen and (max-width: 1200px) {
     
     .users-main .users-table-header {

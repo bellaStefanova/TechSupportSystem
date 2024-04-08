@@ -1,8 +1,4 @@
 from django.db import models
-# from django.contrib.auth import get_user_model
-# from TechSupportSystem.accounts.models import UserProfile
-
-# UserModel = UserProfile
 
 class Department(models.Model):
     DEPARTMENT_MAX_LENGTH = 50
@@ -60,10 +56,6 @@ class Role(models.Model):
     description = models.TextField(
         max_length=DESCRIPTION_MAX_LENGTH,
     )
-
-    # is_eligible_for_staff = models.BooleanField(
-    #     default=False,
-    # )
     
     department = models.ForeignKey(
         Department,

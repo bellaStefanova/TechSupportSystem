@@ -221,7 +221,7 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: scroll;
-    max-height: 50vh;
+    max-height: 47vh;
 }
 
 .tickets-table table tbody::-webkit-scrollbar {

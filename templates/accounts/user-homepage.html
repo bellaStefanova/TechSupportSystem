@@ -68,5 +68,29 @@
             </tbody>
         </table>
     </div>
+    <div class="pagination">
+        <form method="get">
+            <label for="per_page">Page Size:</label>
+            <input type="number" name="per_page" id="per_page" value="{{ paginator.per_page }}" max="100">
+            <button type="submit">Apply</button>
+        </form>
+        <p class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </p>
+        <div class="paginator-links">
+            <a class="paginator-link" href="?page=1"><<</a>
+            {% if page_obj.has_previous %}
+            <a class="paginator-link" href="?page={{ page_obj.previous_page_number }}"><</a>
+            {% else %}
+            <a class="paginator-link" href="?page=1"><</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a class="paginator-link" href="?page={{ page_obj.next_page_number }}">></a>
+            {% else %}
+            <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">></a>
+            {% endif %}
+            <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        </div>
+</div>
 </div>
 {% endblock %}

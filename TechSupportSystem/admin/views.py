@@ -8,21 +8,61 @@ from TechSupportSystem.requests.models import Request
 from TechSupportSystem.accounts.forms import EditProfileForm
 
 from TechSupportSystem.helpers.mixins import GetNotificationsMixin, VisibleToSuperUserMixin, VisibleToStaffMixin
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, PageNotAnInteger
 
+class FlexiblePaginator(Paginator):
+    def __init__(self, object_list, per_page, orphans=0, allow_empty_first_page=True):
+        self.user_per_page = per_page
+        super().__init__(object_list, per_page, orphans, allow_empty_first_page)
+
+    def get_page(self, number):
+        # Override the per_page attribute with the user-specified value
+        self.per_page = self.user_per_page
+        return super().get_page(number)
+    
 UserModel = get_user_model()
 
 class ListRequestsView(GetNotificationsMixin, VisibleToStaffMixin, views.ListView):
     template_name = 'accounts/user-homepage.html'
+    paginate_by = 10
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        per_page = self.request.GET.get('per_page', self.paginate_by)  # Get user input page size
+        paginator = FlexiblePaginator(self.get_queryset(), per_page)
+        page_number = self.request.GET.get('page')
+
+        try:
+            page = paginator.page(page_number)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        context['your_objects'] = page
+        context['paginator'] = paginator
+        context['page_obj'] = page
+        return context
     
     def get_queryset(self):
-        requests = Request.objects.all().order_by('-created_at')
+        queryset = Request.objects.all().order_by('-created_at')
         if self.request.user.is_superuser:
-            return requests
-        return requests.filter(user__department=self.request.user.department)
+            queryset = queryset
+        else:
+            queryset = queryset.filter(user__department=self.request.user.department)
+        return queryset
+    
+        #     queryset=UserModel.objects.all().order_by('username')
+        # if self.request.user.is_superuser:
+        #     queryset = queryset
+        # elif self.request.user.is_staff:
+        #     queryset = queryset.filter(department=self.request.user.department)
+        # return queryset
     
 
 class ListUsersView(GetNotificationsMixin, VisibleToStaffMixin, views.ListView):
-    model = UserModel
+    # model = UserModel
     template_name = 'accounts/users.html'
     paginate_by = 10
     
@@ -49,12 +89,8 @@ class EditUserView(GetNotificationsMixin, VisibleToSuperUserMixin, views.UpdateV
         if form.instance.profile.role == form.instance.department.management_role:
             was_manager = True
         user = form.save()
-        print('Saving first time')
         user.profile.last_updated_by = self.request.user
         user.profile.save()
-        print('Saving second time')
-        # user.save()
-        print(form.instance)
         if form.instance.profile.role == form.instance.department.management_role and not form.instance.department.manager:
             form.instance.department.manager = form.instance
             form.instance.department.save()

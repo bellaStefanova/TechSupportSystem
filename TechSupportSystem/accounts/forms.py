@@ -34,7 +34,8 @@ class EditProfileForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['department'].required = True
+        if not self.instance.is_superuser:
+            self.fields['department'].required = True
         
         if self.instance and self.instance.profile:
             self.fields['first_name'].initial = self.instance.profile.first_name
