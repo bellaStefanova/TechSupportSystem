@@ -54,9 +54,11 @@
                     <td class="table-data-created-on">{{request.created_at|date:"Y-m-d"}}</td>
                     <td class="table-data-updated-on">{{request.updated_at|date:"Y-m-d"}}</td>
                     <td class="table-icons">
-                        <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
-                            <img src="{% static '/images/delete.jpg' %}" alt="">
-                        </a>
+                        {% if request.status == 'Waiting' %}
+                            <a class="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
+                                <img src="{% static '/images/delete.jpg' %}" alt="">
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
 

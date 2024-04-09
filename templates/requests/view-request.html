@@ -44,9 +44,11 @@
                 {% if user.is_superuser %}
                 <div class="take-request" id="take-request">Take Request</div>
                 {% endif %}
+                {% if request.status == 'Waiting' %}
                 <a class="cancel-request" id="cancel-request" href="{% url 'cancel-request' pk=request.pk %}">
                     Cancel Request
                 </a>
+                {% endif %}
                 <a href="{% url 'edit-request' pk=request.pk %}" class="edit-request" id="edit-request">
                     Edit Request
                 </a>
