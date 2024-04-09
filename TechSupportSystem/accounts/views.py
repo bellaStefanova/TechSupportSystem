@@ -11,29 +11,14 @@ from django.utils.decorators import method_decorator
 from django.contrib import auth
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger
 
 from TechSupportSystem.helpers.mixins import GetNotificationsMixin
 from TechSupportSystem.requests.models import Request
 from TechSupportSystem.departments.models import Department
 from .models import Profile
 from .forms import RegisterForm, EditProfileForm
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage, PageNotAnInteger
-
-
-class FlexiblePaginator(Paginator):
-    
-    def __init__(self, object_list, per_page, orphans=0, allow_empty_first_page=True):
-        
-        self.user_per_page = per_page
-        super().__init__(object_list, per_page, orphans, allow_empty_first_page)
-
-
-    def get_page(self, number):
-        
-        self.per_page = self.user_per_page
-        return super().get_page(number)
-
+from TechSupportSystem.helpers.paginators import FlexiblePaginator
 
 UserModel = get_user_model()
 
@@ -128,10 +113,7 @@ class NextToFirstLoginView(LoginRequiredMixin, views.CreateView):
         
         if self.request.user.department:
             department_roles = self.request.user.department.roles.all()
-            
-            # if self.request.user.department.manager:
-            #     department_roles = department_roles.exclude(pk=self.request.user.department.manager.profile.role.pk)
-                
+             
             form.fields['role'].queryset = department_roles
             
         return form
@@ -154,18 +136,14 @@ if the user is authenticated, the view will redirect to login and next home page
 class UserHomeView(GetNotificationsMixin, views.TemplateView):
     
     template_name = 'accounts/user-homepage.html'
-    paginate_by = 10
 
 
     def get_context_data(self, **kwargs):
         
-        all_requests = Request.objects.order_by('-created_at')
         context = super().get_context_data(**kwargs)
-        context['all_requests'] = all_requests
-        context['request_list'] = all_requests.filter(user=self.request.user)
-        per_page = self.request.GET.get('per_page', self.paginate_by)  # Get user input page size
+        per_page = self.request.GET.get('per_page', 10)  # Get user input page size
         paginator = FlexiblePaginator(self.get_queryset(), per_page)
-        page_number = self.request.GET.get('page')
+        page_number = self.request.GET.get('page', 1)
 
         try:
             page = paginator.page(page_number)
@@ -174,9 +152,10 @@ class UserHomeView(GetNotificationsMixin, views.TemplateView):
         except EmptyPage:
             page = paginator.page(paginator.num_pages)
 
-        context['your_objects'] = page
+        context['request_list'] = page.object_list
         context['paginator'] = paginator
         context['page_obj'] = page
+        context['per_page'] = per_page
         
         return context
     
@@ -237,18 +216,11 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
         if self.request.user.department:
             
             department_roles = self.request.user.department.roles.all()
-            # existing_department_manager = None
             
             if self.request.user.department:
                 existing_department_manager = Department.objects.filter(pk=self.request.user.department.pk, manager__isnull=False).first()
-                
-                # if existing_department_manager and existing_department_manager.manager == self.request.user:
-                #     existing_department_manager = None
                     
-            if existing_department_manager:
-                form.fields['role'].queryset = department_roles.exclude(pk=self.request.user.department.management_role.pk)
-            else:
-                form.fields['role'].queryset = department_roles
+            form.fields['role'].queryset = department_roles
                 
         return form
     
