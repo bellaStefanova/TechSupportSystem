@@ -20,7 +20,11 @@ class UserProfile(auth_models.AbstractUser):
     )
     
     def __str__(self):
-        return self.profile.__str__() if hasattr(self, 'profile') else self.username
+        
+        if hasattr(self, 'profile') and self.profile.__str__() != ' ':
+            return self.profile.__str__()
+        
+        return self.username
     
 
 '''Profile Model related to UserProfile, extenging its information with non-required one'''
