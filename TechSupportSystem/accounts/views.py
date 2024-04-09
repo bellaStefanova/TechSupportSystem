@@ -129,8 +129,8 @@ class NextToFirstLoginView(LoginRequiredMixin, views.CreateView):
         if self.request.user.department:
             department_roles = self.request.user.department.roles.all()
             
-            if self.request.user.department.manager:
-                department_roles = department_roles.exclude(pk=self.request.user.department.manager.profile.role.pk)
+            # if self.request.user.department.manager:
+            #     department_roles = department_roles.exclude(pk=self.request.user.department.manager.profile.role.pk)
                 
             form.fields['role'].queryset = department_roles
             
@@ -237,13 +237,13 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
         if self.request.user.department:
             
             department_roles = self.request.user.department.roles.all()
-            existing_department_manager = None
+            # existing_department_manager = None
             
             if self.request.user.department:
                 existing_department_manager = Department.objects.filter(pk=self.request.user.department.pk, manager__isnull=False).first()
                 
-                if existing_department_manager and existing_department_manager.manager == self.request.user:
-                    existing_department_manager = None
+                # if existing_department_manager and existing_department_manager.manager == self.request.user:
+                #     existing_department_manager = None
                     
             if existing_department_manager:
                 form.fields['role'].queryset = department_roles.exclude(pk=self.request.user.department.management_role.pk)
