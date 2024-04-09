@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
         // Accessing sign up URL from navbar
         const signUpNavElement = document.getElementById("signupNavBar");
         signUpNavElement.addEventListener("click", function () {
-            window.location.href = "/signup";
+            window.location.href = "/signup/";
         });
 
         // Accessing sign in URL from navbar
         const signInNavElement = document.getElementById("signinNavBar");
         signInNavElement.addEventListener("click", function () {
-            window.location.href = "/signin";
+            window.location.href = "/signin/";
         });
     } else {
 

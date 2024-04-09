@@ -69,13 +69,14 @@ TEMPLATE_DIRS = (BASE_DIR / 'templates',)
 
 WSGI_APPLICATION = 'TechSupportSystem.wsgi.application'
 
-db_settings = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING'].split(' ')
-db_name = db_settings[0].split('=')[1]
-db_user = db_settings[4].split('=')[1]
-db_pass = db_settings[5].split('=')[1]
-db_host = db_settings[1].split('=')[1]
-
 if 'AZURE_POSTGRESQL_CONNECTIONSTRING' in os.environ:
+    
+    db_settings = os.environ['AZURE_POSTGRESQL_CONNECTIONSTRING'].split(' ')
+    db_name = db_settings[0].split('=')[1]
+    db_user = db_settings[4].split('=')[1]
+    db_pass = db_settings[5].split('=')[1]
+    db_host = db_settings[1].split('=')[1]
+    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
