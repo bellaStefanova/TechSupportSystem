@@ -1,6 +1,12 @@
 <body style="background-color: #D5E6EC">
   <img width="103" alt="image" src="https://github.com/bellaStefanova/TechSupportSystem/assets/123555303/ac62c4bd-efd0-4435-ac11-56ca1e2c6ed5">
-  <br>
+  <br><br>
+
+  <p>Site is deployed on:
+  <a href="https://solvetech.azurewebsites.net/">https://solvetech.azurewebsites.net</a>
+  </p>
+  <p>State: Active and running</p>
+  <hr>
   
   <p><strong>solveTech</strong> is a Tech Support Platform, where issues with automation tools and utilities can be reported. This allows more systematic approach to resolving ang keeping history of submitted requests. It is Django based and integrates the Django user authentication.</p>
   
