@@ -40,9 +40,3 @@ class VisibleToStaffMixin(LoginRequiredMixin):
             return self.handle_no_permission()
         
         return super().dispatch(request, *args, **kwargs)
-
-
-# def get_request_model():
-    
-#     from TechSupportSystem.requests.models import Request
-#     return Request

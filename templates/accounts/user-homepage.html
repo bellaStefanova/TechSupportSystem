@@ -79,21 +79,22 @@
         <button type="submit">Apply</button>
     </form>
     <p class="current">
+        
         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
     </p>
     <div class="paginator-links">
-        <a class="paginator-link" href="?page=1"><<</a>
+        <a class="paginator-link" href="?page=1&per_page={{ per_page }}"><<</a>
         {% if page_obj.has_previous %}
-        <a class="paginator-link" href="?page={{ page_obj.previous_page_number }}"><</a>
+        <a class="paginator-link" href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}"><</a>
         {% else %}
-        <a class="paginator-link" href="?page=1"><</a>
+        <a class="paginator-link" href="?page=1&per_page={{ per_page }}"><</a>
         {% endif %}
         {% if page_obj.has_next %}
-        <a class="paginator-link" href="?page={{ page_obj.next_page_number }}">></a>
+        <a class="paginator-link" href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}">></a>
         {% else %}
-        <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">></a>
+        <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}&per_page={{ per_page }}">></a>
         {% endif %}
-        <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        <a class="paginator-link" href="?page={{ page_obj.paginator.num_pages }}&per_page={{ per_page }}">>></a>
     </div>
 </div>
 {% endblock %}
