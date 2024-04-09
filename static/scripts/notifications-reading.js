@@ -14,7 +14,7 @@ if (window.location.pathname === '/view-notifications/') {
         return cookieValue;
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         const unreadNotifications = document.querySelectorAll('.unread-notification');
         const readAllNotificationsButton = document.getElementById('readAllNotifications');
 
@@ -47,11 +47,11 @@ if (window.location.pathname === '/view-notifications/') {
                         let userId = child.getAttribute('user-id');
                         let requestId = child.getAttribute('request-id');
                         if (requestId !== null) {
-                            windowLocationHref = "/view-request/" + requestId;
+                            windowLocationHref = '/view-request/' + requestId + '/';
                         } else if (userId !== null && userId !== 'myId') {
-                            windowLocationHref = "/edit-user/" + userId;
+                            windowLocationHref = '/edit-user/' + userId;
                         } else if (userId === 'myId') {
-                            windowLocationHref = "/profile";
+                            windowLocationHref = '/profile' + '/';
                         }
                                             fetch('/mark-notification-as-read/' + notificationId + '/', {
                                                 method: 'POST',
@@ -84,7 +84,7 @@ if (window.location.pathname === '/view-notifications/') {
             })
             .then(response => {
                 if (response.ok) {
-                    window.location.href = "/view-notifications";
+                    window.location.href = '/view-notifications' + '/';
                 } else {
                     console.log(response);
                 }

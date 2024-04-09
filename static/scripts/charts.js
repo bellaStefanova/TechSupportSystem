@@ -1,22 +1,22 @@
 if (window.location.pathname === '/dashboard/') {
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     // Doughnut chart with requests count per status
       const waitingRequestsCount = document.getElementById('waitingRequestsCount').innerText;
       const assignedRequestsCount = document.getElementById('assignedRequestsCount').innerText;
       const resolvedRequestsCount = document.getElementById('resolvedRequestsCount').innerText;
 
-      const sValues = ["Waiting", "Assigned", "Resolved"];
+      const sValues = ['Waiting', 'Assigned', 'Resolved'];
       const sData = [waitingRequestsCount, assignedRequestsCount, resolvedRequestsCount];
       const sColors = [
-        "#be3a3a",
-        "#bd9037",
-        "#279127",
+        '#be3a3a',
+        '#bd9037',
+        '#279127',
       ];
 
       let stx = document.getElementById('statusDiagram').getContext('2d');
 
       let statusDiagram = new Chart(stx, {
-        type: "doughnut",
+        type: 'doughnut',
         data: {
           labels: sValues,
           datasets: [{
@@ -44,19 +44,19 @@ if (window.location.pathname === '/dashboard/') {
       let criticalUrgency = document.getElementById('criticalUrgencyRequestsCount').attributes.number.value;
       
 
-      const pValues = ["Critical", "High", "Medium", "Low"];
+      const pValues = ['Critical', 'High', 'Medium', 'Low'];
       const pData = [criticalUrgency, highUrgency, mediumUrgency, lowUrgency];
       const pColors = [
-        "#323232",
-        "#777777",
-        "#A2A2A2",
-        "#E6E6E6",
+        '#323232',
+        '#777777',
+        '#A2A2A2',
+        '#E6E6E6',
       ];
 
       let ptx = document.getElementById('priorityDiagram').getContext('2d');
 
       let priorityDiagram = new Chart(ptx, {
-        type: "pie",
+        type: 'pie',
         data: {
           labels: pValues,
           datasets: [{
@@ -81,7 +81,7 @@ if (window.location.pathname === '/dashboard/') {
       const topDeparmentNames = Array.from(topDepartmentElements).map(element => element.attributes.name.value);
       const topDeparmentValues = Array.from(topDepartmentElements).map(element => element.attributes.number.value);
 
-      const dColors = ["#323232", "#777777", "#A2A2A2", "#E6E6E6",];
+      const dColors = ['#323232', '#777777', '#A2A2A2', '#E6E6E6',];
 
       let dataset = [];
       for (let i = 0; i < topDeparmentValues.length; i++) {
@@ -99,7 +99,7 @@ if (window.location.pathname === '/dashboard/') {
       let dtx = document.getElementById('departmentDiagram').getContext('2d');
 
       let departmentDiagram = new Chart(dtx, {
-        type: "bar",
+        type: 'bar',
         data: {
           labels: topDeparmentNames,
           datasets: dataset

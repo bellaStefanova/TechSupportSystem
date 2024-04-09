@@ -1,6 +1,6 @@
 if (window.location.pathname === '/home' || window.location.pathname === '/requests/') {
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         // Get all table rows from the requests table initially
         let originalTableRows;
         if (!originalTableRows) {
@@ -25,10 +25,10 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
         });
 
         // Handle status dropdown filter
-        const dropdown = document.querySelector(".per-status");
-        const selectedOption = document.querySelector(".initial-option-container");
-        const selectedOptionValue = document.querySelector(".initial-option");
-        const optionsContainer = document.querySelector(".filter-per-status-options");
+        const dropdown = document.querySelector('.per-status');
+        const selectedOption = document.querySelector('.initial-option-container');
+        const selectedOptionValue = document.querySelector('.initial-option');
+        const optionsContainer = document.querySelector('.filter-per-status-options');
         var tbody = document.getElementById('tableBody');
         var tbodyOriginal_content;
 
@@ -38,16 +38,16 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
         }
 
         // Toggle options visibility on click status dropdown
-        selectedOption.addEventListener("click", function () {
+        selectedOption.addEventListener('click', function () {
             optionsContainer.style.display =
-                optionsContainer.style.display === "none" ? "block" : "none";
+                optionsContainer.style.display === 'none' ? 'block' : 'none';
         });
 
         // Handle option selection
-        optionsContainer.addEventListener("click", function (event) {
-            if (event.target.classList.contains("option")) {
+        optionsContainer.addEventListener('click', function (event) {
+            if (event.target.classList.contains('option')) {
                 selectedOptionValue.textContent = event.target.textContent;
-                optionsContainer.style.display = "none";
+                optionsContainer.style.display = 'none';
 
                 if (selectedOptionValue.textContent === 'All') {
                     selectedOption.style.justifyContent = 'flex-end';
@@ -65,9 +65,9 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
 
 
         // Close options when clicking outside the dropdown
-        document.addEventListener("click", function (event) {
+        document.addEventListener('click', function (event) {
             if (!dropdown.contains(event.target)) {
-                optionsContainer.style.display = "none";
+                optionsContainer.style.display = 'none';
             }
         });
 
@@ -197,22 +197,22 @@ if (window.location.pathname === '/home' || window.location.pathname === '/reque
         // Handle table row click to redirect to the specific request details page
         let newTableRows = document.querySelectorAll('.table-row');
         newTableRows.forEach(row => {
-            row.addEventListener("click", function (event) {
+            row.addEventListener('click', function (event) {
                 var target = event.target.parentNode;
-                if (target.tagName === "TBODY") {
+                if (target.tagName === 'TBODY') {
                     target = target.children[0];
                 };
-                if (target.tagName === "TD" && target.className === "table-data-status-cell") {
+                if (target.tagName === 'TD' && target.className === 'table-data-status-cell') {
                     target = target.parentNode;
                 };
-                if (target.tagName === "TR") {
+                if (target.tagName === 'TR') {
                     target = target.children[0];
                 };
 
-                if (target.tagName === "TD" && target.className === "table-data-request-id") {
-                    var id = target.getAttribute("data-id");
+                if (target.tagName === 'TD' && target.className === 'table-data-request-id') {
+                    var id = target.getAttribute('data-id');
                     // Redirect to the edit page with the specific ID
-                    window.location.href = "/view-request/" + id;
+                    window.location.href = '/view-request/' + id + '/';
                 }
             });
         })

@@ -14,7 +14,7 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
         return cookieValue;
     };
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         const takeRequestButton = document.getElementById('take-request');
         let requestId = document.getElementById('request-id').getAttribute('request-id');
         if (takeRequestButton) {
@@ -28,7 +28,7 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
                 })
                     .then(response => {
                         if (response.ok) {
-                            window.location.href = "/view-request/" + requestId;
+                            window.location.href = '/view-request/' + requestId + '/';
                         } else {
                             console.log(response);
                         }
@@ -52,7 +52,7 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
                 })
                     .then(response => {
                         if (response.ok) {
-                            window.location.href = "/view-request/" + requestId;
+                            window.location.href = '/view-request/' + requestId + '/';
                         } else {
                             console.log(response);
                         }

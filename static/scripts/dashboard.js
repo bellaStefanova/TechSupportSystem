@@ -2,7 +2,7 @@ import { filterTableRows } from './user-homepage-actions.js';
 import { replaceTableRows } from './user-homepage-actions.js';
 let optionStatus=''
 if (window.location.pathname === '/dashboard/') {
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         function redirectToRequests(optionStatus) {
             sessionStorage.setItem('optionStatus', optionStatus);
             const url = `/requests/`;
@@ -37,9 +37,9 @@ if (window.location.pathname === '/dashboard/') {
 }
 
 if (window.location.pathname === '/requests/') {
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         optionStatus = sessionStorage.getItem('optionStatus');
-        const selectedOptionValue = document.querySelector(".initial-option");
+        const selectedOptionValue = document.querySelector('.initial-option');
 
         if (optionStatus) {
             selectedOptionValue.textContent = optionStatus;
