@@ -9,8 +9,16 @@
             <ul>
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                {% if not user.is_authenticated %}
                 <li><a href="{% url 'signin' %}">Login</a></li>
                 <li><a href="{% url 'signup' %}">Register</a></li>
+                {% else %}
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'dashboard' %}">Platform</a></li>
+                    {% else %}
+                    <li><a href="{% url 'user-home' %}">Platform</a></li>
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
         <div class="heading-about-page">

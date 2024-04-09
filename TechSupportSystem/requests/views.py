@@ -8,7 +8,7 @@ from .models import Request
 from django.forms import modelform_factory
 from django.urls import reverse_lazy
 from TechSupportSystem.helpers.mixins import GetNotificationsMixin, VisibleToSuperUserMixin
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.views import View
 from django.db.models.signals import post_save
 from .signals import edit_request_handler
@@ -97,6 +97,16 @@ class EditRequestView(GetNotificationsMixin, views.UpdateView):
     def get_success_url(self):
         
         return reverse_lazy('view-request', kwargs={'pk': self.object.id})
+    
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        response = super().dispatch(request, *args, **kwargs)
+        
+        if self.object.status not in ['Waiting', 'Assigned']:
+            raise Http404("You cannot edit requests with status other than 'Waiting' or 'Assigned'.")
+        
+        return response
 
 
 class CancelRequestView(GetNotificationsMixin, views.DeleteView):
@@ -123,6 +133,15 @@ class CancelRequestView(GetNotificationsMixin, views.DeleteView):
         current_request.save()
         
         return HttpResponseRedirect(success_url)
+    
+    def dispatch(self, request, *args, **kwargs):
+
+        response = super().dispatch(request, *args, **kwargs)
+        
+        if self.object.status not in ['Waiting']:
+            raise Http404("You cannot edit requests with status other than 'Waiting' or 'Assigned'.")
+        
+        return response
     
 
 class TakeRequestView(VisibleToSuperUserMixin, View):

@@ -1,10 +1,19 @@
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'web/index.html')
+    context = {
+        'user': request.user,
+    }
+    return render(request, 'web/index.html', context)
 
 def about(request):
-    return render(request, 'web/about.html')
+    context = {
+        'user': request.user,
+    }
+    return render(request, 'web/about.html', context)
 
 def contacts(request):
-    return render(request, 'web/contacts.html')
+    context = {
+        'user': request.user,
+    }
+    return render(request, 'web/contacts.html', context)

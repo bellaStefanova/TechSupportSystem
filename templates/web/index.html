@@ -9,15 +9,23 @@
             <ul>
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                {% if not user.is_authenticated %}
                 <li><a href="{% url 'signin' %}">Login</a></li>
                 <li><a href="{% url 'signup' %}">Register</a></li>
+                {% else %}
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'dashboard' %}">Platform</a></li>
+                    {% else %}
+                    <li><a href="{% url 'user-home' %}">Platform</a></li>
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
         <div class="heading-landing-page">
             <h1>Tech Support System</h1>
         </div>
         <div class="landing-content">
-            <p>Welcome to TechSupportHub!</p>
+            <p>Welcome to solveTech!</p>
             <p>
                 Empower your team with seamless technical support. Our platform offers a streamlined ticketing system,
                 allowing you to efficiently manage and resolve technical issues. From IT troubleshooting to customer
