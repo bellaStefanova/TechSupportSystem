@@ -1,4 +1,6 @@
-from django.http import HttpResponseRedirect
+import json
+from django.http import HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import get_user_model
@@ -6,6 +8,7 @@ from django.forms.models import modelform_factory
 
 from TechSupportSystem.requests.models import Request
 from TechSupportSystem.accounts.forms import EditProfileForm
+from TechSupportSystem.departments.models import Department
 
 from TechSupportSystem.helpers.mixins import (
     GetNotificationsMixin, VisibleToSuperUserMixin, VisibleToStaffMixin)
@@ -123,3 +126,29 @@ class DeleteUserView(GetNotificationsMixin, VisibleToSuperUserMixin, views.Delet
     queryset = UserModel.objects.all()
     template_name = 'accounts/user-delete.html'
     success_url = reverse_lazy('users')
+
+class GetRolesForDepartmentView(views.View):
+    
+    # def get(self, request, *args, **kwargs):
+        
+    #     department_id = request.GET.get('department_id')
+    #     department = Department.objects.get(pk=department_id)
+    #     roles = department.roles.all()
+    #     print({'roles': [{'id': role.id, 'name': role.title} for role in roles]})
+        
+    #     return JsonResponse({'roles': [{'id': role.id, 'name': role.title} for role in roles]})
+    def post(self, request, *args, **kwargs):
+        request_args = json.loads(request.body.decode('utf-8'))
+        if request_args['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest':  # Check if it's an AJAX request\
+            department_id = request_args['department_id']
+            print(department_id)
+            department = Department.objects.get(pk=department_id)
+            roles = department.roles.all()
+            roles_data = [{'id': role.id, 'name': role.title} for role in roles]
+            return JsonResponse({'roles': roles_data})
+        else:
+            print('Not AJAX')
+            return JsonResponse({'error': 'Access denied'}, status=403)
+        
+    def get(self, request, *args, **kwargs):
+        raise PermissionDenied()

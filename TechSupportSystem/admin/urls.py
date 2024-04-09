@@ -3,7 +3,8 @@ from .views import (
     ListUsersView,
     EditUserView,
     DeleteUserView,
-    ListRequestsView
+    ListRequestsView,
+    GetRolesForDepartmentView,
 )
 
 
@@ -12,4 +13,5 @@ urlpatterns = (
     (path('users/', ListUsersView.as_view(), name='users')),
     (path('edit-user/<int:pk>', EditUserView.as_view(), name='edit-user')),
     (path('delete-user/<int:pk>', DeleteUserView.as_view(), name='delete-user')),
+    (path('get-roles-for-department/', GetRolesForDepartmentView.as_view(), name='get-roles-for-department')),
 )

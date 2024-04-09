@@ -15,7 +15,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger
 
 from TechSupportSystem.helpers.mixins import GetNotificationsMixin
 from TechSupportSystem.requests.models import Request
-from TechSupportSystem.departments.models import Department
+from TechSupportSystem.departments.models import Department, Role
 from .models import Profile
 from .forms import RegisterForm, EditProfileForm
 from TechSupportSystem.helpers.paginators import FlexiblePaginator
@@ -103,6 +103,8 @@ class NextToFirstLoginView(LoginRequiredMixin, views.CreateView):
         user = self.request.user
         user.skip_initial_profile_details = True
         user.save()
+        profile = Profile(user=user)
+        profile.save()
         
         return super().get(request, *args, **kwargs)
     
@@ -185,7 +187,6 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
     queryset = UserModel.objects.all()
     template_name = 'accounts/profile-edit.html'
 
-
     def get_object(self):
         
         return self.request.user
@@ -220,7 +221,8 @@ class ProfileEditView(GetNotificationsMixin, views.UpdateView):
             if self.request.user.department:
                 existing_department_manager = Department.objects.filter(pk=self.request.user.department.pk, manager__isnull=False).first()
                     
-            form.fields['role'].queryset = department_roles
+            # form.fields['role'].queryset = department_roles
+            form.fields['role'].queryset = Role.objects.all()
                 
         return form
     
@@ -257,4 +259,3 @@ class ChangePasswordView(GetNotificationsMixin, auth_views.PasswordChangeView):
     def get_success_url(self) -> str:
         
         return reverse_lazy('profile-details')
-
