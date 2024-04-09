@@ -207,6 +207,10 @@
   appearance: none;
 }
 
+.pagination form button {
+    display: none;
+}
+
 @media screen and (max-width: 1200px) {
     
     .users-main .users-table-header {

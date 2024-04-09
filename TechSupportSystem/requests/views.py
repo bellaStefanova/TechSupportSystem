@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models.query import QuerySet
 from django.views import generic as views
 from django.contrib.auth import get_user_model
 from django.db.models import Count
@@ -45,7 +44,6 @@ class CreateRequestView(GetNotificationsMixin, views.CreateView):
 
 class DetailsRequestView(GetNotificationsMixin, views.DetailView):
     
-    # queryset = Request.objects.all()
     template_name = 'requests/view-request.html'
     
     def get_queryset(self):
@@ -56,7 +54,6 @@ class DetailsRequestView(GetNotificationsMixin, views.DetailView):
             return queryset.filter(user__department=self.request.user.department)
         else:
             return queryset.filter(user=self.request.user)
-        # return super().get_queryset()
 
 
 class EditRequestView(GetNotificationsMixin, views.UpdateView):
@@ -91,7 +88,8 @@ class EditRequestView(GetNotificationsMixin, views.UpdateView):
         
         if form.instance.title != initial_title:
             form.instance.title = initial_title
-            form.save()
+        
+        form.save()
             
         return HttpResponseRedirect(self.get_success_url())
 
