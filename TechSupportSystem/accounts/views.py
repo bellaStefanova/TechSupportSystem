@@ -86,11 +86,16 @@ class NextToFirstLoginView(LoginRequiredMixin, views.CreateView):
     
     def form_valid(self, form):
         
-        form.instance.user = self.request.user
-        form.instance.last_updated_by = self.request.user
+        instance = form.save(commit=False)
+        profile = Profile.objects.get(user=self.request.user)
+        profile.first_name = instance.first_name
+        profile.last_name = instance.last_name
+        profile.role = instance.role
+        profile.last_updated_by = self.request.user
+        profile.save()
         
-        return super().form_valid(form)
-    
+        return HttpResponseRedirect(self.get_success_url())
+
     
     def get(self, request, *args, **kwargs):
         
