@@ -24,16 +24,16 @@
         <div class="disabled-buttons">
             <div class="request-actions-buttons">
                 {% if user.is_superuser %}
-                <div class="take-request" id="take-request">Take Request</div>
+                <div class="take-request disabled" id="take-request">Take Request</div>
                 {% endif %}
-                <div class="cancel-request" id="cancel-request">
+                <div class="cancel-request disabled" id="cancel-request">
                     Cancel Request
                 </div>
-                <div class="edit-request" id="edit-request">
+                <div class="edit-request disabled" id="edit-request">
                     Edit Request
                 </div>
                 {% if user.is_superuser %}
-                <div class="mark-request-done" id="markRequestDone">Mark Resolved</div>
+                <div class="mark-request-done disabled" id="markRequestDone">Mark Resolved</div>
                 {% endif %}
             </div>
 

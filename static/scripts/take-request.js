@@ -17,7 +17,7 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
     document.addEventListener('DOMContentLoaded', function () {
         const takeRequestButton = document.getElementById('take-request');
         let requestId = document.getElementById('request-id').getAttribute('request-id');
-        if (takeRequestButton) {
+        if (takeRequestButton && !takeRequestButton.classList.contains('disabled')) {
             takeRequestButton.addEventListener('click', function () {
                 fetch('/take-request/' + requestId + '/', {
                     method: 'POST',
@@ -41,7 +41,7 @@ if (window.location.pathname.indexOf('/view-request') !== -1) {
         };
 
         const markRequestDoneButton = document.getElementById('markRequestDone');
-        if (markRequestDoneButton) {
+        if (markRequestDoneButton && !markRequestDoneButton.classList.contains('disabled')) {
             markRequestDoneButton.addEventListener('click', function () {
                 fetch('/mark-request-done/' + requestId + '/', {
                     method: 'POST',
