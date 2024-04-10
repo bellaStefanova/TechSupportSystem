@@ -165,7 +165,7 @@ class UserHomeView(GetNotificationsMixin, views.TemplateView):
     def get_queryset(self):
         
         queryset = Request.objects.all().order_by('-created_at')
-        queryset = queryset.filter(user__department=self.request.user.department)
+        queryset = queryset.filter(user=self.request.user)
         
         return queryset
     
