@@ -72,4 +72,22 @@ class ReadAllNotificationsView(GetNotificationsMixin, View):
     def get(self, request, *args, **kwargs):
 
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+'''testing notification async'''
+def fetch_notifications(request):
+    user = request.user
+    
+    notifications = UserNotification.objects.filter(user=user, is_read=False)
+    
+    notifications_data = [
+        {
+            'id': notification.notification.id,
+            'message': notification.notification.message,
+            'type': notification.notification.notification_type,
+        }
+        for notification in notifications
+    ]
+    
+    return JsonResponse(notifications_data, safe=False)
     

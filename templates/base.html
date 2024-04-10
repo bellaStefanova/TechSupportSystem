@@ -112,6 +112,37 @@
 
 </body>
 
+<script>
+    function fetchNotifications() {
+    fetch('/fetch-notifications/')
+        .then(response => response.json())
+        .then(data => {
+            let notificationsContainer = document.getElementById('notificationsNavBar');
+            let notificationsBaloon = document.getElementById('notificationCount');
+            let notificationsCount = 0;
+            if (notificationsBaloon) {
+                notificationsBaloon.remove();
+            } else {
+                notificationsBaloon = document.createElement('span');
+                notificationsBaloon.classList.add('notification-count');
+                notificationsBaloon.id = 'notificationCount';
+            }
+
+            notificationsCount = data.length;
+            if (notificationsCount > 0) {
+                notificationsBaloon.textContent = notificationsCount;
+                notificationsContainer.appendChild(notificationsBaloon);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching notifications:', error);
+        });
+}
+
+fetchNotifications();
+
+setInterval(fetchNotifications, 30000);
+</script>
 
 
 </html>
